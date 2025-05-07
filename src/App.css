@@ -1,42 +1,84 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+#root{
+  --background: #120309;
+  --main-text: #fff;
+  --border-color: #868686;
+  --primary-color: #DF922D;
+  --secondary-color: #03CEA4;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/*-----------------///Content Section///---------------------*/
+
+.page-wrapper {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  width: 100vw;
+  border: 1px solid yellow;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/*-----------------///Form///---------------------*/
+
+.input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-basis: 50%;
+  background: var(--background);
+  border: 1px solid deeppink;
+  color: var(--main-text);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.form-container {
+  display: flex;
+  flex-direction: column;
 }
 
-.card {
-  padding: 2em;
+.form-container form{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
 }
 
-.read-the-docs {
-  color: #888;
+.form-container input {
+  height: 40px;
+  background-color: var(--background);
+  border: 1px solid var(--border-color);
+  color: var(--main-text);
+  width: 85%;
+}
+
+::placeholder {
+  color: lightgray;
+  opacity: 40%;
+}
+
+.form-container button {
+
+}
+
+hr{
+  border: 1px solid grey;
+  width: 90%;
+}
+
+.login-button {
+  background-color: var(--secondary-color);
+  color: var(--main-text);
+  width: 60%;
+}
+
+.signup-button {
+  width: 45%;
+}
+
+/*-----------------///Image section///---------------------*/
+
+.image-container {
+  display: flex;
+  flex-shrink: 1;
+  max-width: 2000px;
+  background-image: url(..src/assets/img/dj-background-login-image.jpg);
+  background-size: cover;
+  background-position: center;
 }
