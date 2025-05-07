@@ -1,0 +1,84 @@
+#root{
+    --background: #120309;
+    --main-text: #fff;
+    --border-color: #868686;
+    --primary-color: #DF922D;
+    --secondary-color: #03CEA4;
+}
+
+/*-----------------///Content Section///---------------------*/
+
+.page-wrapper {
+    display: flex;
+    flex-direction: row;
+    height: 100dvh;
+    width: 100dvw;
+    border: 1px solid yellow;
+}
+
+/*-----------------///Form///---------------------*/
+
+.input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 50%;
+    background: var(--background);
+    border: 1px solid deeppink;
+    color: var(--main-text);
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-container form{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+.form-container input {
+    height: 40px;
+    background-color: var(--background);
+    border: 1px solid var(--border-color);
+    color: var(--main-text);
+    width: 85%;
+}
+
+::placeholder {
+    color: lightgray;
+    opacity: 40%;
+}
+
+.form-container button {
+
+}
+
+hr{
+    border: 1px solid grey;
+    width: 90%;
+}
+
+.login-button {
+    background-color: var(--secondary-color);
+    color: var(--main-text);
+    width: 60%;
+}
+
+.signup-button {
+    width: 45%;
+}
+
+/*-----------------///Image section///---------------------*/
+
+.image-container {
+    display: flex;
+    flex-shrink: 2;
+    align-items: center;
+    background-image: url(src/assets/img/dj-background-login-image.jpg);
+    background-size: cover;
+    background-position: center;
+}
