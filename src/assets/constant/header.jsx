@@ -1,17 +1,15 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './header.css'
+import Signup from "../pages/signup/signup.jsx";
 
-function App() {
-  const [count, setCount] = useState(0)
+function Header() {
 
-    return(
+    return (
         <>
             <header>
                 <nav className="navbar">
                     <div className="navbar-logo">
-                        <span className="header-logo-icon"><img src="src/assets/img/placeholder-logo-icon.png" alt="Company logo"/></span>
+                        <span className="header-logo-icon"><img src="src/assets/img/placeholder-logo-icon.png"
+                                                                alt="Company logo"/></span>
                         <p><span id="header-color-section">DJ</span>Corner</p>
                     </div>
                     <ul>
@@ -25,4 +23,4 @@ function App() {
     )
 }
 
-export default App
+export default Header

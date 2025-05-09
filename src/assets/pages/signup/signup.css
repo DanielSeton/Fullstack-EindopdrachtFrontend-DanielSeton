@@ -1,22 +1,18 @@
-#root{
-    --background: #120309;
-    --main-text: #fff;
-    --border-color: #868686;
-    --primary-color: #DF922D;
-    --secondary-color: #03CEA4;
-}
-
 /*-----------------///Content Section///---------------------*/
 
 .page-wrapper {
     display: flex;
     flex-direction: row;
-    height: 100dvh;
-    width: 100dvw;
+    height: 100vh;
+    width: 100vw;
     border: 1px solid yellow;
 }
 
 /*-----------------///Form///---------------------*/
+
+h1{
+    font-size: var(--title-text-weight);
+}
 
 .input-container {
     display: flex;
@@ -31,11 +27,14 @@
 .form-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    gap: 1rem;
 }
 
 .form-container form{
     display: flex;
     flex-direction: column;
+    width: 100%;
     gap: 1rem;
     align-items: center;
 }
@@ -53,23 +52,36 @@
     opacity: 40%;
 }
 
-.form-container button {
-
-}
-
-hr{
+.hr-line{
     border: 1px solid grey;
     width: 90%;
 }
 
-.login-button {
+.form-container a {
+    color: #0958BD;
+    font-size: 21px;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: merriweather-sans;
+}
+
+.form-container a:hover {
+    text-decoration: underline;
+    color: #1372EF;
+}
+
+.form-container button{
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.register-button {
     background-color: var(--secondary-color);
     color: var(--main-text);
     width: 60%;
-}
-
-.signup-button {
-    width: 45%;
 }
 
 /*-----------------///Image section///---------------------*/
@@ -77,8 +89,22 @@ hr{
 .image-container {
     display: flex;
     flex-shrink: 2;
+    flex-basis: 50%;
     align-items: center;
+    justify-content: center;
     background-image: url(src/assets/img/dj-background-login-image.jpg);
     background-size: cover;
     background-position: center;
+}
+
+/*-----------------///Media Queries///---------------------*/
+
+@media screen and (max-width: 576px) {
+    .input-container {
+        background-color: yellow;
+        width: 100%;
+    }
+    .image-container {
+        width: 0;
+    }
 }
