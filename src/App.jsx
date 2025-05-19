@@ -9,62 +9,55 @@ function App() {
 
     return (
         <main>
-            <div className="content-wrapper">
-                <h1><span className="header-color">UPLOAD </span>your file</h1>
-                <div className="upload-container">
-                    <form>
-                        <div className="upload-upper">
-                            <dl className="form-container">
-                                <dt>
-                                    <div className="form-labelWrapper">
-                                        <label className="form-label" htmlFor="title">Title:</label>
-                                    </div>
-                                </dt>
-                                <dd>
-                                    <input id="title" type="text" name="Submission-Title" className="form-textInput"></input>
-                                </dd>
-                            </dl>
-                            <dl className="form-container">
-                                <dt>
-                                    <div className="form-labelWrapper">
-                                        <label className="form-label" htmlFor="bpm">BPM:</label>
-                                    </div>
-                                </dt>
-                                <dd>
-                                    <input id="title" type="text" name="Submission-BPM" className="form-textInput"></input>
-                                </dd>
-                            </dl>
-                            <dl className="form-container">
-                                <dt>
-                                    <div className="form-labelWrapper">
-                                        <label className="form-label" htmlFor="bpm">Upload:</label>
-                                    </div>
-                                </dt>
-                                <dd>
-                                    <span>
-                                        <a className="form-fileUploadButton">
-                                        </a>
-                                        <input type="file" accept="audio/*" title="Attach file" className="form-fileInput"></input>
-                                    </span>
-                                </dd>
-                            </dl>
-                            <dl className="form-container">
-                                <dt>
-                                    <div className="form-labelWrapper">
-                                        <label className="form-label" htmlFor="tags">Tags:</label>
-                                    </div>
-                                </dt>
-                                <dd>
-                                    <input id="title" type="text" name="Submission-Tags" className="form-textInput"></input>
-                                </dd>
-                            </dl>
-                        </div>
-                        <div className="upload-bottom">
-                            <button type="submit" className="form-button">UPLOAD</button>
-                        </div>
-                    </form>
+            <section>
+                <div className="content-container">
+                    <h1>ABOUT <span className="header-color">US</span></h1>
+                    <div className="content-container-inner">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus deserunt distinctio dolorum esse ex nesciunt quasi sequi sit tempore vero. Alias aliquam aliquid blanditiis corporis dolore dolores nam odit perferendis praesentium rem, similique ut vel, voluptatem. A accusantium alias cum cupiditate distinctio earum eius error fugiat hic iure iusto maxime necessitatibus perspiciatis, possimus praesentium ratione, repellat sapiente sequi totam voluptate.</p>
+                        <span className="about-img"><img src="src/assets/img/dj-profile-image.jpg"/></span>
+                    </div>
                 </div>
-            </div>
+            </section>
+            <hr></hr>
+            <section>
+                <div className="content-container">
+                <h1>OUR <span className="header-color">PLAYLIST</span></h1>
+                </div>
+            </section>
+            <hr></hr>
+            <section>
+                <div className="content-container">
+                    <h1>UPCOMING <span className="header-color">SHOWS</span></h1>
+                    <a className="content-show-container" onClick={() => console.log("Show entry clicked")}>
+                        <div className="content-show-entry">
+                            <div className="show-entry-info">
+                                <h3 className="show-entry-title">May 24, 2025</h3>
+                                <p>Amsterdam, Netherlands</p>
+                            </div>
+                            <div className="show-location-text">
+                                <p>Club BijzondereNaam</p>
+                            </div>
+                            <div className="show-entry-ticketButton">
+                                <button onClick={() => console.log("ticket button clicked")}>TICKETS</button>
+                            </div>
+                        </div>
+                    </a>
+                    <a className="content-show-container" onClick={() => console.log("Show entry clicked")}>
+                        <div className="content-show-entry">
+                            <div className="show-entry-info">
+                                <h3 className="show-entry-title">May 24, 2025</h3>
+                                <p>Amsterdam, Netherlands</p>
+                            </div>
+                            <div className="show-location-text">
+                                <p>Club BijzondereNaam</p>
+                            </div>
+                            <div className="show-entry-ticketButton">
+                                <button onClick={() => console.log("ticket button clicked")}>TICKETS</button>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </section>
         </main>
     )
 }

@@ -1,0 +1,138 @@
+/*-----------------///Filter///---------------------*/
+.content-wrapper{
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    align-items: stretch;
+    max-width: 100vw;
+}
+
+h1{
+    color: var(--main-text);
+    font-family: var(--title-text), sans-serif;
+    font-weight: bold;
+    padding-left: 15%;
+    margin-top: 3%;
+}
+
+.header-color{
+    color: var(--primary-color);
+}
+
+.upload-container{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid transparent;
+    border-color: gray;
+    width: calc(100% - 400px);
+    min-width: 600px;
+    flex-shrink: 2;
+    margin-left: auto;
+    margin-right: auto;
+    background: transparent;
+}
+
+.upload-info{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+.upload-input{
+    display: flex;
+    flex-direction: column;
+}
+
+.upload-bottom{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: transparent;
+    border-top: 1px solid transparent;
+    border-color: gray;
+}
+
+/*-----------------///Media Queries///---------------------*/
+
+.form-container{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+}
+
+.form-container dt{
+    border-right: 1px solid transparent;
+    border-color: gray;
+    width: 33%;
+    padding: 15px;
+    text-align: right;
+    padding-top: 22px;
+}
+
+.form-container dd{
+    width: 66%;
+    padding: 15px;
+}
+
+.form-container label{
+    color: var(--main-text);
+    font-family: var(--page-text), sans-serif;
+    font-size: 1.2em;
+}
+
+.form-textInput{
+    font-size: 1.5rem;
+    color: white;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 5px;
+    padding: 6px;
+    display: block;
+    width: 100%;
+    text-align: left;
+    appearance: none;
+    transition: all .2s ease;
+}
+
+.form-fileInput{
+    color: white;
+    padding: 6px;
+    display: block;
+    width: 100%;
+    text-align: left;
+    appearance: none;
+    transition: all .2s ease;
+}
+
+.form-fileUploadButton{
+    visibility: hidden;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    left: -10000px;
+}
+
+.upload-bottom{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.form-button{
+    background-color: var(--secondary-color);
+    min-width: 120px;
+    width: 200px;
+}
+
+/*-----------------///Media Queries///---------------------*/
+
+@media screen and (max-width: 576px) {
+    .upload-container{
+        width: calc(100% - 20px);
+        min-width: 300px;
+    }
+}

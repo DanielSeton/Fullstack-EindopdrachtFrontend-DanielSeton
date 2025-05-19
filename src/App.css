@@ -1,138 +1,96 @@
 /*-----------------///Filter///---------------------*/
-.content-wrapper{
-  display: flex;
-  flex-direction: column;
-  margin-top: 30px;
-  align-items: stretch;
-  max-width: 100vw;
-}
 
-h1{
-  color: var(--main-text);
-  font-family: var(--title-text), sans-serif;
-  font-weight: bold;
-  padding-left: 15%;
+section{
   margin-top: 3%;
+  margin-bottom: 3%;
+  color: white;
+  display: flex;
+  justify-content: center;
 }
 
 .header-color{
   color: var(--primary-color);
 }
 
-.upload-container{
-  display: flex;
-  flex-direction: column;
-  border: 1px solid transparent;
-  border-color: gray;
-  width: calc(100% - 400px);
-  min-width: 600px;
-  flex-shrink: 2;
-  margin-left: auto;
-  margin-right: auto;
-  background: transparent;
+hr{
+  border: 1px solid grey;
+  width: 85%;
+  font-family: var(--page-text),sans-serif;
+  font-weight: bold;
 }
 
-.upload-info{
+.content-container{
   display: flex;
   flex-direction: column;
-  width: 40%;
-}
-.upload-input{
-  display: flex;
-  flex-direction: column;
+  width: 70%;
 }
 
-.upload-bottom{
+.content-container-inner{
   display: flex;
   flex-direction: row;
-  align-items: center;
-  background: transparent;
-  border-top: 1px solid transparent;
-  border-color: gray;
 }
 
-/*-----------------///Media Queries///---------------------*/
+.about-img{
+  width: 80%;
+}
 
-.form-container{
-  display: flex;
-  justify-content: center;
+.about-img img{
   width: 100%;
-  margin: 0;
 }
 
-.form-container dt{
-  border-right: 1px solid transparent;
-  border-color: gray;
-  width: 33%;
-  padding: 15px;
-  text-align: right;
-  padding-top: 22px;
-}
+/*-----------------///Show section///---------------------*/
 
-.form-container dd{
-  width: 66%;
-  padding: 15px;
-}
-
-.form-container label{
+.content-show-container{
+  display: flex;
+  flex-direction: row;
+  padding: 10px 12px;
+  background: transparent;
+  text-decoration: none;
+  cursor: pointer;
+  font-family: var(--page-text),sans-serif;
   color: var(--main-text);
-  font-family: var(--page-text), sans-serif;
-  font-size: 1.2em;
 }
 
-.form-textInput{
-  font-size: 1.5rem;
-  color: white;
-  border-width: 1px;
-  border-style: solid;
-  border-radius: 5px;
-  padding: 6px;
-  display: block;
-  width: 100%;
-  text-align: left;
-  appearance: none;
-  transition: all .2s ease;
+.content-show-container:hover{
+  background-color: gray;
+  color: var(--main-text);
 }
 
-.form-fileInput{
-  color: white;
-  padding: 6px;
-  display: block;
-  width: 100%;
-  text-align: left;
-  appearance: none;
-  transition: all .2s ease;
-}
-
-.form-fileUploadButton{
-  visibility: hidden;
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  left: -10000px;
-}
-
-.upload-bottom{
+.content-show-entry{
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  justify-content: space-between;
+  width: 100%;
+  line-height: 22px;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  border-color: gray;
 }
 
-.form-button{
-  background-color: var(--secondary-color);
-  min-width: 120px;
-  width: 200px;
+.show-location-text{
+  font-size: 24px;
 }
+
+.show-entry-ticketButton{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  }
+
+.show-entry-ticketButton button{
+  background-color: var(--secondary-color);
+  padding: 10px 0px;
+  width: 200px;
+  font-size: 18px;
+}
+
+
 
 /*-----------------///Media Queries///---------------------*/
 
 @media screen and (max-width: 576px) {
-  .upload-container{
-    width: calc(100% - 20px);
-    min-width: 300px;
+  .content-container{
+    width: 100%;
   }
 }
