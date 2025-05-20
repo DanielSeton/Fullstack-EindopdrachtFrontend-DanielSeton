@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import login from "./assets/pages/login/login.jsx";
+import ShowEntryBlock from "./components/showentryBlock/ShowEntryBlock.jsx";
 
 function App() {
   const [count, setCount] = useState(0)
@@ -28,34 +29,7 @@ function App() {
             <section>
                 <div className="content-container">
                     <h1>UPCOMING <span className="header-color">SHOWS</span></h1>
-                    <a className="content-show-container" onClick={() => console.log("Show entry clicked")}>
-                        <div className="content-show-entry">
-                            <div className="show-entry-info">
-                                <h3 className="show-entry-title">May 24, 2025</h3>
-                                <p>Amsterdam, Netherlands</p>
-                            </div>
-                            <div className="show-location-text">
-                                <p>Club BijzondereNaam</p>
-                            </div>
-                            <div className="show-entry-ticketButton">
-                                <button onClick={() => console.log("ticket button clicked")}>TICKETS</button>
-                            </div>
-                        </div>
-                    </a>
-                    <a className="content-show-container" onClick={() => console.log("Show entry clicked")}>
-                        <div className="content-show-entry">
-                            <div className="show-entry-info">
-                                <h3 className="show-entry-title">May 24, 2025</h3>
-                                <p>Amsterdam, Netherlands</p>
-                            </div>
-                            <div className="show-location-text">
-                                <p>Club BijzondereNaam</p>
-                            </div>
-                            <div className="show-entry-ticketButton">
-                                <button onClick={() => console.log("ticket button clicked")}>TICKETS</button>
-                            </div>
-                        </div>
-                    </a>
+                    <ShowEntryBlock date="April 22, 2025" location="Amsterdam, Netherlands" title="Grote Clubhuis"/>
                 </div>
             </section>
         </main>

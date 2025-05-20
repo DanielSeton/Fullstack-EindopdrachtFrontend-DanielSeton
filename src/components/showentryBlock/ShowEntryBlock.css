@@ -1,0 +1,44 @@
+.content-show-container{
+    display: flex;
+    flex-direction: row;
+    padding: 10px 12px;
+    background: transparent;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: var(--page-text),sans-serif;
+    color: var(--main-text);
+}
+
+.content-show-container:hover{
+    background-color: gray;
+    color: var(--main-text);
+}
+
+.content-show-entry{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    line-height: 22px;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    border-color: gray;
+}
+
+.show-location-text{
+    font-size: 24px;
+}
+
+.show-entry-ticketButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.show-entry-ticketButton button{
+    background-color: var(--secondary-color);
+    padding: 10px 0px;
+    width: 200px;
+    font-size: 18px;
+}
