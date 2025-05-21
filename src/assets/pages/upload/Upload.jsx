@@ -1,7 +1,12 @@
+import './Upload.css'
+import Button from "../../../components/button/Button.jsx";
+import InputField from "../../../components/input-field/InputField.jsx";
+import {sizes} from "../../constant/sizes.js";
+import {variants} from "../../constant/variants.js";
+
 function Upload() {
 
     return (
-        <main>
             <div className="content-wrapper">
                 <h1><span className="header-color">UPLOAD </span>your file</h1>
                 <div className="upload-container">
@@ -14,7 +19,11 @@ function Upload() {
                                     </div>
                                 </dt>
                                 <dd>
-                                    <input id="title" type="text" name="Submission-Title" className="form-textInput"></input>
+                                    <InputField
+                                        type="text"
+                                        placeholder="..."
+                                        size={sizes.LARGE}
+                                        isRequired={true}/>
                                 </dd>
                             </dl>
                             <dl className="form-container">
@@ -24,13 +33,17 @@ function Upload() {
                                     </div>
                                 </dt>
                                 <dd>
-                                    <input id="title" type="text" name="Submission-BPM" className="form-textInput"></input>
+                                    <InputField
+                                        type="text"
+                                        placeholder="..."
+                                        size={sizes.LARGE}
+                                        isRequired={true}/>
                                 </dd>
                             </dl>
                             <dl className="form-container">
                                 <dt>
                                     <div className="form-labelWrapper">
-                                        <label className="form-label" htmlFor="bpm">Upload:</label>
+                                        <label className="form-label" htmlFor="upload">Upload:</label>
                                     </div>
                                 </dt>
                                 <dd>
@@ -48,17 +61,24 @@ function Upload() {
                                     </div>
                                 </dt>
                                 <dd>
-                                    <input id="title" type="text" name="Submission-Tags" className="form-textInput"></input>
+                                    <InputField
+                                        type="text"
+                                        placeholder="..."
+                                        size={sizes.LARGE}
+                                        isRequired={true}/>
                                 </dd>
                             </dl>
                         </div>
                         <div className="upload-bottom">
-                            <button type="submit" className="form-button">UPLOAD</button>
+                            <Button
+                                type="submit"
+                                variant={variants.SECONDARY}
+                                size={sizes.MEDIUM}
+                                label="UPLOAD"/>
                         </div>
                     </form>
                 </div>
             </div>
-        </main>
     )
 }
 

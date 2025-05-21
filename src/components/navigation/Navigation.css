@@ -1,7 +1,7 @@
 /*-----------------///HEADER///---------------------*/
 
 header{
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: #D0D0D0;
     width: 100vw;
 }
 
@@ -17,13 +17,10 @@ header p{
     font-weight: bold;
 }
 
-body{
-    background-color: var(--background);
-}
-
 .header-logo-icon{
     width: 40px;
     height: 40px;
+    margin-right: 10px;
 }
 
 .header-logo-icon img{
@@ -83,9 +80,6 @@ body{
 /*-----------------///Media Queries///---------------------*/
 
 @media screen and (max-width: 576px) {
-    body {
-        background-color: yellow;
-    }
     .navbar{
         justify-content: center;
     }

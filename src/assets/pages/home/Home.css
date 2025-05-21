@@ -1,0 +1,55 @@
+/*-----------------///Filter///---------------------*/
+
+section{
+    margin-top: 4%;
+    margin-bottom: 4%;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.section-title{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.section-title h1{
+    flex-grow: 1;
+}
+
+.section-title hr{
+    height: 1px;
+    flex-shrink: 2;
+}
+
+.header-color{
+    color: var(--primary-color);
+}
+
+.content-container{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.content-container-inner{
+    display: flex;
+    flex-direction: row;
+}
+
+.about-img{
+    width: 80%;
+}
+
+.about-img img{
+    width: 100%;
+}
+
+/*-----------------///Media Queries///---------------------*/
+
+@media screen and (max-width: 576px) {
+    .content-container{
+        width: 100%;
+    }
+}

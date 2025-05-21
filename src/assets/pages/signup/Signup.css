@@ -3,9 +3,8 @@
 .page-wrapper {
     display: flex;
     flex-direction: row;
-    height: 100dvh;
-    width: 100dvw;
-    border: 1px solid yellow;
+    height: 100vh;
+    width: 100vw;
 }
 
 /*-----------------///Form///---------------------*/
@@ -16,52 +15,34 @@
     align-items: center;
     flex-basis: 50%;
     background: var(--background);
-    border: 1px solid deeppink;
-    color: var(--main-text);
 }
 
 .form-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    gap: 1rem;
 }
 
 .form-container form{
     display: flex;
     flex-direction: column;
+    width: 100%;
     gap: 1rem;
     align-items: center;
 }
 
-.form-container input {
-    height: 40px;
-    background-color: var(--background);
-    border: 1px solid var(--border-color);
-    color: var(--main-text);
-    width: 85%;
+.form-container a {
+    color: #646cff;
+    font-size: 15px;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: var(--page-text), sans-serif;
 }
 
-::placeholder {
-    color: lightgray;
-    opacity: 40%;
-}
-
-.form-container button {
-
-}
-
-hr{
-    border: 1px solid grey;
-    width: 90%;
-}
-
-.login-button {
-    background-color: var(--secondary-color);
-    color: var(--main-text);
-    width: 60%;
-}
-
-.signup-button {
-    width: 45%;
+.form-container a:hover {
+    text-decoration: underline;
+    color: #1372EF;
 }
 
 /*-----------------///Image section///---------------------*/
@@ -72,7 +53,18 @@ hr{
     flex-basis: 50%;
     align-items: center;
     justify-content: center;
-    background-image: url(../../img/dj-background-login-image.jpg);
+    background-image: url(src/assets/img/dj-background-login-image.jpg);
     background-size: cover;
     background-position: center;
+}
+
+/*-----------------///Media Queries///---------------------*/
+
+@media screen and (max-width: 576px) {
+    .input-container {
+        width: 100%;
+    }
+    .image-container {
+        width: 0;
+    }
 }

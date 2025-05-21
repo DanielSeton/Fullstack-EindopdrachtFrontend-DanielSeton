@@ -1,0 +1,33 @@
+.input-field {
+    height: 40px;
+    background-color: var(--background);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 6px;
+
+    color: var(--page-text-color);
+    font-family: var(--page-text), sans-serif;
+    font-size: 1rem;
+
+    appearance: none;
+    transition: all .2s ease;
+}
+
+.input-field::placeholder {
+    color: lightgray;
+    opacity: 40%;
+}
+
+/*-----------------///Size section///---------------------*/
+
+.input-small{
+    width: 60%;
+}
+
+.input-medium{
+    width: 80%;
+}
+
+.input-large{
+    width: 100%;
+}

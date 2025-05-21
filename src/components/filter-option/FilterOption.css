@@ -1,0 +1,17 @@
+.checkbox-option label{
+    color: lightgray;
+}
+
+.checkbox-option input{
+    width: 1.5em;
+    height: 1.5em;
+    outline: none;
+    cursor: pointer;
+}
+
+.checkbox-option{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}

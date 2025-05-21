@@ -1,0 +1,15 @@
+.page-divider{
+    border: 1px solid grey;
+}
+
+.divider-small{
+    width: 60%;
+}
+
+.divider-medium{
+    width: 85%;
+}
+
+.divider-large{
+    width: 90%;
+}

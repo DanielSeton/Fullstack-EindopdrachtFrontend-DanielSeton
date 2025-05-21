@@ -1,4 +1,5 @@
 import './ShowEntryBlock.css'
+import Button from "../button/Button.jsx";
 
 function ShowEntryBlock({date, location, title}) {
     return (
@@ -12,7 +13,11 @@ function ShowEntryBlock({date, location, title}) {
                     <p>{title}</p>
                 </div>
                 <div className="show-entry-ticketButton">
-                    <button onClick={() => console.log("ticket button clicked")}>TICKETS</button>
+                    <Button
+                        type="submit"
+                        variant="secondary"
+                        size="small"
+                        label="Tickets"/>
                 </div>
             </div>
         </a>);
