@@ -1,0 +1,52 @@
+/*-----------------///Player///---------------------*/
+
+.playlist-container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-height: 366px;
+    background: yellow;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.playlist-player-body{
+    width: 70%;
+    background: deeppink;
+}
+
+.playlist-player-body audio{
+    width: 100%;
+    margin-top: 10%;
+}
+
+/*-----------------///Playlist///---------------------*/
+
+.playlist-list-header{
+    text-align: center;
+    font-family: var(--page-text), sans-serif;
+    font-weight: bold;
+}
+
+.playlist-list-body{
+    width: 30%;
+    background: aquamarine;
+    overflow-y:scroll;
+}
+
+.playlist-title{
+    margin-bottom: 2%;
+    margin-left: 10%;
+}
+
+.playlist-list-body ul{
+    padding-inline-start: 0;
+    list-style: none;
+}
+
+.playlist-list-body li{
+    background: #4E443B;
+    font-family: var(--page-text), sans-serif;
+    padding: 15px 6px;
+    margin-bottom: 2px;
+}

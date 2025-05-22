@@ -1,6 +1,7 @@
 import './SubmissionBlock.css'
 import Home from "../../assets/pages/home/Home.jsx";
 import PageDivider from "../pagedivider/PageDivider.jsx";
+import ButtonDropdown from "../button-dropdown/ButtonDropdown.jsx";
 
 function SubmissionBlock({title, name, date, bpm, tag}){
     return (
@@ -11,6 +12,7 @@ function SubmissionBlock({title, name, date, bpm, tag}){
                         <div className="submission-header">
                             <h2>{title}</h2>
                             <button className="submission-status-button"></button>
+                            <ButtonDropdown/>
                         </div>
                         <PageDivider/>
                         <p><span className="submission-info-title">Name: </span>{name}</p>

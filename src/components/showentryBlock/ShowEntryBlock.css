@@ -6,12 +6,12 @@
     text-decoration: none;
     cursor: pointer;
     font-family: var(--page-text),sans-serif;
-    color: var(--main-text);
+    color: var(--page-text-color);
 }
 
 .content-show-container:hover{
     background-color: gray;
-    color: var(--main-text);
+    color: var(--page-text-color);
 }
 
 .content-show-entry{
@@ -41,4 +41,10 @@
     padding: 10px 0px;
     width: 200px;
     font-size: 18px;
+}
+
+/*-----------------///Media Queries///---------------------*/
+
+@media screen and (max-width: 576px) {
+
 }

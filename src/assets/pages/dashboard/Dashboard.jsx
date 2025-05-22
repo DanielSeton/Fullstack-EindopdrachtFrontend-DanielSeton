@@ -64,7 +64,12 @@ function Dashboard() {
                     <button>Sort by date (newest first)</button>
                     <PageDivider/>
                     <div className="submission-container">
-                        <SubmissionBlock title="Title" name="Henkie" date="25/05/2025" bpm={350} tag="Disco"/>
+                        <SubmissionBlock
+                            title="Title"
+                            name="Henkie"
+                            date="25/05/2025"
+                            bpm={350}
+                            tag="Disco"/>
                     </div>
                 </div>
             </div>
