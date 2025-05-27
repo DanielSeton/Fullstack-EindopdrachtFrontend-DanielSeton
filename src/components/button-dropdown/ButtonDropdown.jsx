@@ -2,7 +2,7 @@ import './ButtonDropdown.css'
 
 function ButtonDropdown() {
     return (
-        <select>
+        <select className="dropbutton-styling">
             <option value="volvo">MERN</option>
             <option value="saab" selected>DevOps</option>
             <option value="mercedes">AI/ML</option>

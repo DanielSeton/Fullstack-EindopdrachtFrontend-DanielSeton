@@ -6,6 +6,11 @@
     border-radius: 10px;
 }
 
+.submission h2{
+    font-size: 30px;
+    margin-bottom: 4px;
+}
+
 .submission-content{
     padding-left : 20px;
     padding-right : 20px;

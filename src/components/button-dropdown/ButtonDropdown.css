@@ -1,0 +1,64 @@
+.dropbutton-styling{
+    font-family: var(--page-text), monospace;
+    font-size: 1em;
+    font-weight: 500;
+
+    border-radius: 5px;
+    border: 1px solid transparent;
+
+    min-width: 120px;
+    padding: 0.6em 1.2em;
+    height: 10%;
+    cursor: pointer;
+    transition: border-color 0.25s;
+}
+
+/*-----------------///Color section///---------------------*/
+
+.primary{
+    background-color: var(--primary-color);
+    color: var(--page-text-color);
+}
+
+.primary:hover{
+    background-color: #E2A95F;
+    border-color: var(--primary-color);
+}
+
+.secondary{
+    background-color: var(--secondary-color);
+    color: var(--page-text-color);
+}
+
+.secondary:hover{
+    background-color: #27E5BF;
+    border-color: var(--secondary-color);
+}
+
+.inverted{
+    background-color: var(--inverted-color);
+    color: var(--page-text-color-inverted)
+}
+
+/*-----------------///Size section///---------------------*/
+
+.button-small{
+    width: 20%;
+}
+
+.button-medium{
+    width: 45%;
+}
+
+.button-large{
+    width: 60%;
+}
+
+/*-----------------///Media Queries///---------------------*/
+
+@media screen and (max-width: 576px) {
+    .button-styling{
+        min-width: 100px;
+        padding: 0.2em 0.5em;
+    }
+}

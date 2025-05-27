@@ -1,6 +1,6 @@
 import './InputField.css'
 
-function InputField({type, placeholder, size, isRequired}) {
+function InputField({type, placeholder, size, inputValue, handleInputChange, isRequired}) {
     let cssSizeClass = '';
 
     switch (size) {
@@ -16,7 +16,14 @@ function InputField({type, placeholder, size, isRequired}) {
     }
 
     return (
-        <input type={type} placeholder={placeholder} className={`input-field ${cssSizeClass}`} required={isRequired}/>
+        <input
+            type={type}
+            placeholder={placeholder}
+            value={inputValue}
+            className={`input-field ${cssSizeClass}`}
+            onChange={(e) => handleInputChange(e.target.value)}
+            required={isRequired}
+        />
     );
 }
 

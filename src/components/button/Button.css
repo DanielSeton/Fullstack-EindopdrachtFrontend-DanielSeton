@@ -42,7 +42,7 @@
 /*-----------------///Size section///---------------------*/
 
 .button-small{
-    width: 200px;
+    width: 20%;
 }
 
 .button-medium{
@@ -51,4 +51,13 @@
 
 .button-large{
     width: 60%;
+}
+
+/*-----------------///Media Queries///---------------------*/
+
+@media screen and (max-width: 576px) {
+    .button-styling{
+        min-width: 100px;
+        padding: 0.2em 0.5em;
+    }
 }

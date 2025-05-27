@@ -13,6 +13,8 @@
 .playlist-player-body{
     width: 70%;
     background: deeppink;
+    align-items: center;
+    padding: 0 0.5em;
 }
 
 .playlist-player-body audio{

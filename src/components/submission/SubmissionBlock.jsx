@@ -11,7 +11,6 @@ function SubmissionBlock({title, name, date, bpm, tag}){
                     <div>
                         <div className="submission-header">
                             <h2>{title}</h2>
-                            <button className="submission-status-button"></button>
                             <ButtonDropdown/>
                         </div>
                         <PageDivider/>
