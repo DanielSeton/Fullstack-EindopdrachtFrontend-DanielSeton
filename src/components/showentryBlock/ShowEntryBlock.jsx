@@ -1,15 +1,15 @@
 import './ShowEntryBlock.css'
 import Button from "../button/Button.jsx";
 
-function ShowEntryBlock({date, location, title}) {
+function ShowEntryBlock({date, location, title, website}) {
     return (
-        <a className="content-show-container" onClick={() => console.log("Show entry clicked")}>
+        <a className="content-show-container" href={website}>
             <div className="content-show-entry">
                 <div className="show-entry-info">
-                    <h3 className="show-entry-title">{date}</h3>
+                    <h3 className="show-entry-date">{date}</h3>
                     <p>{location}</p>
                 </div>
-                <div className="show-location-text">
+                <div className="show-entry-title">
                     <p>{title}</p>
                 </div>
                 <div className="show-entry-ticketButton">

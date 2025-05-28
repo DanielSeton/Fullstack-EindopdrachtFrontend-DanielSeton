@@ -4,6 +4,7 @@ import PageDivider from "../../../components/pagedivider/PageDivider.jsx";
 import {sizes} from "../../constant/sizes.js";
 import Playlist from "../../../components/playlist/Playlist.jsx";
 import SubmissionBlock from "../../../components/submission/SubmissionBlock.jsx";
+import {showList} from "../../constant/show-list.js";
 
 function Home(){
     return (
@@ -25,7 +26,7 @@ function Home(){
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus deserunt distinctio dolorum esse ex nesciunt quasi sequi sit tempore vero. Alias aliquam aliquid blanditiis corporis dolore dolores nam odit perferendis praesentium rem, similique ut vel, voluptatem. A accusantium alias cum cupiditate distinctio earum eius error fugiat hic iure iusto maxime necessitatibus perspiciatis, possimus praesentium ratione, repellat sapiente sequi totam voluptate.</p>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error explicabo perspiciatis quas quidem quo tempore!</p>
                         </div>
-                        <span className="content-container-inner-img"><img src="src/assets/img/dj-profile-image.jpg"/></span>
+                        <span className="content-container-inner-img"><img src="src/assets/img/dj_headshot.jpg"/></span>
                     </div>
                 </div>
             </section>
@@ -44,13 +45,16 @@ function Home(){
                         <h1>UPCOMING <span className="header-color">SHOWS</span></h1>
                         <PageDivider size={sizes.SMALL}/>
                     </div>
-                    <ShowEntryBlock date="April 22, 2025" location="Amsterdam, Netherlands" title="Grote Clubhuis"/>
-                    <SubmissionBlock
-                        title="Title"
-                        name="Henkie"
-                        date="25/05/2025"
-                        bpm={350}
-                        tag="Disco"/>
+                    {showList.map((show) => {
+                        return (
+                            <ShowEntryBlock
+                                date={show.date}
+                                title={show.name}
+                                location={show.location}
+                                website={show.website}
+                            />
+                        );
+                    })}
                 </div>
             </section>
         </>

@@ -1,14 +1,15 @@
 import './ButtonDropdown.css'
 
 function ButtonDropdown() {
-    return (
-        <select className="dropbutton-styling">
-            <option value="volvo">MERN</option>
-            <option value="saab" selected>DevOps</option>
-            <option value="mercedes">AI/ML</option>
-            <option value="audi">Data Science</option>
-        </select>
-    );
+        return (
+            <select id="select" className="dropbutton-styling" onClick={(e) => {
+                e.stopPropagation();}}>
+                <option value="noFeedback" selected>No feedback</option>
+                <option value="StandBy">In review</option>
+                <option value="positive">Approved</option>
+                <option value="negative">Rejected</option>
+            </select>
+        );
 }
 
 export default ButtonDropdown;

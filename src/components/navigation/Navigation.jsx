@@ -5,7 +5,7 @@ function Navigation() {
     return (
         <nav className="navbar">
             <div className="navbar-logo">
-                <span className="header-logo-icon"><img src="../../assets/img/placeholder-logo-icon.png" alt="Company logo"/></span>
+                <span className="header-logo-icon"><img src="src/assets/img/djcorner_logo.png" alt="Company logo"/></span>
                 <p><span id="header-color-section">DJ</span>Corner</p>
             </div>
             <ul>

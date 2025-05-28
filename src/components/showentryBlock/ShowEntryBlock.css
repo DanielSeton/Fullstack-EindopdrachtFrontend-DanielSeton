@@ -26,8 +26,14 @@
     border-color: gray;
 }
 
-.show-location-text{
+.show-entry-title{
     font-size: 24px;
+}
+
+.show-entry-info{
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 2;
 }
 
 .show-entry-ticketButton{
@@ -46,5 +52,16 @@
 /*-----------------///Media Queries///---------------------*/
 
 @media screen and (max-width: 576px) {
+    .show-entry-ticketButton button{
+        width: 100px;
+        font-size: 13px;
+    }
+
+    .show-entry-title{
+        font-size: 18px;
+    }
+    .show-entry-date{
+        font-size: 13px;
+    }
 
 }

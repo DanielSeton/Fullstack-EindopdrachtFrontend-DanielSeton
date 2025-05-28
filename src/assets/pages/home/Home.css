@@ -31,8 +31,10 @@ section{
 
 .banner-container{
     width: 100vw;
-    height: 500px;
-    background: deeppink;
+    height: 600px;
+    background-image: url(src/assets/img/djcorner_header_background.png);
+    background-size: cover;
+    background-position: center;
     margin-top: 0;
 }
 
@@ -43,6 +45,19 @@ section{
     justify-content: center;
     text-align: left;
     width: 100%;
+}
+
+.banner-text>h1{
+    font-family: var(--banner-text), sans-serif;
+    font-size: 5rem;
+    color: var(--banner-text-color);
+    -webkit-text-stroke: 2px white;
+}
+
+.banner-text>h2{
+    font-family: var(--banner-text), sans-serif;
+    color: var(--banner-text-color);
+    -webkit-text-stroke: 1px white;
 }
 
 .content-container{
@@ -59,10 +74,11 @@ section{
     padding-right: 25px;
 }
 
-content-container-inner-textblock{
+.content-container-inner-textblock{
     display: flex;
     flex-direction: column;
     width: 100%;
+    font-family: var(--page-text), sans-serif;
 }
 
 .content-container-inner-img{
@@ -79,7 +95,7 @@ content-container-inner-textblock{
 
 @media screen and (max-width: 576px) {
     .content-container{
-        width: 100%;
+        flex-basis: 100%;
     }
 
     .content-container-inner{

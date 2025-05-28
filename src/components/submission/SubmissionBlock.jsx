@@ -1,5 +1,4 @@
 import './SubmissionBlock.css'
-import Home from "../../assets/pages/home/Home.jsx";
 import PageDivider from "../pagedivider/PageDivider.jsx";
 import ButtonDropdown from "../button-dropdown/ButtonDropdown.jsx";
 

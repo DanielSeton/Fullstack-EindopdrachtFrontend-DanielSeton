@@ -12,8 +12,8 @@ function Playlist() {
                 <audio className="submission-audio" controls src="src/assets/placeholders/Beach_Walk.mp3"></audio>
             </div>
             <div className="playlist-list-body">
-                <div>
-                    <h2 className="playlist-list-header">Playlist</h2>
+                <div className="playlist-list-header">
+                    <h2>Playlist</h2>
                 </div>
                 <ul>
                     <li>Artist - title of track</li>
