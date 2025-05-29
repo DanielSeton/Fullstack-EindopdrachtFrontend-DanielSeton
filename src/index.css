@@ -48,6 +48,10 @@ h1{
   line-height: 1.1;
 }
 
+button{
+  text-transform: uppercase;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
