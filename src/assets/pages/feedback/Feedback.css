@@ -38,12 +38,17 @@ h1{
     display: flex;
     flex-direction: column;
     flex-basis: 60%;
-    padding: 5px;
+    padding: 10px;
     border-right: 1px solid transparent;
     border-color: var(--border-color);
     color: var(--page-text-color);
     font-family: var(--page-text), sans-serif;
 }
+
+.info audio{
+    width: 90%;
+}
+
 .feedback{
     display: flex;
     flex-direction: column;
@@ -69,53 +74,6 @@ h1{
     resize: none;
 }
 
-
-
-/*-----------------///Form///---------------------*/
-
-.form-container{
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin: 0;
-}
-
-.form-container dt{
-    border-right: 1px solid transparent;
-    border-color: var(--border-color);
-
-    text-align: right;
-
-    width: 33%;
-    padding-top: 22px;
-    padding: 15px;
-}
-
-.form-container dd{
-    width: 66%;
-    padding: 15px;
-}
-
-
-
-.form-fileInput{
-    color: var(--page-text-color);
-    padding: 6px;
-    display: block;
-    width: 100%;
-    text-align: left;
-    appearance: none;
-    transition: all .2s ease;
-}
-
-.form-fileUploadButton{
-    visibility: hidden;
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    left: -10000px;
-}
 
 /*-----------------///Media Queries///---------------------*/
 

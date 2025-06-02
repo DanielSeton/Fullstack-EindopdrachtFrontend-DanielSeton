@@ -1,0 +1,92 @@
+.content-container{
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: 100%;
+    margin-top: 20px;
+}
+
+/*-----------------///Filter///---------------------*/
+
+.filter-container{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 10px;
+
+    background: var(--background);
+    border: 1px solid var(--border-color);
+
+    color: var(--page-text-color);
+    font-family: var(--page-text), sans-serif;
+}
+
+h3 {
+    font-weight: bold;
+}
+
+.filter-header{
+    display: flex;
+    justify-content: center;
+    background: var(--background-block-color);
+    border-radius: 10px;
+}
+
+.checkbox-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+/*-----------------///Submissions container///---------------------*/
+
+.content-container-right{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    padding: 10px;
+    gap: 5px;
+    max-height: 100vh;
+}
+
+.content-container-right button{
+    width: 300px;
+    height: 40px;
+    font-family: var(--page-text), sans-serif;
+    background: var(--inverted-color);
+}
+
+.submission-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 100%;
+    overflow-y: scroll;
+    scrollbar-color: var(--background);
+}
+
+/*-----------------///Media Queries///---------------------*/
+
+@media screen and (max-width: 576px) {
+    .content-container{
+        flex-direction: column;
+        align-items: center;
+    }
+    .filter-container{
+        width: 95%;
+    }
+
+    .checkbox-container{
+        display: flex;
+        gap: 5px;
+        margin-bottom: 10px;
+    }
+    .content-container-right{
+        width: 95%;
+        align-self: center;
+    }
+}

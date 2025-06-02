@@ -1,9 +1,8 @@
 import { useState } from 'react'
 import './App.css'
 import Navigation from "./components/navigation/Navigation.jsx";
-import Home from "./assets/pages/home/Home.jsx";
 import Footer from "./components/footer/Footer.jsx";
-import Feedback from "./assets/pages/feedback/Feedback.jsx";
+import Upload from "./assets/pages/upload/Upload.jsx";
 
 function App() {
   const [count, setCount] = useState(0)
@@ -14,7 +13,7 @@ function App() {
                 <Navigation/>
             </header>
             <main>
-                <Feedback/>
+                <Upload/>
             </main>
             <footer>
                 <Footer/>

@@ -1,5 +1,4 @@
 import './Feedback.css'
-import InputField from "../../../components/input-field/InputField.jsx";
 import {sizes} from "../../constant/sizes.js";
 import Button from "../../../components/button/Button.jsx";
 import {variants} from "../../constant/variants.js";
