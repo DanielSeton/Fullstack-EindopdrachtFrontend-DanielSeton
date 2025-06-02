@@ -18,6 +18,10 @@ function Upload() {
 
     const handleSelectChange = (e) => {
         const tag = e.target.value;
+        console.log("tag: " + tag);
+        console.log("Selectedtag: " + selectedTag);
+        console.log("SetSelectedTag: ", typeof setSelectedTag === "function");
+
         addTags(tag, selectedTag, setSelectedTag);
         setSelectValue("");
     };
@@ -81,10 +85,9 @@ function Upload() {
                                     </div>
                                 </dt>
                                 <dd>
-                                    <select value={selectValue} onChange={(e) => addTags(e.target.value)}>
+                                    <select value={selectValue} onChange={handleSelectChange}>
                                         <option
-                                            value={selectValue}
-                                            onChange={handleSelectChange}>
+                                            value="">
                                             --Choose a tag--
                                         </option>
                                         {tagList.map(tag => (
