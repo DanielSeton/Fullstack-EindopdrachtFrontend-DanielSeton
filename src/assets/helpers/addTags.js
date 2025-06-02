@@ -1,5 +1,5 @@
-export const addTags = (tag, selectedTag, setSelectedTag) => {
-    if (!selectedTag.includes(tag)) {
-        setSelectedTag(tag);
+export const addTags = (tag, selectedTag = [], setSelectedTag) => {
+    if (tag && !selectedTag.includes(tag)) {
+        setSelectedTag([...selectedTag, tag]);
     }
 }

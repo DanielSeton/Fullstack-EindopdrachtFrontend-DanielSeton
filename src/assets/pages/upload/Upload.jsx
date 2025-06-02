@@ -3,8 +3,28 @@ import Button from "../../../components/button/Button.jsx";
 import InputField from "../../../components/input-field/InputField.jsx";
 import {sizes} from "../../constant/sizes.js";
 import {variants} from "../../constant/variants.js";
+import {useState} from "react";
+
+import {removeTags} from "../../helpers/removeTags.js";
+import {tagList} from "../../constant/tag-list.js";
+import {addTags} from "../../helpers/addTags.js";
+
+
 
 function Upload() {
+
+    const [selectedTag, setSelectedTag] = useState([]);
+    const [selectValue, setSelectValue] = useState("");
+
+    const handleSelectChange = (e) => {
+        const tag = e.target.value;
+        addTags(tag, selectedTag, setSelectedTag);
+        setSelectValue("");
+    };
+
+    const handleTagRemove = (tag) => {
+        removeTags(tag, selectedTag, setSelectedTag);
+    }
 
     return (
             <div className="content-wrapper">
@@ -61,11 +81,34 @@ function Upload() {
                                     </div>
                                 </dt>
                                 <dd>
-                                    <InputField
-                                        type="text"
-                                        placeholder="..."
-                                        size={sizes.LARGE}
-                                        isRequired={true}/>
+                                    <select value={selectValue} onChange={(e) => addTags(e.target.value)}>
+                                        <option
+                                            value={selectValue}
+                                            onChange={handleSelectChange}>
+                                            --Choose a tag--
+                                        </option>
+                                        {tagList.map(tag => (
+                                            <option key={tag} value={tag}>
+                                                {tag}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    <div>
+                                        {selectedTag.map((tag) => (
+                                            <div
+                                                className="tag-item"
+                                                key={tag}
+                                                onClick={() => handleTagRemove(tag)}>
+                                                {tag}
+                                                <span
+                                                    onClick={
+                                                    (e) => {e.stopPropagation();
+                                                    handleTagRemove(tag);}}>
+                                                    x
+                                                </span>
+                                            </div>
+                                        ))}
+                                    </div>
                                 </dd>
                             </dl>
                         </div>

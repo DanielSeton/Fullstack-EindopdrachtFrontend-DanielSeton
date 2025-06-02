@@ -94,6 +94,19 @@ h1{
 
 /*-----------------///Media Queries///---------------------*/
 
+.tag-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    width: 100px;
+    height: 30px;
+    background: var(--secondary-color);
+    border-radius: 2px;
+}
+
+/*-----------------///Media Queries///---------------------*/
+
 @media screen and (max-width: 576px) {
     .upload-container{
         width: calc(100% - 20px);
