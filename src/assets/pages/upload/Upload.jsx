@@ -28,13 +28,19 @@ function Upload() {
 
     const handleTagRemove = (tag) => {
         removeTags(tag, selectedTag, setSelectedTag);
+    };
+
+    function handleSubmit(e) {
+        e.preventDefault();
     }
+
+
 
     return (
             <div className="content-wrapper">
                 <h1><span className="header-color">UPLOAD </span>your file</h1>
                 <div className="upload-container">
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <div className="upload-upper">
                             <dl className="form-container">
                                 <dt>
@@ -96,7 +102,7 @@ function Upload() {
                                             </option>
                                         ))}
                                     </select>
-                                    <div>
+                                    <div className="tag-storage">
                                         {selectedTag.map((tag) => (
                                             <div
                                                 className="tag-item"
@@ -104,6 +110,7 @@ function Upload() {
                                                 onClick={() => handleTagRemove(tag)}>
                                                 {tag}
                                                 <span
+                                                    className="tag-item-cancel"
                                                     onClick={
                                                     (e) => {e.stopPropagation();
                                                     handleTagRemove(tag);}}>
