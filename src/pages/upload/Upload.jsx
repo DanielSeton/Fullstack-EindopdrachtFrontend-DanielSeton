@@ -1,13 +1,13 @@
 import './Upload.css'
-import Button from "../../../components/button/Button.jsx";
-import InputField from "../../../components/input-field/InputField.jsx";
-import {sizes} from "../../constant/sizes.js";
-import {variants} from "../../constant/variants.js";
+import Button from "../../components/button/Button.jsx";
+import InputField from "../../components/input-field/InputField.jsx";
+import {sizes} from "../../assets/constant/sizes.js";
+import {variants} from "../../assets/constant/variants.js";
 import {useState} from "react";
 
-import {removeTags} from "../../helpers/removeTags.js";
-import {tagList} from "../../constant/tag-list.js";
-import {addTags} from "../../helpers/addTags.js";
+import {removeTags} from "../../assets/helpers/removeTags.js";
+import {tagList} from "../../assets/constant/tag-list.js";
+import {addTags} from "../../assets/helpers/addTags.js";
 
 
 

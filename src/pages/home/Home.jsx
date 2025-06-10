@@ -1,10 +1,10 @@
 import './Home.css';
-import ShowEntryBlock from "../../../components/showentryBlock/ShowEntryBlock.jsx";
-import PageDivider from "../../../components/pagedivider/PageDivider.jsx";
-import {sizes} from "../../constant/sizes.js";
-import Playlist from "../../../components/playlist/Playlist.jsx";
-import SubmissionBlock from "../../../components/submission/SubmissionBlock.jsx";
-import {showList} from "../../constant/show-list.js";
+import ShowEntryBlock from "../../components/showentryBlock/ShowEntryBlock.jsx";
+import PageDivider from "../../components/pagedivider/PageDivider.jsx";
+import {sizes} from "../../assets/constant/sizes.js";
+import Playlist from "../../components/playlist/Playlist.jsx";
+import SubmissionBlock from "../../components/submission/SubmissionBlock.jsx";
+import {showList} from "../../assets/constant/show-list.js";
 
 function Home(){
     return (
@@ -26,7 +26,7 @@ function Home(){
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus deserunt distinctio dolorum esse ex nesciunt quasi sequi sit tempore vero. Alias aliquam aliquid blanditiis corporis dolore dolores nam odit perferendis praesentium rem, similique ut vel, voluptatem. A accusantium alias cum cupiditate distinctio earum eius error fugiat hic iure iusto maxime necessitatibus perspiciatis, possimus praesentium ratione, repellat sapiente sequi totam voluptate.</p>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error explicabo perspiciatis quas quidem quo tempore!</p>
                         </div>
-                        <span className="content-container-inner-img"><img src="src/assets/img/dj_headshot.jpg"/></span>
+                        <span className="content-container-inner-img"><img src="../../assets/img/dj_headshot.jpg"/></span>
                     </div>
                 </div>
             </section>

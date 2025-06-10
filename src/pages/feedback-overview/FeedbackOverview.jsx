@@ -1,7 +1,7 @@
 import './FeedbackOverview.css'
-import SubmissionBlock from "../../../components/submission/SubmissionBlock.jsx";
-import PageDivider from "../../../components/pagedivider/PageDivider.jsx";
-import FilterOption from "../../../components/filter-option/FilterOption.jsx";
+import SubmissionBlock from "../../components/submission/SubmissionBlock.jsx";
+import PageDivider from "../../components/pagedivider/PageDivider.jsx";
+import FilterOption from "../../components/filter-option/FilterOption.jsx";
 
 function FeedbackOverview() {
 

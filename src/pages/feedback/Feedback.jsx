@@ -1,9 +1,9 @@
 import './Feedback.css'
-import {sizes} from "../../constant/sizes.js";
-import Button from "../../../components/button/Button.jsx";
-import {variants} from "../../constant/variants.js";
-import ButtonDropdown from "../../../components/button-dropdown/ButtonDropdown.jsx";
-import PageDivider from "../../../components/pagedivider/PageDivider.jsx";
+import {sizes} from "../../assets/constant/sizes.js";
+import Button from "../../components/button/Button.jsx";
+import {variants} from "../../assets/constant/variants.js";
+import ButtonDropdown from "../../components/button-dropdown/ButtonDropdown.jsx";
+import PageDivider from "../../components/pagedivider/PageDivider.jsx";
 
 function Feedback(){
     return(
@@ -14,7 +14,7 @@ function Feedback(){
                     <PageDivider size={sizes.MEDIUM}/>
                     <p>Uploaded: Dit is de upload date</p>
                     <p>BPM: dit is de BPM</p>
-                    <audio className="submission-audio" controls src="src/assets/placeholders/Beach_Walk.mp3"></audio>
+                    <audio className="submission-audio" controls src="../../assets/placeholders/Beach_Walk.mp3"></audio>
                     <p>Tags</p>
                     <div>
                         <ul className="submission-tags-list">

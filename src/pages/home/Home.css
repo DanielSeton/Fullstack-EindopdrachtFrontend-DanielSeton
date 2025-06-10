@@ -32,7 +32,7 @@ section{
 .banner-container{
     width: 100vw;
     height: 600px;
-    background-image: url(src/assets/img/djcorner_header_background.png);
+    background-image: url(../../assets/img/djcorner_header_background.png);
     background-size: cover;
     background-position: center;
     margin-top: 0;

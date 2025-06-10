@@ -1,9 +1,9 @@
 import './Signup.css'
-import PageDivider from "../../../components/pagedivider/PageDivider.jsx";
-import Button from "../../../components/button/Button.jsx";
-import {variants} from "../../constant/variants.js";
-import {sizes} from "../../constant/sizes.js";
-import InputField from "../../../components/input-field/InputField.jsx";
+import PageDivider from "../../components/pagedivider/PageDivider.jsx";
+import Button from "../../components/button/Button.jsx";
+import {variants} from "../../assets/constant/variants.js";
+import {sizes} from "../../assets/constant/sizes.js";
+import InputField from "../../components/input-field/InputField.jsx";
 
 function Signup() {
 
