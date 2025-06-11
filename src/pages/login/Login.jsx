@@ -9,12 +9,24 @@ import {useNavigate} from "react-router-dom";
 
 function Login() {
 
-    const [query, setQuery] = useState('');
+    const [formState, setFormState] = useState({
+        email: '',
+        password: '',
+    });
 
     const navigate = useNavigate();
 
+    function handleChange(e) {
+        setFormState({
+            ...formState,
+            [e.target.name]: e.target.value,
+        })
+    }
+
     function handleSubmit(e) {
         e.preventDefault();
+
+        console.log({...formState});
     }
 
     return (
@@ -24,32 +36,38 @@ function Login() {
                         <h1>LOGIN</h1>
                         <form onSubmit={(handleSubmit)}>
                             <InputField
-                                type="email"
+                                name="email"
+                                id="email"
+                                inputType="text"
                                 placeholder="email*"
                                 size={sizes.MEDIUM}
-                                inputValue={query}
-                                handleInputCallback={setQuery}
+                                inputValue={formState.email}
+                                changeEvent={handleChange}
                                 isRequired={true}/>
                             <InputField
-                                type="password"
+                                name="password"
+                                id="password"
+                                inputType="text"
                                 placeholder="password"
                                 size={sizes.MEDIUM}
+                                inputValue={formState.password}
+                                changeEvent={handleChange}
                                 isRequired={true}/>
                             <br/>
                             <Button
-                                type="login"
+                                type="submit"
                                 variant={variants.PRIMARY}
                                 size={sizes.LARGE}
                                 label="LOGIN"
                                 clickEvent={handleSubmit}/>
                             <PageDivider/>
-                            <Button
-                                type="signup"
-                                variant={variants.INVERTED}
-                                size={sizes.MEDIUM}
-                                label="SIGN-UP"
-                            clickEvent={() => navigate("/signup")}/>
                         </form>
+                        <Button
+                            type="signup"
+                            variant={variants.INVERTED}
+                            size={sizes.MEDIUM}
+                            label="SIGN-UP"
+                            clickEvent={() => navigate("/signup")}/>
                     </div>
                 </div>
                 <div className="image-container">
