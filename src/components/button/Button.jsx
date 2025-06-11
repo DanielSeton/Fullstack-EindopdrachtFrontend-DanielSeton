@@ -1,6 +1,6 @@
 import './Button.css'
 
-function Button({type = "button", variant, size, label}) {
+function Button({type = "button", variant, clickEvent, size, label}) {
     let cssVariantClass = '';
     let cssSizeClass = '';
     console.log({label} + " clicked")
@@ -24,13 +24,16 @@ function Button({type = "button", variant, size, label}) {
         case 'large':
             cssSizeClass = 'button-large';
             break;
+        case 'full':
+            cssSizeClass = 'button-full';
+            break;
         case 'medium':
         default:
             cssSizeClass = 'button-medium';
     }
 
     return (
-        <button type={type} className={`button-styling ${cssSizeClass} ${cssVariantClass}`}>
+        <button type={type} onClick={clickEvent} className={`button-styling ${cssSizeClass} ${cssVariantClass}`}>
             {label}
         </button>
     )

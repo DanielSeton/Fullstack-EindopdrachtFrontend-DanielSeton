@@ -4,6 +4,7 @@ import Button from "../../components/button/Button.jsx";
 import {variants} from "../../assets/constant/variants.js";
 import {sizes} from "../../assets/constant/sizes.js";
 import InputField from "../../components/input-field/InputField.jsx";
+import {NavLink} from "react-router-dom";
 
 function Signup() {
 
@@ -11,7 +12,7 @@ function Signup() {
             <div className="page-wrapper">
                 <div className="input-container">
                     <div className="form-container">
-                        <h1>Dit is de sign-up sectie</h1>
+                        <h1>Sign-up</h1>
                         <form>
                             <InputField
                                 type="name"
@@ -36,7 +37,7 @@ function Signup() {
                                 size={sizes.LARGE}
                                 label="REGISTER"/>
                         </form>
-                        <a href="" className="existing-account-link">Already have an account?</a>
+                        <NavLink to="/login">Already have an account?</NavLink>
                     </div>
                 </div>
                 <div className="image-container">

@@ -38,14 +38,14 @@ function Upload() {
 
     return (
             <div className="content-wrapper">
-                <h1><span className="header-color">UPLOAD </span>your file</h1>
+                <h1 className="upload-title"><span className="header-color">UPLOAD </span>your file</h1>
                 <div className="upload-container">
                     <form onSubmit={handleSubmit}>
-                        <div className="upload-upper">
-                            <dl className="form-container">
+                        <div className="upload-form-upper">
+                            <dl className="upload-form-container">
                                 <dt>
-                                    <div className="form-labelWrapper">
-                                        <label className="form-label" htmlFor="title">Title:</label>
+                                    <div className="form-label-container">
+                                        <label className="upload-form-label" htmlFor="title">Title:</label>
                                     </div>
                                 </dt>
                                 <dd>
@@ -56,10 +56,10 @@ function Upload() {
                                         isRequired={true}/>
                                 </dd>
                             </dl>
-                            <dl className="form-container">
+                            <dl className="upload-form-container">
                                 <dt>
-                                    <div className="form-labelWrapper">
-                                        <label className="form-label" htmlFor="bpm">BPM:</label>
+                                    <div className="form-label-container">
+                                        <label className="upload-form-label" htmlFor="bpm">BPM:</label>
                                     </div>
                                 </dt>
                                 <dd>
@@ -70,24 +70,24 @@ function Upload() {
                                         isRequired={true}/>
                                 </dd>
                             </dl>
-                            <dl className="form-container">
+                            <dl className="upload-form-container">
                                 <dt>
-                                    <div className="form-labelWrapper">
-                                        <label className="form-label" htmlFor="upload">Upload:</label>
+                                    <div className="form-label-container">
+                                        <label className="upload-form-label" htmlFor="upload">Upload:</label>
                                     </div>
                                 </dt>
                                 <dd>
                                     <span>
-                                        <a className="form-fileUploadButton">
+                                        <a className="upload-form-file-uploadButton">
                                         </a>
                                         <input type="file" accept="audio/*" title="Attach file" className="form-fileInput"></input>
                                     </span>
                                 </dd>
                             </dl>
-                            <dl className="form-container">
+                            <dl className="upload-form-container">
                                 <dt>
-                                    <div className="form-labelWrapper">
-                                        <label className="form-label" htmlFor="tags">Tags:</label>
+                                    <div className="form-label-container">
+                                        <label className="upload-form-label" htmlFor="tags">Tags:</label>
                                     </div>
                                 </dt>
                                 <dd>
@@ -122,7 +122,7 @@ function Upload() {
                                 </dd>
                             </dl>
                         </div>
-                        <div className="upload-bottom">
+                        <div className="upload-form-bottom">
                             <Button
                                 type="submit"
                                 variant={variants.SECONDARY}

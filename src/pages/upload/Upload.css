@@ -6,7 +6,7 @@
     max-width: 100vw;
 }
 
-h1{
+.upload-title{
     padding-left: 15%;
     margin-top: 3%;
 }
@@ -30,7 +30,7 @@ h1{
     background: transparent;
 }
 
-.upload-bottom{
+.upload-form-bottom{
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -44,14 +44,14 @@ h1{
 
 /*-----------------///Form///---------------------*/
 
-.form-container{
+.upload-form-container{
     display: flex;
     justify-content: center;
     width: 100%;
     margin: 0;
 }
 
-.form-container dt{
+.upload-form-container dt{
     border-right: 1px solid transparent;
     border-color: var(--border-color);
 
@@ -62,12 +62,12 @@ h1{
     padding: 15px;
 }
 
-.form-container dd{
+.upload-form-container dd{
     width: 66%;
     padding: 15px;
 }
 
-.form-container label{
+.upload-form-label{
     color: var(--page-text-color);
     font-family: var(--page-text), sans-serif;
     font-size: 1.2em;
@@ -83,7 +83,7 @@ h1{
     transition: all .2s ease;
 }
 
-.form-fileUploadButton{
+.upload-form-file-uploadButton{
     visibility: hidden;
     position: absolute;
     width: 1px;

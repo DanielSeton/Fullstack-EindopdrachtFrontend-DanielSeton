@@ -5,10 +5,13 @@ import {variants} from "../../assets/constant/variants.js";
 import {sizes} from "../../assets/constant/sizes.js";
 import InputField from "../../components/input-field/InputField.jsx";
 import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 function Login() {
 
     const [query, setQuery] = useState('');
+
+    const navigate = useNavigate();
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -18,7 +21,7 @@ function Login() {
             <div className="page-wrapper">
                 <div className="input-container">
                     <div className="form-container">
-                        <h1>Dit is de login sectie</h1>
+                        <h1>LOGIN</h1>
                         <form onSubmit={(handleSubmit)}>
                             <InputField
                                 type="email"
@@ -32,17 +35,20 @@ function Login() {
                                 placeholder="password"
                                 size={sizes.MEDIUM}
                                 isRequired={true}/>
+                            <br/>
                             <Button
                                 type="login"
                                 variant={variants.PRIMARY}
                                 size={sizes.LARGE}
-                                label="LOGIN"/>
+                                label="LOGIN"
+                                clickEvent={handleSubmit}/>
                             <PageDivider/>
                             <Button
                                 type="signup"
                                 variant={variants.INVERTED}
                                 size={sizes.MEDIUM}
-                                label="SIGN-UP"/>
+                                label="SIGN-UP"
+                            clickEvent={() => navigate("/signup")}/>
                         </form>
                     </div>
                 </div>
