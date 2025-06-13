@@ -15,6 +15,11 @@ function Upload() {
 
     const [selectedTag, setSelectedTag] = useState([]);
     const [selectValue, setSelectValue] = useState("");
+    const [uploadFormState, setUploadFormState] = useState({
+        title: '',
+        bpm: '',
+    });
+
 
     const handleSelectChange = (e) => {
         const tag = e.target.value;
@@ -30,8 +35,21 @@ function Upload() {
         removeTags(tag, selectedTag, setSelectedTag);
     };
 
+    function handleUploadChange(e) {
+        const { name, value, files } = e.target;
+
+        setUploadFormState( {
+            ...uploadFormState,
+            [name]: name === "upload" ? files[0] : value,
+            }
+        )
+    }
+
     function handleSubmit(e) {
         e.preventDefault();
+
+        console.log(uploadFormState);
+        console.log("tags: " + selectedTag);
     }
 
 
@@ -50,9 +68,13 @@ function Upload() {
                                 </dt>
                                 <dd>
                                     <InputField
-                                        type="text"
+                                        name="title"
+                                        id="title"
+                                        inputType="text"
                                         placeholder="..."
                                         size={sizes.LARGE}
+                                        inputValue={uploadFormState.title}
+                                        changeEvent={handleUploadChange}
                                         isRequired={true}/>
                                 </dd>
                             </dl>
@@ -64,9 +86,13 @@ function Upload() {
                                 </dt>
                                 <dd>
                                     <InputField
-                                        type="text"
+                                        name="bpm"
+                                        id="bpm"
+                                        type="number"
                                         placeholder="..."
                                         size={sizes.LARGE}
+                                        inputValue={uploadFormState.bpm}
+                                        changeEvent={handleUploadChange}
                                         isRequired={true}/>
                                 </dd>
                             </dl>
@@ -80,7 +106,14 @@ function Upload() {
                                     <span>
                                         <a className="upload-form-file-uploadButton">
                                         </a>
-                                        <input type="file" accept="audio/*" title="Attach file" className="form-fileInput"></input>
+                                        <input
+                                            name="upload"
+                                            id="upload-field"
+                                            type="file"
+                                            onChange={handleUploadChange}
+                                            accept="audio/*"
+                                            title="Attach file"
+                                            className="form-fileInput"></input>
                                     </span>
                                 </dd>
                             </dl>
