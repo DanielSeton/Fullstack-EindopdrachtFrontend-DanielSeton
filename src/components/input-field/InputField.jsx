@@ -17,7 +17,7 @@ function InputField({name, inputType, placeholder, size, inputValue, changeEvent
 
     return (
         <input
-            name={`${name}-field`}
+            name={name}
             id={`${name}-field`}
             type={inputType}
             placeholder={placeholder}
