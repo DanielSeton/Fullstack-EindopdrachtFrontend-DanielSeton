@@ -3,7 +3,7 @@ import './Button.css'
 function Button({type = "button", variant, clickEvent, size, label}) {
     let cssVariantClass = '';
     let cssSizeClass = '';
-    console.log({label} + " clicked")
+    console.log(label + " clicked")
 
     switch (variant) {
         case 'primary':

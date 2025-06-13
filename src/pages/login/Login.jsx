@@ -1,15 +1,17 @@
 import './Login.css'
 import Button from "../../components/button/Button.jsx";
 import PageDivider from "../../components/pagedivider/PageDivider.jsx";
-import {variants} from "../../assets/constant/variants.js";
-import {sizes} from "../../assets/constant/sizes.js";
 import InputField from "../../components/input-field/InputField.jsx";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 
+import {variants} from "../../assets/constant/variants.js";
+import {sizes} from "../../assets/constant/sizes.js";
+
+
 function Login() {
 
-    const [formState, setFormState] = useState({
+    const [loginFormState, setLoginFormState] = useState({
         email: '',
         password: '',
     });
@@ -17,8 +19,8 @@ function Login() {
     const navigate = useNavigate();
 
     function handleChange(e) {
-        setFormState({
-            ...formState,
+        setLoginFormState({
+            ...loginFormState,
             [e.target.name]: e.target.value,
         })
     }
@@ -26,7 +28,7 @@ function Login() {
     function handleSubmit(e) {
         e.preventDefault();
 
-        console.log({...formState});
+        console.log({...loginFormState});
     }
 
     return (
@@ -38,10 +40,10 @@ function Login() {
                             <InputField
                                 name="email"
                                 id="email"
-                                inputType="text"
+                                inputType="email"
                                 placeholder="email*"
                                 size={sizes.MEDIUM}
-                                inputValue={formState.email}
+                                inputValue={loginFormState.email}
                                 changeEvent={handleChange}
                                 isRequired={true}/>
                             <InputField
@@ -50,7 +52,7 @@ function Login() {
                                 inputType="text"
                                 placeholder="password"
                                 size={sizes.MEDIUM}
-                                inputValue={formState.password}
+                                inputValue={loginFormState.password}
                                 changeEvent={handleChange}
                                 isRequired={true}/>
                             <br/>
@@ -59,11 +61,11 @@ function Login() {
                                 variant={variants.PRIMARY}
                                 size={sizes.LARGE}
                                 label="LOGIN"
-                                clickEvent={handleSubmit}/>
+                                clickEvent={(e) => {e.stopPropagation()}} />
                             <PageDivider/>
                         </form>
                         <Button
-                            type="signup"
+                            type="button"
                             variant={variants.INVERTED}
                             size={sizes.MEDIUM}
                             label="SIGN-UP"
