@@ -1,4 +1,4 @@
-.content-container{
+.dashboard-content-container{
     display: flex;
     flex-direction: row;
     width: 100vw;
@@ -6,15 +6,16 @@
     margin-top: 20px;
 }
 
-/*-----------------///Filter///---------------------*/
+/*-----------------///Profile section///---------------------*/
 
-.filter-container{
+.profile-container{
     display: flex;
     flex-direction: column;
     width: 20%;
     margin-left: 20px;
     margin-right: 20px;
     padding: 10px;
+    max-height: 500px;
 
     background: var(--background);
     border: 1px solid var(--border-color);
@@ -23,11 +24,11 @@
     font-family: var(--page-text), sans-serif;
 }
 
-h3 {
+.profile-container h2 {
     font-weight: bold;
 }
 
-.filter-header{
+.profile-header{
     display: flex;
     justify-content: center;
     background: var(--background-block-color);
@@ -40,6 +41,13 @@ h3 {
     justify-content: center;
     gap: 5px;
     margin-bottom: 10px;
+}
+
+.dashboard-profile-container{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
 }
 
 /*-----------------///Submissions container///---------------------*/
@@ -64,7 +72,7 @@ h3 {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    max-height: 100%;
+    max-height: 800px;
     overflow-y: scroll;
     scrollbar-color: var(--background);
 }
@@ -72,17 +80,16 @@ h3 {
 /*-----------------///Media Queries///---------------------*/
 
 @media screen and (max-width: 576px) {
-    .content-container{
+    .dashboard-content-container{
         flex-direction: column;
         align-items: center;
     }
-    .filter-container{
+    .profile-container{
         width: 95%;
     }
 
-    .checkbox-container{
-        display: flex;
-        gap: 5px;
+    .dashboard-profile-container{
+        gap: 15px;
         margin-bottom: 10px;
     }
     .content-container-right{

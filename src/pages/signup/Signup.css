@@ -1,12 +1,3 @@
-/*-----------------///Content Section///---------------------*/
-
-.page-wrapper {
-    display: flex;
-    flex-direction: row;
-    height: 100dvh;
-    width: 100dvw;
-}
-
 /*-----------------///Form///---------------------*/
 
 .input-container {
@@ -21,35 +12,29 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 80%;
     gap: 1rem;
 }
 
 .form-container form{
     display: flex;
     flex-direction: column;
+    width: 100%;
     gap: 1rem;
     align-items: center;
 }
 
-.form-container input {
-    height: 40px;
-    background-color: var(--background);
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    width: 80%;
-    padding: 6px;
-
-    color: var(--page-text-color);
+.form-container a {
+    color: #646cff;
+    font-size: 15px;
+    text-decoration: none;
+    font-weight: bold;
     font-family: var(--page-text), sans-serif;
-    font-size: 1rem;
-
-    appearance: none;
-    transition: all .2s ease;
 }
 
-::placeholder {
-    color: lightgray;
-    opacity: 40%;
+.form-container a:hover {
+    text-decoration: underline;
+    color: #1372EF;
 }
 
 /*-----------------///Image section///---------------------*/
@@ -60,7 +45,7 @@
     flex-basis: 50%;
     align-items: center;
     justify-content: center;
-    background-image: url(../../img/dj-background-login-image.jpg);
+    background-image: url(../../assets/img/dj-background-login-image.jpg);
     background-size: cover;
     background-position: center;
 }
@@ -68,11 +53,13 @@
 /*-----------------///Media Queries///---------------------*/
 
 @media screen and (max-width: 576px) {
-    .image-container{
-        display: none;
-    }
-
-    .input-container{
+    .input-container {
         flex-basis: 100%;
+    }
+    .image-container {
+        flex-basis: 0;
+    }
+    .quote-text{
+        visibility: hidden;
     }
 }

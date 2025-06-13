@@ -1,17 +1,25 @@
 import './Navigation.css'
+import {NavLink, useNavigate} from "react-router-dom";
+import logo from "../../assets/img/djcorner_logo.png"
 
 function Navigation() {
+
+    const navigate = useNavigate();
 
     return (
         <nav className="navbar">
             <div className="navbar-logo">
-                <span className="header-logo-icon"><img src="src/assets/img/djcorner_logo.png" alt="Company logo"/></span>
-                <p><span id="header-color-section">DJ</span>Corner</p>
+                <button type="button" className="navbar-logo-button" onClick={() => navigate("/")}><img src={logo} alt="Company logo"/>
+                    <span id="header-color-section">DJ</span>Corner</button>
             </div>
             <ul>
-                <li><a href="/public" onClick={() => console.log("Home clicked")}>Home</a></li>
-                <li><a href="/public" onClick={() => console.log("Dashboard clicked")}>Dashboard</a></li>
-                <li><a href="/public" onClick={() => console.log("Logout clicked")}>Logout</a></li>
+                <li>
+                    <NavLink to="/">Home</NavLink></li>
+                <li>
+                    <NavLink to="/dashboard">Dashboard</NavLink></li>
+                <li>
+                    <NavLink to="/">Logout</NavLink>
+                </li>
             </ul>
         </nav>
     )

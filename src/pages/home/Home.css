@@ -8,22 +8,17 @@ section{
     justify-content: center;
 }
 
-.section-title{
+.home-content-title{
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.section-title h1{
+.home-content-title h1{
     flex-grow: 1;
     width: 60%
 }
 
-.section-title hr{
-    height: 1px;
-    width: 40%;
-    flex-shrink: 2;
-}
 
 .header-color{
     color: var(--primary-color);
@@ -32,7 +27,7 @@ section{
 .banner-container{
     width: 100vw;
     height: 600px;
-    background-image: url(src/assets/img/djcorner_header_background.png);
+    background-image: url(../../assets/img/djcorner_header_background.png);
     background-size: cover;
     background-position: center;
     margin-top: 0;
@@ -60,13 +55,13 @@ section{
     -webkit-text-stroke: 1px white;
 }
 
-.content-container{
+.home-content-container{
     display: flex;
     flex-direction: column;
     width: 70%;
 }
 
-.content-container-inner{
+.home-content-container-inner{
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -74,32 +69,40 @@ section{
     padding-right: 25px;
 }
 
-.content-container-inner-textblock{
+.home-content-container-inner-textblock{
     display: flex;
     flex-direction: column;
     width: 100%;
     font-family: var(--page-text), sans-serif;
 }
 
-.content-container-inner-img{
+.home-content-container-inner-img{
     width: 80%;
     margin-left: 5%;
     flex-shrink: 1;
 }
 
-.content-container-inner-img img{
+.home-content-container-inner-img img{
     width: 100%;
 }
 
 /*-----------------///Media Queries///---------------------*/
 
 @media screen and (max-width: 576px) {
-    .content-container{
+    .home-content-container{
         flex-basis: 100%;
     }
 
-    .content-container-inner{
+    .home-content-container-inner{
         flex-direction: column;
         align-items: center;
+    }
+
+    .home-content-title {
+        flex-direction: column;
+        text-align: center;
+    }
+    .home-content-title h1{
+        width: 90%;
     }
 }

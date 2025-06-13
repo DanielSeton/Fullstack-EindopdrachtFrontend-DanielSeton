@@ -1,5 +1,6 @@
 export const sizes = {
     SMALL: 'small',
     MEDIUM: 'medium',
-    LARGE: 'large'
+    LARGE: 'large',
+    FULL: 'full'
 };
