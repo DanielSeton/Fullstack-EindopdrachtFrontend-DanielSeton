@@ -2,8 +2,35 @@ import './FeedbackOverview.css'
 import SubmissionBlock from "../../components/submission/SubmissionBlock.jsx";
 import PageDivider from "../../components/pagedivider/PageDivider.jsx";
 import FilterOption from "../../components/filter-option/FilterOption.jsx";
+import {useEffect, useState} from "react";
+import axios from "axios";
+import {formatDate} from "../../assets/helpers/formatDate.js";
 
 function FeedbackOverview() {
+
+    const [submissions, setSubmissions] = useState({});
+    const [error, toggleError] = useState(false);
+
+    useEffect(() => {
+        const controller = new AbortController();
+
+        async function fetchSubmissions() {
+            toggleError(false);
+
+            try {
+                const response = await axios.get("http://localhost:8080/submissions",
+                    {signal:controller.signal});
+                console.log(response.data);
+                setSubmissions(response.data);
+            } catch (e) {
+                console.error(e);
+                toggleError(true);
+            }
+        }
+
+        fetchSubmissions();
+
+    }, [])
 
     return (
         <div className="content-container">
@@ -64,12 +91,19 @@ function FeedbackOverview() {
                 <button>Sort by date (newest first)</button>
                 <PageDivider/>
                 <div className="submission-container">
-                    <SubmissionBlock
-                        title="Title"
-                        name="Henkie"
-                        date="25/05/2025"
-                        bpm={350}
-                        tag="Disco"/>
+                    {Object.keys(submissions).length > 0 && submissions.map((submission) => {
+                        return (
+                            <SubmissionBlock
+                                key={submission.id}
+                                id={submission.id}
+                                // title={submission.title}
+                                // name={submission.artistName}
+                                // date={formatDate(submission.uploadDate)}
+                                // bpm={submission.bpm}
+                                // tag={submission.tags}
+                            />
+                        );
+                    })}
                 </div>
             </div>
         </div>

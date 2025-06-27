@@ -4,6 +4,8 @@ import Button from "../../components/button/Button.jsx";
 import {variants} from "../../assets/constant/variants.js";
 import ButtonDropdown from "../../components/button-dropdown/ButtonDropdown.jsx";
 import PageDivider from "../../components/pagedivider/PageDivider.jsx";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 function Feedback(){
 
