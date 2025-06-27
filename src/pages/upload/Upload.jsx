@@ -3,15 +3,19 @@ import Button from "../../components/button/Button.jsx";
 import InputField from "../../components/input-field/InputField.jsx";
 import {sizes} from "../../assets/constant/sizes.js";
 import {variants} from "../../assets/constant/variants.js";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 import {removeTags} from "../../assets/helpers/removeTags.js";
 import {tagList} from "../../assets/constant/tag-list.js";
 import {addTags} from "../../assets/helpers/addTags.js";
+import axios from "axios";
 
 
 
 function Upload() {
+
+    const [tags, setTags] = useState([]);
+    const [error, toggleError] = useState(false);
 
     const [selectedTag, setSelectedTag] = useState([]);
     const [selectValue, setSelectValue] = useState("");
@@ -20,6 +24,25 @@ function Upload() {
         bpm: '',
     });
 
+    useEffect(() => {
+        const controller = new AbortController();
+
+        async function fetchTags(){
+            toggleError(false);
+
+            try {
+                const response = await axios.get("http://localhost:8080/tags",
+                    {signal:controller.signal});
+                console.log(response.data);
+                setTags(response.data)
+            } catch (e) {
+                console.error(e);
+                toggleError(true);
+            }
+        }
+
+        fetchTags();
+    }, [])
 
     const handleSelectChange = (e) => {
         const tag = e.target.value;
@@ -129,9 +152,9 @@ function Upload() {
                                             value="">
                                             --Choose a tag--
                                         </option>
-                                        {tagList.map(tag => (
-                                            <option key={tag} value={tag}>
-                                                {tag}
+                                        {Object.keys(tags).length > 0 && tags.map((tag) => (
+                                            <option key={`${tag.id}_${tag.name}`} value={tag.name}>
+                                                {tag.name}
                                             </option>
                                         ))}
                                     </select>

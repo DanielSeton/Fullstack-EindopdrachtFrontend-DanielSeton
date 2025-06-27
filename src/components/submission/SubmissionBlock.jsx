@@ -18,7 +18,7 @@ function SubmissionBlock({title, name, date, bpm, tag}){
                         <p><span className="submission-info-title">BPM: </span>{bpm}</p>
                     </div>
                 </a>
-                <audio className="submission-audio" controls src="src/assets/placeholders/Beach_Walk.mp3"></audio>
+                <audio preload="none" className="submission-audio" controls src="src/assets/placeholders/Beach_Walk.mp3"></audio>
             </div>
             <div className="submission-bottom">
                 <p>Tags: </p>

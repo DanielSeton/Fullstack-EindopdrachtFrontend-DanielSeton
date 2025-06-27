@@ -6,6 +6,7 @@ import ButtonDropdown from "../../components/button-dropdown/ButtonDropdown.jsx"
 import PageDivider from "../../components/pagedivider/PageDivider.jsx";
 
 function Feedback(){
+
     return(
         <div className="content-wrapper">
             <div className="feedback-container">
