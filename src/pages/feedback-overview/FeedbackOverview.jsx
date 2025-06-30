@@ -30,6 +30,10 @@ function FeedbackOverview() {
 
         fetchSubmissions();
 
+        return function cleanup() {
+            controller.abort();
+        }
+
     }, [])
 
     return (
@@ -81,10 +85,8 @@ function FeedbackOverview() {
                     <h3>Tags</h3>
                     <FilterOption
                         label="No preference"
-                        isChecked={false}/>
-                    <FilterOption
-                        label="Disco"
-                        isChecked={false}/>
+                        isChecked={false}
+                    />
                 </div>
             </aside>
             <div className="content-container-right">
@@ -96,11 +98,6 @@ function FeedbackOverview() {
                             <SubmissionBlock
                                 key={submission.id}
                                 id={submission.id}
-                                // title={submission.title}
-                                // name={submission.artistName}
-                                // date={formatDate(submission.uploadDate)}
-                                // bpm={submission.bpm}
-                                // tag={submission.tags}
                             />
                         );
                     })}

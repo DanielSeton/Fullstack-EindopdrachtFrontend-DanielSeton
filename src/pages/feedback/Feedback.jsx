@@ -6,8 +6,38 @@ import ButtonDropdown from "../../components/button-dropdown/ButtonDropdown.jsx"
 import PageDivider from "../../components/pagedivider/PageDivider.jsx";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {useParams} from "react-router-dom";
 
 function Feedback(){
+
+    const [submission, setSubmission] = useState({});
+    const [error, toggleError] = useState(false);
+
+    const { id } = useParams();
+
+    useEffect(() => {
+        const controller = new AbortController();
+
+        async function fetchSubmission() {
+            toggleError(false);
+
+            try {
+                const response = await axios.get(`http://localhost:8080/submissions/${id}`,
+                    {signal:controller.signal});
+                console.log(response.data);
+            } catch (e) {
+                console.error(e);
+                toggleError(true);
+            }
+        }
+
+        fetchSubmission();
+
+        return function cleanup() {
+            controller.abort();
+        }
+
+    }, [])
 
     return(
         <div className="content-wrapper">

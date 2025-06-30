@@ -45,7 +45,7 @@ function SubmissionBlock({id}){
                         <p><span className="submission-info-title">BPM: </span>{submission.bpm}</p>
                     </div>
                 </a>
-                <audio preload="none" className="submission-audio" controls src={submission.audioDownloadUrl}></audio>
+                <audio preload="none" className="submission-audio" controls src={`http://localhost:8080/${submission.audioDownloadUrl}`}></audio>
             </div>
             <div className="submission-bottom">
                 <p>Tags: </p>
