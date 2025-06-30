@@ -13,8 +13,9 @@ function Feedback(){
 
     const [submission, setSubmission] = useState({});
     const [error, toggleError] = useState(false);
+    const [loading, toggleLoading] = useState(false);
     const [feedback, setFeedback] = useState("");
-    const [status, setStatus] = useState("");
+    const [status, setStatus] = useState("noFeedback");
 
 
     const { id } = useParams();
@@ -24,6 +25,7 @@ function Feedback(){
 
         async function fetchSubmission() {
             toggleError(false);
+            toggleLoading(true);
 
             try {
                 const response = await axios.get(`http://localhost:8080/submissions/${id}`,
@@ -31,8 +33,14 @@ function Feedback(){
                 console.log(response.data);
                 setSubmission(response.data);
             } catch (e) {
-                console.error(e);
-                toggleError(true);
+                if (axios.isCancel(e)) {
+                    console.error('Request is canceled...', e.message);
+                } else {
+                    console.error(e);
+                    toggleError(true);
+                }
+            } finally {
+                toggleLoading(false);
             }
         }
 
@@ -45,12 +53,20 @@ function Feedback(){
     }, [])
 
     async function handleSubmit(e) {
-        console.log(status, feedback);
+        e.preventDefault();
+        try{
+            console.log(status, feedback);
+        } catch (e) {
+            console.error(e);
+        }
     }
 
     return(
         <div className="content-wrapper">
-            {error ? <Navigate to="/error" /> :
+            {loading ? (
+                <p>Loading submission data...</p>
+            ) : error ? (
+                <Navigate to="/error" /> ) : (
             <div className="feedback-container">
                 <div className="info">
                     <h2>{submission.title}</h2>
@@ -62,9 +78,9 @@ function Feedback(){
                     <p><strong>Tags</strong></p>
                     <div>
                         <ul className="submission-tags-list">
-                            {submission.tags?.map((tag) => {
+                            {submission.tags?.map((tag, index) => {
                                 return(
-                                    <li key={`${submission.id}_${submission.tags.name}`} className="submission-tags-list-item">{tag}</li>
+                                    <li key={`${submission.id}_${tag}_${index}`} className="submission-tags-list-item">{tag}</li>
                                 )
                             })}
                         </ul>
@@ -80,13 +96,16 @@ function Feedback(){
                                 id="feedback"
                                 rows={6}
                                 cols={40}
+                                value={feedback}
                                 onChange={(e) => {setFeedback(e.target.value)}}>
                             </textarea>
                         </section>
                         <label>Status</label>
                         <section>
                             <ButtonDropdown
-                                onChange={(e) => setStatus(e.target.value)}/>
+                                value={status}
+                                changeEvent={(e) => setStatus(e.target.value)}
+                            />
                         </section>
                         <section>
                             <Button
@@ -100,7 +119,7 @@ function Feedback(){
                     </form>
                 </div>
             </div>
-            }
+            )}
         </div>
     )
 }

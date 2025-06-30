@@ -10,12 +10,14 @@ function FeedbackOverview() {
 
     const [submissions, setSubmissions] = useState({});
     const [error, toggleError] = useState(false);
+    const [loading, toggleLoading] = useState(false);
 
     useEffect(() => {
         const controller = new AbortController();
 
         async function fetchSubmissions() {
             toggleError(false);
+            toggleLoading(true);
 
             try {
                 const response = await axios.get("http://localhost:8080/submissions",
@@ -23,8 +25,14 @@ function FeedbackOverview() {
                 console.log(response.data);
                 setSubmissions(response.data);
             } catch (e) {
-                console.error(e);
-                toggleError(true);
+                if (axios.isCancel(e)) {
+                    console.error('Request is canceled...', e.message);
+                } else {
+                    console.error(e);
+                    toggleError(true);
+                }
+            } finally {
+                toggleLoading(false);
             }
         }
 
