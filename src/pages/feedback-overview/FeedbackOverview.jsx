@@ -101,7 +101,12 @@ function FeedbackOverview() {
                 <button>Sort by date (newest first)</button>
                 <PageDivider/>
                 <div className="submission-container">
-                    {Object.keys(submissions).length > 0 && submissions.map((submission) => {
+                    {loading && <p className="submission-state-message">Loading submissions...</p>}
+                    {error && <p className="submission-state-message">Something went wrong loading the submissions</p>}
+                    {!loading && !error && submissions.length === 0 && (
+                        <p className="submission-state-message">No submissions found</p>
+                    )}
+                    {!loading && !error && Object.keys(submissions).length > 0 && submissions.map((submission) => {
                         return (
                             <SubmissionBlock
                                 key={submission.id}
