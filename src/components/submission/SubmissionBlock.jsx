@@ -4,6 +4,7 @@ import ButtonDropdown from "../button-dropdown/ButtonDropdown.jsx";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {formatDate} from "../../assets/helpers/formatDate.js";
+import {NavLink} from "react-router-dom";
 
 function SubmissionBlock({id}){
 
@@ -28,12 +29,16 @@ function SubmissionBlock({id}){
         }
 
         loadSubmission();
+
+        return function cleanup() {
+            controller.abort();
+        }
     }, [])
 
     return (
         <article className="submission">
             <div className="submission-content">
-                <a href="" onClick={() => console.log('submission clicked')}>
+                <NavLink to={`/feedback/${id}`}>
                     <div>
                         <div className="submission-header">
                             <h2>{submission.title}</h2>
@@ -44,7 +49,7 @@ function SubmissionBlock({id}){
                         <p><span className="submission-info-title">Uploaded: </span>{formatDate(submission.uploadDate)}</p>
                         <p><span className="submission-info-title">BPM: </span>{submission.bpm}</p>
                     </div>
-                </a>
+                </NavLink>
                 <audio preload="none" className="submission-audio" controls src={`http://localhost:8080/${submission.audioDownloadUrl}`}></audio>
             </div>
             <div className="submission-bottom">

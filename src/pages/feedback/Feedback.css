@@ -75,8 +75,8 @@
 @media screen and (max-width: 576px) {
     .feedback-container{
         flex-direction: column;
-        width: calc(100% - 20px);
-        min-width: 300px;
+        width: calc(100% - 5px);
+        min-width: 100px;
         height: 100%;
     }
 
