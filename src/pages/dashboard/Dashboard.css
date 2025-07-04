@@ -76,6 +76,12 @@
     overflow-y: scroll;
     scrollbar-color: var(--background);
 }
+.submission-state-message{
+    align-self: center;
+    font-family: var(--page-text), sans-serif;
+    color: var(--secondary-color);
+}
+
 
 /*-----------------///Media Queries///---------------------*/
 

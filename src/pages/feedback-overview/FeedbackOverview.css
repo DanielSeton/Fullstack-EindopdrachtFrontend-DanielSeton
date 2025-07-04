@@ -69,6 +69,12 @@ h3 {
     scrollbar-color: var(--background);
 }
 
+.submission-state-message{
+    align-self: center;
+    font-family: var(--page-text), sans-serif;
+    color: var(--page-text-color);
+}
+
 /*-----------------///Media Queries///---------------------*/
 
 @media screen and (max-width: 576px) {

@@ -2,8 +2,47 @@ import './FeedbackOverview.css'
 import SubmissionBlock from "../../components/submission/SubmissionBlock.jsx";
 import PageDivider from "../../components/pagedivider/PageDivider.jsx";
 import FilterOption from "../../components/filter-option/FilterOption.jsx";
+import {useEffect, useState} from "react";
+import axios from "axios";
+import {formatDate} from "../../assets/helpers/formatDate.js";
 
 function FeedbackOverview() {
+
+    const [submissions, setSubmissions] = useState({});
+    const [error, toggleError] = useState(false);
+    const [loading, toggleLoading] = useState(false);
+
+    useEffect(() => {
+        const controller = new AbortController();
+
+        async function fetchSubmissions() {
+            toggleError(false);
+            toggleLoading(true);
+
+            try {
+                const response = await axios.get("http://localhost:8080/submissions",
+                    {signal:controller.signal});
+                console.log(response.data);
+                setSubmissions(response.data);
+            } catch (e) {
+                if (axios.isCancel(e)) {
+                    console.error('Request is canceled...', e.message);
+                } else {
+                    console.error(e);
+                    toggleError(true);
+                }
+            } finally {
+                toggleLoading(false);
+            }
+        }
+
+        fetchSubmissions();
+
+        return function cleanup() {
+            controller.abort();
+        }
+
+    }, [])
 
     return (
         <div className="content-container">
@@ -54,22 +93,27 @@ function FeedbackOverview() {
                     <h3>Tags</h3>
                     <FilterOption
                         label="No preference"
-                        isChecked={false}/>
-                    <FilterOption
-                        label="Disco"
-                        isChecked={false}/>
+                        isChecked={false}
+                    />
                 </div>
             </aside>
             <div className="content-container-right">
                 <button>Sort by date (newest first)</button>
                 <PageDivider/>
                 <div className="submission-container">
-                    <SubmissionBlock
-                        title="Title"
-                        name="Henkie"
-                        date="25/05/2025"
-                        bpm={350}
-                        tag="Disco"/>
+                    {loading && <p className="submission-state-message">Loading submissions...</p>}
+                    {error && <p className="submission-state-message">Something went wrong loading the submissions</p>}
+                    {!loading && !error && submissions.length === 0 && (
+                        <p className="submission-state-message">No submissions found</p>
+                    )}
+                    {!loading && !error && Object.keys(submissions).length > 0 && submissions.map((submission) => {
+                        return (
+                            <SubmissionBlock
+                                key={submission.id}
+                                id={submission.id}
+                            />
+                        );
+                    })}
                 </div>
             </div>
         </div>

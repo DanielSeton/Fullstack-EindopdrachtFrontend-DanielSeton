@@ -6,10 +6,47 @@ import {useNavigate} from "react-router-dom";
 import Button from "../../components/button/Button.jsx";
 import {variants} from "../../assets/constant/variants.js";
 import {sizes} from "../../assets/constant/sizes.js";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 function Dashboard() {
 
+    const [submissions, setSubmissions] = useState({});
+    const [error, toggleError] = useState(false);
+    const [loading, toggleLoading] = useState(false);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const controller = new AbortController();
+
+        async function fetchSubmissions() {
+            toggleError(false);
+            toggleLoading(true);
+
+            try {
+                const response = await axios.get("http://localhost:8080/submissions",
+                    {signal:controller.signal});
+                console.log(response.data);
+                setSubmissions(response.data);
+            } catch (e) {
+                if (axios.isCancel(e)) {
+                    console.error('Request is canceled...', e.message);
+                } else {
+                    console.error(e);
+                    toggleError(true);
+                }
+            } finally {
+                toggleLoading(false);
+            }
+        }
+
+        fetchSubmissions();
+
+        return function cleanup() {
+            controller.abort();
+        }
+
+    }, [])
 
     return (
             <div className="dashboard-content-container">
@@ -37,24 +74,19 @@ function Dashboard() {
                     <button>Sort by date (newest first)</button>
                     <PageDivider/>
                     <div className="submission-container">
-                        <SubmissionBlock
-                            title="Title"
-                            name="Henkie"
-                            date="25/05/2025"
-                            bpm={350}
-                            tag="Disco"/>
-                        <SubmissionBlock
-                            title="Title"
-                            name="Henkie"
-                            date="25/05/2025"
-                            bpm={350}
-                            tag="Disco"/>
-                        <SubmissionBlock
-                            title="Title"
-                            name="Henkie"
-                            date="25/05/2025"
-                            bpm={350}
-                            tag="Disco"/>
+                        {loading && <p className="submission-state-message">Loading submissions...</p>}
+                        {error && <p className="submission-state-message">Something went wrong loading your submissions</p>}
+                        {!loading && !error && submissions.length === 0 && (
+                            <p className="submission-state-message">No submissions found</p>
+                        )}
+                        {!loading && !error && Object.keys(submissions).length > 0 && submissions.map((submission) => {
+                            return (
+                                <SubmissionBlock
+                                    key={submission.id}
+                                    id={submission.id}
+                                />
+                            );
+                        })}
                     </div>
                 </div>
             </div>

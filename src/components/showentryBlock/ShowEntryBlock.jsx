@@ -1,7 +1,7 @@
 import './ShowEntryBlock.css'
 import Button from "../button/Button.jsx";
 
-function ShowEntryBlock({date, location, title, website}) {
+function ShowEntryBlock({date, location, title, website, tickets}) {
     return (
         <a className="content-show-container" href={website}>
             <div className="content-show-entry">
@@ -16,6 +16,7 @@ function ShowEntryBlock({date, location, title, website}) {
                     <Button
                         type="submit"
                         variant="secondary"
+                        clickEvent={tickets}
                         size="small"
                         label="Tickets"/>
                 </div>

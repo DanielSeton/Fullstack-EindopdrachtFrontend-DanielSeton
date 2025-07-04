@@ -1,13 +1,13 @@
 import './ButtonDropdown.css'
 
-function ButtonDropdown() {
+function ButtonDropdown({value, changeEvent}) {
         return (
-            <select id="select" className="dropbutton-styling" onClick={(e) => {
+            <select id="select" className="dropbutton-styling" onChange={changeEvent} value={value} onClick={(e) => {
                 e.stopPropagation();}}>
-                <option value="noFeedback" selected>No feedback</option>
-                <option value="StandBy">In review</option>
-                <option value="positive">Approved</option>
-                <option value="negative">Rejected</option>
+                <option value="NO_FEEDBACK">No feedback</option>
+                <option value="IN_CONSIDERATION">In review</option>
+                <option value="APPROVED">Approved</option>
+                <option value="REJECTED">Rejected</option>
             </select>
         );
 }

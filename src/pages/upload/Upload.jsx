@@ -3,18 +3,46 @@ import Button from "../../components/button/Button.jsx";
 import InputField from "../../components/input-field/InputField.jsx";
 import {sizes} from "../../assets/constant/sizes.js";
 import {variants} from "../../assets/constant/variants.js";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 import {removeTags} from "../../assets/helpers/removeTags.js";
 import {tagList} from "../../assets/constant/tag-list.js";
 import {addTags} from "../../assets/helpers/addTags.js";
+import axios from "axios";
 
 
 
 function Upload() {
 
+    const [tags, setTags] = useState([]);
+    const [error, toggleError] = useState(false);
+
     const [selectedTag, setSelectedTag] = useState([]);
     const [selectValue, setSelectValue] = useState("");
+    const [uploadFormState, setUploadFormState] = useState({
+        title: '',
+        bpm: '',
+    });
+
+    useEffect(() => {
+        const controller = new AbortController();
+
+        async function fetchTags(){
+            toggleError(false);
+
+            try {
+                const response = await axios.get("http://localhost:8080/tags",
+                    {signal:controller.signal});
+                console.log(response.data);
+                setTags(response.data)
+            } catch (e) {
+                console.error(e);
+                toggleError(true);
+            }
+        }
+
+        fetchTags();
+    }, [])
 
     const handleSelectChange = (e) => {
         const tag = e.target.value;
@@ -30,8 +58,21 @@ function Upload() {
         removeTags(tag, selectedTag, setSelectedTag);
     };
 
+    function handleUploadChange(e) {
+        const { name, value, files } = e.target;
+
+        setUploadFormState( {
+            ...uploadFormState,
+            [name]: name === "upload" ? files[0] : value,
+            }
+        )
+    }
+
     function handleSubmit(e) {
         e.preventDefault();
+
+        console.log(uploadFormState);
+        console.log("tags: " + selectedTag);
     }
 
 
@@ -50,9 +91,13 @@ function Upload() {
                                 </dt>
                                 <dd>
                                     <InputField
-                                        type="text"
+                                        name="title"
+                                        id="title"
+                                        inputType="text"
                                         placeholder="..."
                                         size={sizes.LARGE}
+                                        inputValue={uploadFormState.title}
+                                        changeEvent={handleUploadChange}
                                         isRequired={true}/>
                                 </dd>
                             </dl>
@@ -64,9 +109,13 @@ function Upload() {
                                 </dt>
                                 <dd>
                                     <InputField
-                                        type="text"
+                                        name="bpm"
+                                        id="bpm"
+                                        type="number"
                                         placeholder="..."
                                         size={sizes.LARGE}
+                                        inputValue={uploadFormState.bpm}
+                                        changeEvent={handleUploadChange}
                                         isRequired={true}/>
                                 </dd>
                             </dl>
@@ -80,7 +129,14 @@ function Upload() {
                                     <span>
                                         <a className="upload-form-file-uploadButton">
                                         </a>
-                                        <input type="file" accept="audio/*" title="Attach file" className="form-fileInput"></input>
+                                        <input
+                                            name="upload"
+                                            id="upload-field"
+                                            type="file"
+                                            onChange={handleUploadChange}
+                                            accept="audio/*"
+                                            title="Attach file"
+                                            className="form-fileInput"></input>
                                     </span>
                                 </dd>
                             </dl>
@@ -96,9 +152,9 @@ function Upload() {
                                             value="">
                                             --Choose a tag--
                                         </option>
-                                        {tagList.map(tag => (
-                                            <option key={tag} value={tag}>
-                                                {tag}
+                                        {Object.keys(tags).length > 0 && tags.map((tag) => (
+                                            <option key={`${tag.id}_${tag.name}`} value={tag.name}>
+                                                {tag.name}
                                             </option>
                                         ))}
                                     </select>

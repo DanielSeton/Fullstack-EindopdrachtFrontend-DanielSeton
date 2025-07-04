@@ -4,12 +4,37 @@ import PageDivider from "../../components/pagedivider/PageDivider.jsx";
 import Playlist from "../../components/playlist/Playlist.jsx";
 
 import {sizes} from "../../assets/constant/sizes.js";
-import {showList} from "../../assets/constant/show-list.js";
 
 import headshot from "../../assets/img/dj_headshot.jpg"
-
+import {useEffect, useState} from "react";
+import axios from "axios";
+import {formatDate} from "../../assets/helpers/formatDate.js";
 
 function Home(){
+
+    const [shows, setShows] = useState([]);
+    const [error, toggleError] = useState(false);
+
+    useEffect(()=>{
+        const controller = new AbortController();
+
+        async function fetchShows(){
+            toggleError(false);
+
+            try {
+                const response = await axios.get("http://localhost:8080/shows",
+                    {signal:controller.signal});
+                console.log(response.data);
+                setShows(response.data)
+            } catch (e) {
+                console.error(e);
+                toggleError(true);
+            }
+        }
+
+        fetchShows();
+    }, []);
+
     return (
         <>
             <section className="banner-container">
@@ -48,13 +73,15 @@ function Home(){
                         <h1>UPCOMING <span className="header-color">SHOWS</span></h1>
                         <PageDivider size={sizes.SMALL}/>
                     </div>
-                    {showList.map((show) => {
+                    {Object.keys(shows).length > 0 && shows.map((show) => {
                         return (
                             <ShowEntryBlock
-                                date={show.date}
+                                key={`${show.id}`}
+                                date={formatDate(show.date)}
                                 title={show.name}
                                 location={show.location}
                                 website={show.website}
+                                tickets={show.ticketSite}
                             />
                         );
                     })}
