@@ -75,7 +75,7 @@ function Dashboard() {
                     <PageDivider/>
                     <div className="submission-container">
                         {loading && <p className="submission-state-message">Loading submissions...</p>}
-                        {error && <p className="submission-state-message">Something went wrong loading the submissions</p>}
+                        {error && <p className="submission-state-message">Something went wrong loading your submissions</p>}
                         {!loading && !error && submissions.length === 0 && (
                             <p className="submission-state-message">No submissions found</p>
                         )}
