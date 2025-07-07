@@ -5,15 +5,43 @@ import FilterOption from "../../components/filter-option/FilterOption.jsx";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {formatDate} from "../../assets/helpers/formatDate.js";
+import Button from "../../components/button/Button.jsx";
+import {variants} from "../../assets/constant/variants.js";
+import {sizes} from "../../assets/constant/sizes.js";
 
 function FeedbackOverview() {
 
-    const [submissions, setSubmissions] = useState({});
+    const [submissions, setSubmissions] = useState([]);
+    const [tags, setTags] = useState([]);
+    const [selectedTags, setSelectedTags] = useState([]);
+    const [selectedStatus, setSelectedStatus] = useState("");
+
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
 
     useEffect(() => {
         const controller = new AbortController();
+
+        async function fetchTags(){
+            toggleError(false);
+            toggleLoading(true);
+
+            try {
+                const results = await axios.get("http://localhost:8080/tags",
+                    {signal:controller.signal});
+                console.log(results.data);
+                setTags(results.data);
+            } catch (e) {
+                if (axios.isCancel(e)) {
+                    console.error('Request is canceled...', e.message);
+                } else {
+                    console.error(e);
+                    toggleError(true);
+                }
+            } finally {
+                toggleLoading(false);
+            }
+        }
 
         async function fetchSubmissions() {
             toggleError(false);
@@ -36,6 +64,7 @@ function FeedbackOverview() {
             }
         }
 
+        fetchTags()
         fetchSubmissions();
 
         return function cleanup() {
@@ -44,6 +73,38 @@ function FeedbackOverview() {
 
     }, [])
 
+
+    async function fetchFilteredSubmissions() {
+        toggleLoading(true);
+        toggleError(false);
+
+        try {
+            const params = {};
+            if (selectedTags.length > 0) params.tagNames = selectedTags;
+            if (selectedStatus) params.status = selectedStatus;
+
+            const response = await axios.get("http://localhost:8080/submissions/filter", { params });
+            setSubmissions(response.data);
+        } catch (e) {
+            console.error(e);
+            toggleError(true);
+        } finally {
+            toggleLoading(false);
+        }
+    }
+
+    function handleTagChange(tagName) {
+        setSelectedTags(prev =>
+            prev.includes(tagName)
+                ? prev.filter(t => t !== tagName)
+                : [...prev, tagName]
+        );
+    }
+
+    function handleStatusChange(status) {
+        setSelectedStatus(status);
+    }
+
     return (
         <div className="content-container">
             <aside className="filter-container">
@@ -51,54 +112,49 @@ function FeedbackOverview() {
                     <h2>FILTER</h2>
                 </div>
                 <PageDivider />
+                <Button
+                    variant={variants.SECONDARY}
+                    size={sizes.FULL}
+                    clickEvent={fetchFilteredSubmissions}
+                    label="Apply filter"/>
+                <PageDivider />
                 <div className="checkbox-container">
                     <h3>Status</h3>
                     <FilterOption
-                        label="No preference"
-                        isChecked={false}/>
-                    <FilterOption
-                        label="In review"
-                        isChecked={false}/>
-                    <FilterOption
-                        label="Denied"
-                        isChecked={false}/>
+                        label="No feedback"
+                        isChecked={selectedStatus === ""}
+                        changeEvent={() => handleStatusChange("")}
+                    />
                     <FilterOption
                         label="Accepted"
-                        isChecked={false}/>
+                        isChecked={selectedStatus === "APPROVED"}
+                        changeEvent={() => handleStatusChange("APPROVED")}/>
+                    <FilterOption
+                        label="Denied"
+                        isChecked={selectedStatus === "REJECTED"}
+                        changeEvent={() => handleStatusChange("REJECTED")}/>
+                    <FilterOption
+                        label="In consideration"
+                        isChecked={selectedStatus === "IN_CONSIDERATION"}
+                        changeEvent={() => handleStatusChange("IN_CONSIDERATION")}/>
                 </div>
                 <PageDivider />
                 <div className="checkbox-container">
-                    <h3>Upload date</h3>
-                    <FilterOption
-                        label="No preference"
-                        isChecked={true}/>
-                    <FilterOption
-                        label="Today"
-                        isChecked={false}/>
-                    <FilterOption
-                        label="3 days"
-                        isChecked={false}/>
-                    <FilterOption
-                        label="5 days"
-                        isChecked={false}/>
-                    <FilterOption
-                        label="10 days"
-                        isChecked={false}/>
-                    <FilterOption
-                        label="30 days"
-                        isChecked={false}/>
-                </div>
-                <PageDivider/>
-                <div className="checkbox-container">
                     <h3>Tags</h3>
-                    <FilterOption
-                        label="No preference"
-                        isChecked={false}
-                    />
+                    {Object.keys(tags).map(key => {
+                        const tag = tags[key];
+                        return (
+                            <FilterOption
+                                key={tag.id}
+                                label={tag.name}
+                                isChecked={selectedTags.includes(tag.name)}
+                                changeEvent={() => handleTagChange(tag.name)}
+                            />
+                        );
+                    })}
                 </div>
             </aside>
             <div className="content-container-right">
-                <button>Sort by date (newest first)</button>
                 <PageDivider/>
                 <div className="submission-container">
                     {loading && <p className="submission-state-message">Loading submissions...</p>}
