@@ -4,7 +4,7 @@ import PageDivider from "../../components/pagedivider/PageDivider.jsx";
 import FilterOption from "../../components/filter-option/FilterOption.jsx";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {formatDate} from "../../assets/helpers/formatDate.js";
+import qs from "qs";
 import Button from "../../components/button/Button.jsx";
 import {variants} from "../../assets/constant/variants.js";
 import {sizes} from "../../assets/constant/sizes.js";
@@ -79,12 +79,18 @@ function FeedbackOverview() {
         toggleError(false);
 
         try {
-            const params = {};
-            if (selectedTags.length > 0) params.tagNames = selectedTags;
-            if (selectedStatus) params.status = selectedStatus;
+            const params = {
+                tags : selectedTags,
+                status : selectedStatus,
+            };
 
-            const response = await axios.get("http://localhost:8080/submissions/filter", { params });
+
+            const response = await axios.get("http://localhost:8080/submissions/filter", {
+                params,
+                paramsSerializer: p => qs.stringify(p, {arrayFormat: 'repeat'})
+            });
             setSubmissions(response.data);
+            console.log(params)
         } catch (e) {
             console.error(e);
             toggleError(true);

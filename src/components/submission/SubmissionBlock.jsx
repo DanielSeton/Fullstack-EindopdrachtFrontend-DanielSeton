@@ -55,9 +55,9 @@ function SubmissionBlock({id}){
             <div className="submission-bottom">
                 <p>Tags: </p>
                 <ul className="submission-tags-list">
-                    {submission.tags?.map((tag) => {
+                    {submission.tags?.map((tag, index) => {
                         return(
-                            <li key={`${submission.id}`} className="submission-tags-list-item">{tag}</li>
+                            <li key={`${submission.id}-${index}`} className="submission-tags-list-item">{tag}</li>
                         )
                     })}
                 </ul>
