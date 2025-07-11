@@ -5,6 +5,9 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {formatDate} from "../../assets/helpers/formatDate.js";
 import {NavLink} from "react-router-dom";
+import StatusBlock from "../status-block/StatusBlock.jsx";
+import {status} from "../../assets/constant/status.js";
+import {sizes} from "../../assets/constant/sizes.js";
 
 function SubmissionBlock({id}){
 
@@ -42,7 +45,11 @@ function SubmissionBlock({id}){
                     <div>
                         <div className="submission-header">
                             <h2>{submission.title}</h2>
-                            <ButtonDropdown/>
+                            <StatusBlock
+                                variant={status[submission.feedbackStatus] || status.NO_FEEDBACK}
+                                size={sizes.MEDIUM}
+                                label="No feedback"
+                            />
                         </div>
                         <PageDivider/>
                         <p><span className="submission-info-title">Name: </span>{submission.artistName}</p>
@@ -55,9 +62,9 @@ function SubmissionBlock({id}){
             <div className="submission-bottom">
                 <p>Tags: </p>
                 <ul className="submission-tags-list">
-                    {submission.tags?.map((tag) => {
+                    {submission.tags?.map((tag, index) => {
                         return(
-                            <li key={`${submission.id}`} className="submission-tags-list-item">{tag}</li>
+                            <li key={`${submission.id}-${index}`} className="submission-tags-list-item">{tag}</li>
                         )
                     })}
                 </ul>

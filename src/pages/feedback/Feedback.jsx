@@ -52,10 +52,16 @@ function Feedback(){
 
     }, [])
 
+
+
     async function handleSubmit(e) {
         e.preventDefault();
         try{
-            console.log(status, feedback);
+            const response = await axios.patch(`http://localhost:8080/submissions/${id}/feedback`, {
+                status: status,
+                feedback: feedback,
+            });
+            console.log("Feedback successfully send: ", response.data);
         } catch (e) {
             console.error(e);
         }

@@ -1,0 +1,63 @@
+.status-styling{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: var(--page-text), monospace;
+    font-size: 1em;
+    font-weight: 500;
+
+    border-radius: 5px;
+    border: 1px solid transparent;
+    border-color: var(--border-color);
+    color: var(--page-text-color);
+
+    min-width: 120px;
+    padding: 0.6em 3em;
+}
+
+/*-----------------///Size section///---------------------*/
+
+.button-small{
+    width: 30%;
+}
+
+.button-medium{
+    width: 50%;
+}
+
+.button-large{
+    width: 60%;
+}
+
+.button-full{
+    width: 100%;
+}
+
+/*-----------------///Color section///---------------------*/
+
+.nofeedback{
+    background-color: var(--status-nofeedback);
+}
+
+.rejected{
+    background-color: var(--status-rejected);
+}
+
+.approved{
+    background-color: var(--status-approved);
+}
+
+.consideration{
+    background-color: var(--status-consider);
+}
+
+
+/*-----------------///Media Queries///---------------------*/
+
+@media screen and (max-width: 576px) {
+    .button-styling{
+        min-width: 100px;
+        padding: 0.2em 0.5em;
+    }
+}
