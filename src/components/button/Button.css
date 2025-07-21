@@ -12,7 +12,7 @@
     transition: border-color 0.25s;
 }
 
-/*-----------------///Color section///---------------------*/
+/*-----------------///Variant section///---------------------*/
 
 .primary{
     background-color: var(--primary-color);
@@ -37,6 +37,34 @@
 .inverted{
     background-color: var(--inverted-color);
     color: var(--page-text-color-inverted)
+}
+
+.link {
+    background-color: transparent;
+    color: #575757;
+    border: none;
+    padding: 0;
+    font-size: 18px;
+    font-family: var(--page-text), sans-serif;
+    cursor: pointer;
+    text-decoration: none;
+    position: relative;
+}
+
+.link::after {
+    content: "";
+    display: block;
+    height: 5px;
+    width: 0;
+    background-color: var(--secondary-color);
+    transition: width 0.3s ease;
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+}
+
+.link:hover::after {
+    width: 100%;
 }
 
 /*-----------------///Size section///---------------------*/

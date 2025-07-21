@@ -11,6 +11,9 @@ function Button({type = "button", variant, clickEvent, size, label}) {
         case 'secondary':
             cssVariantClass = 'secondary';
             break;
+        case 'link':
+            cssVariantClass = 'link';
+            break;
         case 'inverted':
         default:
             cssVariantClass = 'inverted';

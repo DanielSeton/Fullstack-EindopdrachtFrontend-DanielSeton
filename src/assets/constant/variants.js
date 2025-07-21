@@ -1,5 +1,6 @@
 export const variants = {
     PRIMARY: 'primary',
     SECONDARY: 'secondary',
-    INVERTED: 'inverted'
+    INVERTED: 'inverted',
+    LINK: 'link'
 };

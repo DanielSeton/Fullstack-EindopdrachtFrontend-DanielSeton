@@ -2,33 +2,37 @@ import './Login.css'
 import Button from "../../components/button/Button.jsx";
 import PageDivider from "../../components/pagedivider/PageDivider.jsx";
 import InputField from "../../components/input-field/InputField.jsx";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 import {variants} from "../../assets/constant/variants.js";
 import {sizes} from "../../assets/constant/sizes.js";
+import {AuthContext} from "../../context/AuthContext.jsx";
+import axios from "axios";
 
 
 function Login() {
 
-    const [loginFormState, setLoginFormState] = useState({
-        email: '',
-        password: '',
-    });
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, toggleError] = useState(false);
+    const { login } = useContext(AuthContext);
 
-    const navigate = useNavigate();
-
-    function handleChange(e) {
-        setLoginFormState({
-            ...loginFormState,
-            [e.target.name]: e.target.value,
-        })
-    }
-
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
+        toggleError(false);
 
-        console.log({...loginFormState});
+        try {
+            const result = await axios.post("http://localhost:8080/auth", {
+                username: username,
+                password: password,
+            });
+            console.log(result);
+
+        } catch (e) {
+            console.error(e);
+            toggleError(true);
+        }
     }
 
     return (
@@ -38,22 +42,20 @@ function Login() {
                         <h1>LOGIN</h1>
                         <form onSubmit={(handleSubmit)}>
                             <InputField
-                                name="email"
-                                id="email"
-                                inputType="email"
-                                placeholder="email*"
+                                name="username"
+                                id="username"
+                                inputType="text"
+                                placeholder="username*"
                                 size={sizes.MEDIUM}
-                                inputValue={loginFormState.email}
-                                changeEvent={handleChange}
+                                changeEvent={(e) => setUsername(e.target.value)}
                                 isRequired={true}/>
                             <InputField
                                 name="password"
                                 id="password"
-                                inputType="text"
-                                placeholder="password"
+                                inputType="password"
+                                placeholder="password*"
                                 size={sizes.MEDIUM}
-                                inputValue={loginFormState.password}
-                                changeEvent={handleChange}
+                                changeEvent={(e) => setPassword(e.target.value)}
                                 isRequired={true}/>
                             <br/>
                             <Button
