@@ -6,7 +6,6 @@ import {variants} from "../../assets/constant/variants.js";
 import {useEffect, useState} from "react";
 
 import {removeTags} from "../../assets/helpers/removeTags.js";
-import {tagList} from "../../assets/constant/tag-list.js";
 import {addTags} from "../../assets/helpers/addTags.js";
 import axios from "axios";
 
