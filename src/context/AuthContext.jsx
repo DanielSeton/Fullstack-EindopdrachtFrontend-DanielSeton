@@ -13,21 +13,24 @@ function AuthContextProvider({ children }) {
         status: 'pending',
     } );
     const navigate = useNavigate();
-    const [userData, setUserData] = useState({});
-    const [token, setToken] = useState({});
 
     useEffect (() => {
         const token = localStorage.getItem('token');
 
         if (token) {
-            const decoded = jwtDecode(token);
-            void fetchUserData ( decoded.sub, token );
+            try {
+                const decoded = jwtDecode(token);
+                void fetchUserData ( decoded.sub, token );
+            } catch (e) {
+                console.error("Token decode failed", e)
+                logout();
+            }
         } else {
-            toggleIsAuth( {
+            toggleIsAuth({
                 isAuth: false,
                 user: null,
                 status: 'done',
-            } );
+            });
         }
     }, []);
 
@@ -35,11 +38,13 @@ function AuthContextProvider({ children }) {
         localStorage.setItem('token', JWT);
         const decoded = jwtDecode( JWT );
 
+        console.log(JWT)
+
         void fetchUserData ( decoded.sub, JWT, '/' );
     }
 
     function logout() {
-        localStorage.clear();
+        localStorage.removeItem("token");
         toggleIsAuth( {
             isAuth: false,
             user: null,
@@ -51,7 +56,7 @@ function AuthContextProvider({ children }) {
 
     async function fetchUserData ( id, token, redirectUrl ) {
         try {
-            const result = await axios.get ( `http://localhost:8080/users/${id}`, {
+            const result = await axios.get ( `http://localhost:8080/users/username/${id}`, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`,

@@ -20,6 +20,7 @@ function Navigation() {
                     <span id="header-color-section">DJ</span>Corner</button>
             </div>
             {console.log(authState.isAuth)}
+            {console.log(authState.user.role)}
             {authState.isAuth ?
                 <ul>
                     <li>
@@ -33,25 +34,39 @@ function Navigation() {
                             }}
                         />
                     </li>
-                    <li>
-                        <Button
-                            type="button"
-                            variant={variants.LINK}
-                            size={sizes.MEDIUM}
-                            label="Dashboard"
-                            onClick={() => {
-                                navigate("/dashboard")
-                            }}
-                        />
-                        <NavLink to="/dashboard">Dashboard</NavLink>
-                    </li>
+                    {authState.user?.role === "USER" && (
+                        <li>
+                            <Button
+                                type="button"
+                                variant={variants.LINK}
+                                size={sizes.MEDIUM}
+                                label="Dashboard"
+                                clickEvent={() => {
+                                    navigate("/dashboard")
+                                }}
+                            />
+                        </li>
+                    )}
+                    {authState.user?.role === "STAFF" && (
+                        <li>
+                            <Button
+                                type="button"
+                                variant={variants.LINK}
+                                size={sizes.MEDIUM}
+                                label="Overview"
+                                clickEvent={() => {
+                                    navigate("/overview")
+                                }}
+                            />
+                        </li>
+                    )}
                     <li>
                         <Button
                             type="button"
                             variant={variants.LINK}
                             size={sizes.MEDIUM}
                             label="Logout"
-                            onClick={() => {
+                            clickEvent={() => {
                                 logout();
                                 navigate("/")
                             }}

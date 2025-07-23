@@ -16,7 +16,9 @@ function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, toggleError] = useState(false);
+
     const { login } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -27,10 +29,18 @@ function Login() {
                 username: username,
                 password: password,
             });
-            console.log(result);
+
+            const authHeader = result.headers['authorization'];
+            if (authHeader && authHeader.startsWith("Bearer ")) {
+                const token = authHeader.substring(7);
+                login(token);
+            } else {
+                console.error("Token is missing from the header");
+                toggleError(true);
+            }
 
         } catch (e) {
-            console.error(e);
+            console.error("Login failed:", e);
             toggleError(true);
         }
     }
@@ -66,6 +76,7 @@ function Login() {
                                 clickEvent={(e) => {e.stopPropagation()}} />
                             <PageDivider/>
                         </form>
+                        {error && <p className="error">An error has occurred, please try again</p>}
                         <Button
                             type="button"
                             variant={variants.INVERTED}
