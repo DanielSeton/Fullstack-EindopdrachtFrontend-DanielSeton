@@ -29,9 +29,16 @@ function Upload() {
         async function fetchTags(){
             toggleError(false);
 
+            const token = localStorage.getItem('token');
+
             try {
-                const response = await axios.get("http://localhost:8080/tags",
-                    {signal:controller.signal});
+                const response = await axios.get("http://localhost:8080/tags", {
+                    signal: controller.signal,
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`
+                    }
+                });
                 console.log(response.data);
                 setTags(response.data)
             } catch (e) {

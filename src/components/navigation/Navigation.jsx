@@ -20,7 +20,7 @@ function Navigation() {
                     <span id="header-color-section">DJ</span>Corner</button>
             </div>
             {console.log(authState.isAuth)}
-            {console.log(authState.user.role)}
+            {console.log(authState.user?.role)}
             {authState.isAuth ?
                 <ul>
                     <li>
@@ -47,7 +47,7 @@ function Navigation() {
                             />
                         </li>
                     )}
-                    {authState.user?.role === "STAFF" && (
+                    {["STAFF", "ADMIN"].includes(authState.user?.role) && (
                         <li>
                             <Button
                                 type="button"
