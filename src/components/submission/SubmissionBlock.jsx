@@ -20,9 +20,16 @@ function SubmissionBlock({id}){
         async function loadSubmission() {
             toggleError(false);
 
+            const token = localStorage.getItem('token');
+
             try {
-                const response = await axios.get(`http://localhost:8080/submissions/${id}`,
-                    {signal:controller.signal});
+                const response = await axios.get(`http://localhost:8080/submissions/${id}`, {
+                    signal: controller.signal,
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`
+                    }
+                });
                 console.log("Dit is de data voor de blokken: ", response.data);
                 setSubmission(response.data);
             } catch (e) {
@@ -37,6 +44,8 @@ function SubmissionBlock({id}){
             controller.abort();
         }
     }, [])
+
+    //todo label van status aanpassen aan status die gegeven is
 
     return (
         <article className="submission">

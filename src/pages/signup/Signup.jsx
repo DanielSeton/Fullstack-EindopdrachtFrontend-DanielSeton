@@ -4,28 +4,39 @@ import Button from "../../components/button/Button.jsx";
 import {variants} from "../../assets/constant/variants.js";
 import {sizes} from "../../assets/constant/sizes.js";
 import InputField from "../../components/input-field/InputField.jsx";
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import {useState} from "react";
+import axios from "axios";
 
 function Signup() {
 
-    const [signupFormState, setSignupFormState] = useState({
-        username: '',
-        email: '',
-        password: '',
-    });
+    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
 
-    function handleChange(e) {
-        setSignupFormState({
-            ...signupFormState,
-            [e.target.name]: e.target.value,
-        })
-    }
+    const [error, toggleError] = useState(false);
+    const [loading, toggleLoading] = useState(false);
+    const navigate = useNavigate();
 
-    function handleSubmit(e) {
+
+    async function handleSubmit(e) {
         e.preventDefault();
+        toggleError(false);
+        toggleLoading(true);
 
-        console.log({...signupFormState});
+        try {
+            await axios.post("http://localhost:8080/users", {
+                email: email,
+                password: password,
+                username: username,
+            });
+            navigate('/login');
+        } catch (e) {
+            console.error(e);
+            toggleError(true);
+        }
+
+        toggleLoading(false);
     }
 
     return (
@@ -40,8 +51,7 @@ function Signup() {
                                 inputType="text"
                                 placeholder="name*"
                                 size={sizes.MEDIUM}
-                                inputValue={signupFormState.username}
-                                changeEvent={handleChange}
+                                changeEvent={(e) => setUsername(e.target.value)}
                                 isRequired={true}/>
                             <br/>
                             <InputField
@@ -50,24 +60,25 @@ function Signup() {
                                 inputType="email"
                                 placeholder="email*"
                                 size={sizes.MEDIUM}
-                                inputValue={signupFormState.email}
-                                changeEvent={handleChange}
+                                changeEvent={(e) => setEmail(e.target.value)}
                                 isRequired={true}/>
                             <InputField
                                 name="password"
                                 id="password"
-                                type="text"
+                                type="password"
                                 placeholder="password*"
                                 size={sizes.MEDIUM}
-                                inputValue={signupFormState.password}
-                                changeEvent={handleChange}
+                                changeEvent={(e) => setPassword(e.target.value)}
                                 isRequired={true}/>
                             <PageDivider />
+                            {error && <p className="error">An error has occurred, please try again</p>}
                             <Button
                                 type="submit"
                                 variant={variants.PRIMARY}
                                 size={sizes.LARGE}
-                                label="REGISTER"/>
+                                label="REGISTER"
+                                disable={loading}
+                            />
                         </form>
                         <NavLink to="/login">Already have an account?</NavLink>
                     </div>

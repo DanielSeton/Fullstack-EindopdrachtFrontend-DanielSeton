@@ -6,7 +6,6 @@ import {variants} from "../../assets/constant/variants.js";
 import {useEffect, useState} from "react";
 
 import {removeTags} from "../../assets/helpers/removeTags.js";
-import {tagList} from "../../assets/constant/tag-list.js";
 import {addTags} from "../../assets/helpers/addTags.js";
 import axios from "axios";
 
@@ -30,9 +29,16 @@ function Upload() {
         async function fetchTags(){
             toggleError(false);
 
+            const token = localStorage.getItem('token');
+
             try {
-                const response = await axios.get("http://localhost:8080/tags",
-                    {signal:controller.signal});
+                const response = await axios.get("http://localhost:8080/tags", {
+                    signal: controller.signal,
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`
+                    }
+                });
                 console.log(response.data);
                 setTags(response.data)
             } catch (e) {

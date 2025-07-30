@@ -26,9 +26,16 @@ function FeedbackOverview() {
             toggleError(false);
             toggleLoading(true);
 
+            const token = localStorage.getItem('token');
+
             try {
-                const results = await axios.get("http://localhost:8080/tags",
-                    {signal:controller.signal});
+                const results = await axios.get("http://localhost:8080/tags", {
+                    signal:controller.signal,
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`
+                    }
+                });
                 console.log(results.data);
                 setTags(results.data);
             } catch (e) {
@@ -47,9 +54,16 @@ function FeedbackOverview() {
             toggleError(false);
             toggleLoading(true);
 
+            const token = localStorage.getItem('token');
+
             try {
-                const response = await axios.get("http://localhost:8080/submissions",
-                    {signal:controller.signal});
+                const response = await axios.get("http://localhost:8080/submissions", {
+                    signal:controller.signal,
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`
+                    }
+                });
                 console.log(response.data);
                 setSubmissions(response.data);
             } catch (e) {

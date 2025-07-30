@@ -27,9 +27,16 @@ function Feedback(){
             toggleError(false);
             toggleLoading(true);
 
+            const token = localStorage.getItem('token');
+
             try {
-                const response = await axios.get(`http://localhost:8080/submissions/${id}`,
-                    {signal:controller.signal});
+                const response = await axios.get(`http://localhost:8080/submissions/${id}`, {
+                    signal:controller.signal,
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`
+                    }
+                });
                 console.log(response.data);
                 setSubmission(response.data);
             } catch (e) {
@@ -56,10 +63,18 @@ function Feedback(){
 
     async function handleSubmit(e) {
         e.preventDefault();
+
+        const token = localStorage.getItem('token');
+
         try{
             const response = await axios.patch(`http://localhost:8080/submissions/${id}/feedback`, {
                 status: status,
                 feedback: feedback,
+            }, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
             });
             console.log("Feedback successfully send: ", response.data);
         } catch (e) {

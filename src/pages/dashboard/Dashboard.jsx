@@ -6,14 +6,18 @@ import {useNavigate} from "react-router-dom";
 import Button from "../../components/button/Button.jsx";
 import {variants} from "../../assets/constant/variants.js";
 import {sizes} from "../../assets/constant/sizes.js";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import axios from "axios";
+import {AuthContext} from "../../context/AuthContext.jsx";
 
 function Dashboard() {
 
     const [submissions, setSubmissions] = useState({});
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
+
+    const { authState } = useContext(AuthContext);
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -23,10 +27,17 @@ function Dashboard() {
             toggleError(false);
             toggleLoading(true);
 
+            const token = localStorage.getItem('token');
+
             try {
-                const response = await axios.get("http://localhost:8080/submissions",
-                    {signal:controller.signal});
-                console.log(response.data);
+                const response = await axios.get("http://localhost:8080/submissions", {
+                    signal:controller.signal,
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                console.log("Dit is wat we binnen krijgen: ", response.data);
                 setSubmissions(response.data);
             } catch (e) {
                 if (axios.isCancel(e)) {
@@ -57,9 +68,11 @@ function Dashboard() {
                     <PageDivider />
                     <div className="dashboard-profile-container">
                         <div className="dashboard-profile-info">
-                            <p>name</p>
+                            {console.log(authState)}
+                            <p>name: {authState.user.username}</p>
                             <p>joined</p>
-                            <p>submitTotal total submit(s)</p>
+                            <br/>
+                            <p>(submitTotal) total submit(s)</p>
                         </div>
                         <Button
                             type="button"
@@ -71,7 +84,6 @@ function Dashboard() {
                     </div>
                 </aside>
                 <div className="content-container-right">
-                    <button>Sort by date (newest first)</button>
                     <PageDivider/>
                     <div className="submission-container">
                         {loading && <p className="submission-state-message">Loading submissions...</p>}
@@ -80,6 +92,7 @@ function Dashboard() {
                             <p className="submission-state-message">No submissions found</p>
                         )}
                         {!loading && !error && Object.keys(submissions).length > 0 && submissions.map((submission) => {
+                            {console.log("Dit is wat er in de submissions staat ", submissions)}
                             return (
                                 <SubmissionBlock
                                     key={submission.id}

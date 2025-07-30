@@ -55,26 +55,6 @@ header p{
     display: flex;
 }
 
-.navbar a{
-    font-size: 18px;
-    color: #575757;
-    letter-spacing: 0.5px;
-    font-family: var(--page-text), sans-serif;
-}
-
-.navbar a::after{
-    content: "";
-    display: block;
-    height: 5px;
-    width: 0;
-    background-color: var(--secondary-color);
-    transition: all 0.5s ease;
-}
-
-.navbar a:hover::after{
-    width: 100%;
-}
-
 .navbar div{
     align-self: flex-start;
     gap: 10px;
