@@ -69,10 +69,9 @@ function Dashboard() {
                     <div className="dashboard-profile-container">
                         <div className="dashboard-profile-info">
                             {console.log(authState)}
-                            <p>name: {authState.user.username}</p>
-                            <p>joined</p>
+                            <p>User: {authState.user.username}</p>
                             <br/>
-                            <p>(submitTotal) total submit(s)</p>
+                            <p>Total submit(s): {submissions.length}</p>
                         </div>
                         <Button
                             type="button"

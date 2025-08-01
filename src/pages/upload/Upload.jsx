@@ -74,11 +74,33 @@ function Upload() {
         )
     }
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
+        const token = localStorage.getItem('token');
 
-        console.log(uploadFormState);
-        console.log("tags: " + selectedTag);
+        const metadata = {
+            title: uploadFormState.title,
+            bpm: uploadFormState.bpm,
+            tags: selectedTag,
+        };
+
+        const formData = new FormData();
+        formData.append("file", uploadFormState.upload);
+        formData.append("metadata", new Blob(
+           [JSON.stringify(metadata)],
+            {type: "application/json"}
+        ));
+
+        try {
+            const result = await axios.post("http://localhost:8080/submissions", formData, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            console.log(result);
+        } catch (e) {
+            console.error(e);
+        }
     }
 
 
