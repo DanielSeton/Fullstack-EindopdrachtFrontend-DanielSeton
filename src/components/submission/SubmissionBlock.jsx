@@ -12,6 +12,8 @@ import {AuthContext} from "../../context/AuthContext.jsx";
 function SubmissionBlock({id}){
 
     const [submission, setSubmission] = useState({});
+    const [audio, setAudio] = useState({});
+    const [isPlaying, toggleIsPlaying] = useState(false);
     const [error, toggleError] = useState();
 
     useEffect(() => {
@@ -45,6 +47,37 @@ function SubmissionBlock({id}){
         }
     }, [])
 
+    useEffect(() => {
+        if (!isPlaying) return;
+
+        const controller = new AbortController();
+
+        async function loadAudio() {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await axios.get(`http://localhost:8080/submissions/${id}/audio`, {
+                    responseType: "blob",
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    },
+                    signal: controller.signal
+                });
+                const audioUrl = URL.createObjectURL(response.data);
+                setAudio(audioUrl);
+            } catch (e) {
+                console.error('Audio load error: ', e);
+            }
+        }
+
+        loadAudio();
+
+        return () => {
+            controller.abort();
+            if (audio) URL.revokeObjectURL(audio);
+        }
+
+    }, [isPlaying])
+
     //todo label van status aanpassen aan status die gegeven is
 
     return (
@@ -66,7 +99,7 @@ function SubmissionBlock({id}){
                         <p><span className="submission-info-title">BPM: </span>{submission.bpm}</p>
                     </div>
                 </NavLink>
-                <audio preload="none" className="submission-audio" controls src={`http://localhost:8080/${submission.audioDownloadUrl}`}></audio>
+                <audio preload="none" className="submission-audio" controls src={audio} onPlay={() => toggleIsPlaying(true)}></audio>
             </div>
             <div className="submission-bottom">
                 <p>Tags: </p>

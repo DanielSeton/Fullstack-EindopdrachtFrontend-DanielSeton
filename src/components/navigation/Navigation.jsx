@@ -20,7 +20,7 @@ function Navigation() {
                     <span id="header-color-section">DJ</span>Corner</button>
             </div>
             {console.log(authState.isAuth)}
-            {console.log(authState.user?.role)}
+            {console.log(authState.user?.username)}
             {authState.isAuth ?
                 <ul>
                     <li>
