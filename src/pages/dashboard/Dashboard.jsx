@@ -12,7 +12,7 @@ import {AuthContext} from "../../context/AuthContext.jsx";
 
 function Dashboard() {
 
-    const [submissions, setSubmissions] = useState({});
+    const [submissions, setSubmissions] = useState([]);
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
 
@@ -30,15 +30,15 @@ function Dashboard() {
             const token = localStorage.getItem('token');
 
             try {
-                const response = await axios.get("http://localhost:8080/submissions", {
+                const response = await axios.get("http://localhost:8080/submissions?page=0&size=15", {
                     signal:controller.signal,
                     headers: {
                         "Content-Type": "application/json",
                         Authorization: `Bearer ${token}`
                     }
                 });
-                console.log("Dit is wat we binnen krijgen: ", response.data);
-                setSubmissions(response.data);
+                console.log("Dit is wat we binnen krijgen: ", response.data.content);
+                setSubmissions(response.data.content);
             } catch (e) {
                 if (axios.isCancel(e)) {
                     console.error('Request is canceled...', e.message);

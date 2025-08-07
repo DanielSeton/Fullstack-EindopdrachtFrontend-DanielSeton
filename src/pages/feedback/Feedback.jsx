@@ -4,18 +4,26 @@ import Button from "../../components/button/Button.jsx";
 import {variants} from "../../assets/constant/variants.js";
 import ButtonDropdown from "../../components/button-dropdown/ButtonDropdown.jsx";
 import PageDivider from "../../components/pagedivider/PageDivider.jsx";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import axios from "axios";
-import {Navigate, useParams} from "react-router-dom";
+import {Navigate, useNavigate, useParams} from "react-router-dom";
 import {formatDate} from "../../assets/helpers/formatDate.js";
+import {AuthContext} from "../../context/AuthContext.jsx";
 
 function Feedback(){
 
+    const { authState } = useContext(AuthContext);
+
     const [submission, setSubmission] = useState({});
-    const [error, toggleError] = useState(false);
-    const [loading, toggleLoading] = useState(false);
+    const [audio, setAudio] = useState({})
+
     const [feedback, setFeedback] = useState("");
     const [status, setStatus] = useState("noFeedback");
+
+    const [error, toggleError] = useState(false);
+    const [loading, toggleLoading] = useState(false);
+
+    const navigate = useNavigate();
 
 
     const { id } = useParams();
@@ -59,6 +67,36 @@ function Feedback(){
 
     }, [])
 
+    useEffect(() => {
+        const controller = new AbortController();
+
+        async function loadAudio() {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await axios.get(`http://localhost:8080/submissions/${id}/audio`, {
+                    responseType: "blob",
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    },
+                    signal: controller.signal
+                });
+                const audioUrl = URL.createObjectURL(response.data);
+                console.log("Audio link: ", audioUrl);
+                setAudio(audioUrl);
+            } catch (e) {
+                console.error('Audio load error: ', e);
+            }
+        }
+
+        loadAudio();
+
+        return () => {
+            controller.abort();
+            if (audio) URL.revokeObjectURL(audio);
+        }
+
+    }, [])
+
 
 
     async function handleSubmit(e) {
@@ -82,6 +120,22 @@ function Feedback(){
         }
     }
 
+    async function handleDelete() {
+        const token = localStorage.getItem('token');
+
+        try {
+            const result = await axios.delete(`http://localhost:8080/submissions/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            console.log(result)
+            navigate('/dashboard');
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
     return(
         <div className="content-wrapper">
             {loading ? (
@@ -90,12 +144,12 @@ function Feedback(){
                 <Navigate to="/error" /> ) : (
             <div className="feedback-container">
                 <div className="info">
-                    <h2>{submission.title}</h2>
+                    <h2 className="submission-title">{submission.title}</h2>
                     <PageDivider size={sizes.MEDIUM}/>
                     <p><strong>Uploaded: </strong>{formatDate(submission.uploadDate)}</p>
                     <p><strong>Artist: </strong>{submission.artistName}</p>
                     <p><strong>BPM: </strong>{submission.bpm}</p>
-                    <audio preload="none" className="submission-audio" controls src={`http://localhost:8080/${submission.audioDownloadUrl}`}></audio>
+                    <audio preload="none" className="submission-audio" controls src={audio}></audio>
                     <p><strong>Tags</strong></p>
                     <div>
                         <ul className="submission-tags-list">
@@ -106,6 +160,20 @@ function Feedback(){
                             })}
                         </ul>
                     </div>
+                    <PageDivider />
+                    {(
+                        ["STAFF", "ADMIN"].includes(authState.user?.role) ||
+                        (authState.user?.role === "USER" && submission.status === "no feedback" || !submission.status)
+                    ) && (
+                        <div className="feedback-buttoncontainer">
+                            <Button
+                                variant={variants.INVERTED}
+                                size={sizes.MEDIUM}
+                                label="DELETE SUBMISSION"
+                                clickEvent={handleDelete}
+                            />
+                        </div>
+                    )}
                 </div>
                 <div className="feedback">
                     <form onSubmit={handleSubmit}>

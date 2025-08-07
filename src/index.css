@@ -53,6 +53,13 @@ h1{
   line-height: 1.1;
 }
 
+h2{
+  font-family: var(--title-text), sans-serif;
+  font-weight: var(--title-text-weight);
+  color: var(--title-text-color);
+  line-height: 1.1;
+}
+
 button{
   text-transform: uppercase;
 }
