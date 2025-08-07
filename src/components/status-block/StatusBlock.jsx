@@ -1,4 +1,6 @@
 import './StatusBlock.css'
+import {formatDate} from "../../assets/helpers/formatDate.js";
+import {formatStatus} from "../../assets/helpers/formatStatus.js";
 
 function StatusBlock({variant, size, label}) {
     let cssStatusClass = '';
@@ -6,7 +8,7 @@ function StatusBlock({variant, size, label}) {
 
     switch (variant) {
         case 'approved':
-            cssStatusClass = 'nofeedback';
+            cssStatusClass = 'approved';
             break;
         case 'rejected':
             cssStatusClass = 'rejected';
@@ -38,7 +40,7 @@ function StatusBlock({variant, size, label}) {
 
     return (
         <div className={`status-styling ${cssSizeClass} ${cssStatusClass}`}>
-            {label}
+            {formatStatus(label)}
         </div>
     )
 }

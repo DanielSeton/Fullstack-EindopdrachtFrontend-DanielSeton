@@ -8,6 +8,7 @@ import StatusBlock from "../status-block/StatusBlock.jsx";
 import {status} from "../../assets/constant/status.js";
 import {sizes} from "../../assets/constant/sizes.js";
 import {AuthContext} from "../../context/AuthContext.jsx";
+import {formatStatus} from "../../assets/helpers/formatStatus.js";
 
 function SubmissionBlock({id}){
 
@@ -78,8 +79,6 @@ function SubmissionBlock({id}){
 
     }, [isPlaying])
 
-    //todo label van status aanpassen aan status die gegeven is
-
     return (
         <article className="submission">
             <div className="submission-content">
@@ -90,7 +89,7 @@ function SubmissionBlock({id}){
                             <StatusBlock
                                 variant={status[submission.feedbackStatus] || status.NO_FEEDBACK}
                                 size={sizes.MEDIUM}
-                                label="No feedback"
+                                label={submission.feedbackStatus}
                             />
                         </div>
                         <PageDivider/>
