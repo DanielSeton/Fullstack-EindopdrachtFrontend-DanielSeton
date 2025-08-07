@@ -9,6 +9,8 @@ import axios from "axios";
 import {Navigate, useNavigate, useParams} from "react-router-dom";
 import {formatDate} from "../../assets/helpers/formatDate.js";
 import {AuthContext} from "../../context/AuthContext.jsx";
+import {status} from "../../assets/constant/status.js";
+import StatusBlock from "../../components/status-block/StatusBlock.jsx";
 
 function Feedback(){
 
@@ -115,6 +117,7 @@ function Feedback(){
                 },
             });
             console.log("Feedback successfully send: ", response.data);
+            navigate('/overview');
         } catch (e) {
             console.error(e);
         }
@@ -130,7 +133,13 @@ function Feedback(){
                 }
             });
             console.log(result)
-            navigate('/dashboard');
+
+            if (authState.user?.role === "USER") {
+                navigate('/dashboard');
+            } else if (["STAFF", "ADMIN"].includes(authState.user?.role)) {
+                navigate("/overview")
+            }
+
         } catch (e) {
             console.error(e);
         }
@@ -145,6 +154,7 @@ function Feedback(){
             <div className="feedback-container">
                 <div className="info">
                     <h2 className="submission-title">{submission.title}</h2>
+                    {console.log(submission)}
                     <PageDivider size={sizes.MEDIUM}/>
                     <p><strong>Uploaded: </strong>{formatDate(submission.uploadDate)}</p>
                     <p><strong>Artist: </strong>{submission.artistName}</p>
@@ -163,7 +173,10 @@ function Feedback(){
                     <PageDivider />
                     {(
                         ["STAFF", "ADMIN"].includes(authState.user?.role) ||
-                        (authState.user?.role === "USER" && submission.status === "no feedback" || !submission.status)
+                        (
+                            authState.user?.role === "USER" &&
+                            (!submission.feedbackStatus || submission.feedbackStatus === "NO_FEEDBACK")
+                        )
                     ) && (
                         <div className="feedback-buttoncontainer">
                             <Button
@@ -176,9 +189,10 @@ function Feedback(){
                     )}
                 </div>
                 <div className="feedback">
-                    <form onSubmit={handleSubmit}>
-                        <label>Feedback field</label>
-                        <section className="feedback-section">
+                {(["STAFF", "ADMIN"].includes(authState.user?.role)) && (
+                        <form onSubmit={handleSubmit}>
+                            <label>Feedback field</label>
+                            <section className="feedback-section">
                             <textarea
                                 className="feedback-textarea"
                                 name="feedback"
@@ -188,24 +202,43 @@ function Feedback(){
                                 value={feedback}
                                 onChange={(e) => {setFeedback(e.target.value)}}>
                             </textarea>
-                        </section>
-                        <label>Status</label>
-                        <section>
-                            <ButtonDropdown
-                                value={status}
-                                changeEvent={(e) => setStatus(e.target.value)}
-                            />
-                        </section>
-                        <section>
-                            <Button
-                                type="submit"
-                                value="submit"
-                                variant={variants.SECONDARY}
-                                size={sizes.LARGE}
-                                isRequired={true}
-                                label="Submit"/>
-                        </section>
-                    </form>
+                            </section>
+                            <label>Status</label>
+                            <section>
+                                <ButtonDropdown
+                                    value={status}
+                                    changeEvent={(e) => setStatus(e.target.value)}
+                                />
+                            </section>
+                            <section>
+                                <Button
+                                    type="submit"
+                                    value="submit"
+                                    variant={variants.SECONDARY}
+                                    size={sizes.LARGE}
+                                    isRequired={true}
+                                    label="Submit"/>
+                            </section>
+                        </form>
+                )}
+                {authState.user?.role === "USER" && (
+                    <div className="feedback-">
+                        <StatusBlock
+                            variant={status[submission.feedbackStatus] || status.NO_FEEDBACK}
+                            size={sizes.MEDIUM}
+                            label={submission.feedbackStatus}
+                        />
+                        <h2>Feedback</h2>
+                        <PageDivider/>
+                        {!submission.feedbackText && (
+                            <p>No feedback yet...</p>
+                        )}
+                        {submission.feedbackText && (
+                            <p>{submission.feedbackText}</p>
+                        )}
+                        <p></p>
+                    </div>
+                )}
                 </div>
             </div>
             )}
