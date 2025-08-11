@@ -1,3 +1,5 @@
+/*-----------------///Container///---------------------*/
+
 .submission{
     display: flex;
     flex-direction: column;
@@ -6,22 +8,13 @@
     border-radius: 10px;
 }
 
-.submission h2{
-    font-size: 30px;
-    margin-bottom: 4px;
-}
+/*-----------------///Upper///---------------------*/
 
 .submission-content{
     padding-left : 20px;
     padding-right : 20px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-}
-
-.submission-name-and-time{
-    display: flex;
-    flex-direction: row;
     justify-content: space-between;
 }
 
@@ -32,47 +25,28 @@
     justify-content: space-between;
 }
 
-.submission-content a{
+.submission-content a {
     text-decoration: none;
 }
 
-.submission-content p,h2{
-    color: var(--page-text-color);
-}
-
-.submission-info-title{
-    color: grey;
-}
-
-.submission audio{
+.submission-content audio{
     width: 100%;
     margin-bottom: 10px;
 }
 
-.submission-bottom{
+/*-----------------///Footer///---------------------*/
+
+.submission-footer{
     display: flex;
     flex-direction: row;
     align-items: center;
     padding-left: 20px;
+    gap: 10px;
     width: 100%;
     color: var(--page-text-color);
     background: #4E443B;
     border-radius: 0 0 10px 10px;
 }
 
-.submission-tags-list{
-    display: flex;
-    flex-direction: row;
-    gap: 5px;
-}
 
-.submission-tags-list-item{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 13px;
-    width: 100px;
-    height: 30px;
-    background: var(--secondary-color);
-    border-radius: 2px;
-}
+

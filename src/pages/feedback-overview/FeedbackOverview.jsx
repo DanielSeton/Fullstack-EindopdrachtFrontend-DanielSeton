@@ -127,8 +127,8 @@ function FeedbackOverview() {
 
     return (
         <div className="content-container">
-            <aside className="filter-container">
-                <div className="filter-header">
+            <aside className="filter-sidebar">
+                <div className="sidebar-header">
                     <h2>FILTER</h2>
                 </div>
                 <PageDivider />
@@ -138,7 +138,7 @@ function FeedbackOverview() {
                     clickEvent={fetchFilteredSubmissions}
                     label="Apply filter"/>
                 <PageDivider />
-                <div className="checkbox-container">
+                <div className="filter-section">
                     <h3>Status</h3>
                     <FilterOption
                         label="No feedback"
@@ -159,7 +159,7 @@ function FeedbackOverview() {
                         changeEvent={() => handleStatusChange("IN_CONSIDERATION")}/>
                 </div>
                 <PageDivider />
-                <div className="checkbox-container">
+                <div className="filter-section">
                     <h3>Tags</h3>
                     {Object.keys(tags).map(key => {
                         const tag = tags[key];
@@ -174,13 +174,13 @@ function FeedbackOverview() {
                     })}
                 </div>
             </aside>
-            <div className="content-container-right">
+            <div className="submission-content">
                 <PageDivider/>
                 <div className="submission-container">
-                    {loading && <p className="submission-state-message">Loading submissions...</p>}
-                    {error && <p className="submission-state-message">Something went wrong loading the submissions</p>}
+                    {loading && <p className="state-message">Loading submissions...</p>}
+                    {error && <p className="state-message">Something went wrong loading the submissions</p>}
                     {!loading && !error && submissions.length === 0 && (
-                        <p className="submission-state-message">No submissions found</p>
+                        <p className="state-message">No submissions found</p>
                     )}
                     {!loading && !error && Object.keys(submissions).length > 0 && submissions.map((submission) => {
                         return (

@@ -1,28 +1,4 @@
-/*-----------------///Filter///---------------------*/
-
-section{
-    margin-top: 4%;
-    margin-bottom: 4%;
-    color: white;
-    display: flex;
-    justify-content: center;
-}
-
-.home-content-title{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.home-content-title h1{
-    flex-grow: 1;
-    width: 60%
-}
-
-
-.header-color{
-    color: var(--primary-color);
-}
+/*-----------------///Banner///---------------------*/
 
 .banner-container{
     width: 100vw;
@@ -55,6 +31,33 @@ section{
     -webkit-text-stroke: 1px white;
 }
 
+/*-----------------///Header///---------------------*/
+
+.home-content-title{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.home-content-title h1{
+    flex-grow: 1;
+    width: 60%
+}
+
+.header-color{
+    color: var(--primary-color);
+}
+
+/*-----------------///Section///---------------------*/
+
+section{
+    margin-top: 4%;
+    margin-bottom: 4%;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
 .home-content-container{
     display: flex;
     flex-direction: column;
@@ -73,17 +76,12 @@ section{
     display: flex;
     flex-direction: column;
     width: 100%;
-    font-family: var(--page-text), sans-serif;
 }
 
 .home-content-container-inner-img{
     width: 80%;
     margin-left: 5%;
     flex-shrink: 1;
-}
-
-.home-content-container-inner-img img{
-    width: 100%;
 }
 
 /*-----------------///Media Queries///---------------------*/

@@ -111,7 +111,7 @@ function Upload() {
                 <h1 className="upload-title"><span className="header-color">UPLOAD </span>your file</h1>
                 <div className="upload-container">
                     <form onSubmit={handleSubmit}>
-                        <div className="upload-form-upper">
+                        <div className="upload-form-fields">
                             <dl className="upload-form-container">
                                 <dt>
                                     <div className="form-label-container">
@@ -156,8 +156,6 @@ function Upload() {
                                 </dt>
                                 <dd>
                                     <span>
-                                        <a className="upload-form-file-uploadButton">
-                                        </a>
                                         <input
                                             name="upload"
                                             id="upload-field"
@@ -165,13 +163,13 @@ function Upload() {
                                             onChange={handleUploadChange}
                                             accept="audio/*"
                                             title="Attach file"
-                                            className="form-fileInput"></input>
+                                            className="form-file-input"></input>
                                     </span>
                                 </dd>
                             </dl>
                             <dl className="upload-form-container">
                                 <dt>
-                                    <div className="form-label-container">
+                                    <div className="form-label-wrapper">
                                         <label className="upload-form-label" htmlFor="tags">Tags:</label>
                                     </div>
                                 </dt>

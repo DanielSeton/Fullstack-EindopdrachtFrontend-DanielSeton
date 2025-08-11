@@ -60,9 +60,9 @@ function Dashboard() {
     }, [])
 
     return (
-            <div className="dashboard-content-container">
-                <aside className="profile-container">
-                    <div className="profile-header">
+            <div className="content-container">
+                <aside className="dashboard-profile">
+                    <div className="sidebar-header">
                         <h2>Profile</h2>
                     </div>
                     <PageDivider />
@@ -82,13 +82,13 @@ function Dashboard() {
                             />
                     </div>
                 </aside>
-                <div className="content-container-right">
+                <div className="submission-content">
                     <PageDivider/>
                     <div className="submission-container">
-                        {loading && <p className="submission-state-message">Loading submissions...</p>}
-                        {error && <p className="submission-state-message">Something went wrong loading your submissions</p>}
+                        {loading && <p className="state-message">Loading submissions...</p>}
+                        {error && <p className="state-message">Something went wrong loading your submissions</p>}
                         {!loading && !error && submissions.length === 0 && (
-                            <p className="submission-state-message">No submissions found</p>
+                            <p className="state-message">No submissions found</p>
                         )}
                         {!loading && !error && Object.keys(submissions).length > 0 && submissions.map((submission) => {
                             {console.log("Dit is wat er in de submissions staat ", submissions)}

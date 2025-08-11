@@ -152,20 +152,20 @@ function Feedback(){
             ) : error ? (
                 <Navigate to="/error" /> ) : (
             <div className="feedback-container">
-                <div className="info">
+                <div className="feedback-info">
                     <h2 className="submission-title">{submission.title}</h2>
                     {console.log(submission)}
                     <PageDivider size={sizes.MEDIUM}/>
-                    <p><strong>Uploaded: </strong>{formatDate(submission.uploadDate)}</p>
-                    <p><strong>Artist: </strong>{submission.artistName}</p>
-                    <p><strong>BPM: </strong>{submission.bpm}</p>
+                    <p><span className="submission-label">Uploaded: </span>{formatDate(submission.uploadDate)}</p>
+                    <p><span className="submission-label">Artist: </span>{submission.artistName}</p>
+                    <p><span className="submission-label">BPM: </span>{submission.bpm}</p>
                     <audio preload="none" className="submission-audio" controls src={audio}></audio>
                     <p><strong>Tags</strong></p>
                     <div>
-                        <ul className="submission-tags-list">
+                        <ul className="submission-tags">
                             {submission.tags?.map((tag, index) => {
                                 return(
-                                    <li key={`${submission.id}_${tag}_${index}`} className="submission-tags-list-item">{tag}</li>
+                                    <li key={`${submission.id}_${tag}_${index}`} className="submission-tag">{tag}</li>
                                 )
                             })}
                         </ul>
@@ -178,7 +178,7 @@ function Feedback(){
                             (!submission.feedbackStatus || submission.feedbackStatus === "NO_FEEDBACK")
                         )
                     ) && (
-                        <div className="feedback-buttoncontainer">
+                        <div className="feedback-actions">
                             <Button
                                 variant={variants.INVERTED}
                                 size={sizes.MEDIUM}
@@ -188,7 +188,7 @@ function Feedback(){
                         </div>
                     )}
                 </div>
-                <div className="feedback">
+                <div className="feedback-display">
                 {(["STAFF", "ADMIN"].includes(authState.user?.role)) && (
                         <form onSubmit={handleSubmit}>
                             <label>Feedback field</label>
@@ -222,7 +222,7 @@ function Feedback(){
                         </form>
                 )}
                 {authState.user?.role === "USER" && (
-                    <div className="feedback-">
+                    <div className="feedback-display">
                         <StatusBlock
                             variant={status[submission.feedbackStatus] || status.NO_FEEDBACK}
                             size={sizes.MEDIUM}

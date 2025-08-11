@@ -93,19 +93,19 @@ function SubmissionBlock({id}){
                             />
                         </div>
                         <PageDivider/>
-                        <p><span className="submission-info-title">Name: </span>{submission.artistName}</p>
-                        <p><span className="submission-info-title">Uploaded: </span>{formatDate(submission.uploadDate)}</p>
-                        <p><span className="submission-info-title">BPM: </span>{submission.bpm}</p>
+                        <p><span className="submission-label">Name: </span>{submission.artistName}</p>
+                        <p><span className="submission-label">Uploaded: </span>{formatDate(submission.uploadDate)}</p>
+                        <p><span className="submission-label">BPM: </span>{submission.bpm}</p>
                     </div>
                 </NavLink>
                 <audio preload="none" className="submission-audio" controls src={audio} onPlay={() => toggleIsPlaying(true)}></audio>
             </div>
-            <div className="submission-bottom">
+            <div className="submission-footer">
                 <p>Tags: </p>
-                <ul className="submission-tags-list">
+                <ul className="submission-tags">
                     {submission.tags?.map((tag, index) => {
                         return(
-                            <li key={`${submission.id}-${index}`} className="submission-tags-list-item">{tag}</li>
+                            <li key={`${submission.id}-${index}`} className="submission-tag">{tag}</li>
                         )
                     })}
                 </ul>

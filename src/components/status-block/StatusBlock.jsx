@@ -1,5 +1,4 @@
 import './StatusBlock.css'
-import {formatDate} from "../../assets/helpers/formatDate.js";
 import {formatStatus} from "../../assets/helpers/formatStatus.js";
 
 function StatusBlock({variant, size, label}) {

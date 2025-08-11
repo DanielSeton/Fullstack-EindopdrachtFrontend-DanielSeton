@@ -9,7 +9,7 @@ function ErrorPage() {
     const navigate = useNavigate();
 
     return (
-        <section className="not-found-section">
+        <section className="error-section">
             <div>
                 <h1>404</h1>
                 <h2>The page you are looking for doesn't exist</h2>

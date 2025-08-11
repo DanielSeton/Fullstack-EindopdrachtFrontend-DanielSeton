@@ -3,8 +3,8 @@ import Button from "../button/Button.jsx";
 
 function ShowEntryBlock({date, location, title, website, tickets}) {
     return (
-        <a className="content-show-container" href={website}>
-            <div className="content-show-entry">
+        <a className="show-card" href={website}>
+            <div className="show-entry">
                 <div className="show-entry-info">
                     <h3 className="show-entry-date">{date}</h3>
                     <p>{location}</p>
@@ -12,7 +12,7 @@ function ShowEntryBlock({date, location, title, website, tickets}) {
                 <div className="show-entry-title">
                     <p>{title}</p>
                 </div>
-                <div className="show-entry-ticketButton">
+                <div className="show-entry-ticket-button">
                     <Button
                         type="submit"
                         variant="secondary"
