@@ -80,11 +80,11 @@ function SubmissionBlock({id}){
     }, [isPlaying])
 
     return (
-        <article className="submission">
-            <div className="submission-content">
+        <article className="submission-block">
+            <div className="submission-block-content">
                 <NavLink to={`/feedback/${id}`}>
                     <div>
-                        <div className="submission-header">
+                        <div className="submission-block-header">
                             <h2>{submission.title}</h2>
                             <StatusBlock
                                 variant={status[submission.feedbackStatus] || status.NO_FEEDBACK}
@@ -100,7 +100,7 @@ function SubmissionBlock({id}){
                 </NavLink>
                 <audio preload="none" className="submission-audio" controls src={audio} onPlay={() => toggleIsPlaying(true)}></audio>
             </div>
-            <div className="submission-footer">
+            <div className="submission-block-footer">
                 <p>Tags: </p>
                 <ul className="submission-tags">
                     {submission.tags?.map((tag, index) => {

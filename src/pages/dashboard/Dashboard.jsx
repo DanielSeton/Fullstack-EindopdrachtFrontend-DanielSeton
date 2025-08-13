@@ -30,7 +30,7 @@ function Dashboard() {
             const token = localStorage.getItem('token');
 
             try {
-                const response = await axios.get("http://localhost:8080/submissions?page=0&size=15", {
+                const response = await axios.get("http://localhost:8080/submissions/mine?page=0&size=15", {
                     signal:controller.signal,
                     headers: {
                         "Content-Type": "application/json",

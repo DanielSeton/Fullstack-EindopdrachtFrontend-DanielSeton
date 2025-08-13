@@ -1,6 +1,6 @@
 /*-----------------///Container///---------------------*/
 
-.submission{
+.submission-block{
     display: flex;
     flex-direction: column;
     border: 1px solid var(--border-color);
@@ -10,7 +10,7 @@
 
 /*-----------------///Upper///---------------------*/
 
-.submission-content{
+.submission-block-content{
     padding-left : 20px;
     padding-right : 20px;
     display: flex;
@@ -18,25 +18,25 @@
     justify-content: space-between;
 }
 
-.submission-header{
+.submission-block-header{
     display: flex;
     flex-direction: row;
     width: 100%;
     justify-content: space-between;
 }
 
-.submission-content a {
+.submission-block-content a {
     text-decoration: none;
 }
 
-.submission-content audio{
+.submission-block-content audio{
     width: 100%;
     margin-bottom: 10px;
 }
 
 /*-----------------///Footer///---------------------*/
 
-.submission-footer{
+.submission-block-footer{
     display: flex;
     flex-direction: row;
     align-items: center;
