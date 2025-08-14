@@ -4,18 +4,28 @@ import Button from "../../components/button/Button.jsx";
 import {variants} from "../../assets/constant/variants.js";
 import ButtonDropdown from "../../components/button-dropdown/ButtonDropdown.jsx";
 import PageDivider from "../../components/pagedivider/PageDivider.jsx";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import axios from "axios";
-import {Navigate, useParams} from "react-router-dom";
+import {Navigate, useNavigate, useParams} from "react-router-dom";
 import {formatDate} from "../../assets/helpers/formatDate.js";
+import {AuthContext} from "../../context/AuthContext.jsx";
+import {status} from "../../assets/constant/status.js";
+import StatusBlock from "../../components/status-block/StatusBlock.jsx";
 
 function Feedback(){
 
+    const { authState } = useContext(AuthContext);
+
     const [submission, setSubmission] = useState({});
-    const [error, toggleError] = useState(false);
-    const [loading, toggleLoading] = useState(false);
+    const [audio, setAudio] = useState({})
+
     const [feedback, setFeedback] = useState("");
     const [status, setStatus] = useState("noFeedback");
+
+    const [error, toggleError] = useState(false);
+    const [loading, toggleLoading] = useState(false);
+
+    const navigate = useNavigate();
 
 
     const { id } = useParams();
@@ -59,6 +69,36 @@ function Feedback(){
 
     }, [])
 
+    useEffect(() => {
+        const controller = new AbortController();
+
+        async function loadAudio() {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await axios.get(`http://localhost:8080/submissions/${id}/audio`, {
+                    responseType: "blob",
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    },
+                    signal: controller.signal
+                });
+                const audioUrl = URL.createObjectURL(response.data);
+                console.log("Audio link: ", audioUrl);
+                setAudio(audioUrl);
+            } catch (e) {
+                console.error('Audio load error: ', e);
+            }
+        }
+
+        loadAudio();
+
+        return () => {
+            controller.abort();
+            if (audio) URL.revokeObjectURL(audio);
+        }
+
+    }, [])
+
 
 
     async function handleSubmit(e) {
@@ -77,6 +117,29 @@ function Feedback(){
                 },
             });
             console.log("Feedback successfully send: ", response.data);
+            navigate('/overview');
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    async function handleDelete() {
+        const token = localStorage.getItem('token');
+
+        try {
+            const result = await axios.delete(`http://localhost:8080/submissions/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            console.log(result)
+
+            if (authState.user?.role === "USER") {
+                navigate('/dashboard');
+            } else if (["STAFF", "ADMIN"].includes(authState.user?.role)) {
+                navigate("/overview")
+            }
+
         } catch (e) {
             console.error(e);
         }
@@ -89,28 +152,47 @@ function Feedback(){
             ) : error ? (
                 <Navigate to="/error" /> ) : (
             <div className="feedback-container">
-                <div className="info">
-                    <h2>{submission.title}</h2>
+                <div className="feedback-info">
+                    <h2 className="submission-title">{submission.title}</h2>
+                    {console.log(submission)}
                     <PageDivider size={sizes.MEDIUM}/>
-                    <p><strong>Uploaded: </strong>{formatDate(submission.uploadDate)}</p>
-                    <p><strong>Artist: </strong>{submission.artistName}</p>
-                    <p><strong>BPM: </strong>{submission.bpm}</p>
-                    <audio preload="none" className="submission-audio" controls src={`http://localhost:8080/${submission.audioDownloadUrl}`}></audio>
+                    <p><span className="submission-label">Uploaded: </span>{formatDate(submission.uploadDate)}</p>
+                    <p><span className="submission-label">Artist: </span>{submission.artistName}</p>
+                    <p><span className="submission-label">BPM: </span>{submission.bpm}</p>
+                    <audio preload="none" className="submission-audio" controls src={audio}></audio>
                     <p><strong>Tags</strong></p>
                     <div>
-                        <ul className="submission-tags-list">
+                        <ul className="submission-tags">
                             {submission.tags?.map((tag, index) => {
                                 return(
-                                    <li key={`${submission.id}_${tag}_${index}`} className="submission-tags-list-item">{tag}</li>
+                                    <li key={`${submission.id}_${tag}_${index}`} className="submission-tag">{tag}</li>
                                 )
                             })}
                         </ul>
                     </div>
+                    <PageDivider />
+                    {(
+                        ["STAFF", "ADMIN"].includes(authState.user?.role) ||
+                        (
+                            authState.user?.role === "USER" &&
+                            (!submission.feedbackStatus || submission.feedbackStatus === "NO_FEEDBACK")
+                        )
+                    ) && (
+                        <div className="feedback-actions">
+                            <Button
+                                variant={variants.INVERTED}
+                                size={sizes.MEDIUM}
+                                label="DELETE SUBMISSION"
+                                clickEvent={handleDelete}
+                            />
+                        </div>
+                    )}
                 </div>
-                <div className="feedback">
-                    <form onSubmit={handleSubmit}>
-                        <label>Feedback field</label>
-                        <section className="feedback-section">
+                <div className="feedback-display">
+                {(["STAFF", "ADMIN"].includes(authState.user?.role)) && (
+                        <form onSubmit={handleSubmit}>
+                            <label>Feedback field</label>
+                            <section className="feedback-section">
                             <textarea
                                 className="feedback-textarea"
                                 name="feedback"
@@ -120,24 +202,43 @@ function Feedback(){
                                 value={feedback}
                                 onChange={(e) => {setFeedback(e.target.value)}}>
                             </textarea>
-                        </section>
-                        <label>Status</label>
-                        <section>
-                            <ButtonDropdown
-                                value={status}
-                                changeEvent={(e) => setStatus(e.target.value)}
-                            />
-                        </section>
-                        <section>
-                            <Button
-                                type="submit"
-                                value="submit"
-                                variant={variants.SECONDARY}
-                                size={sizes.LARGE}
-                                isRequired={true}
-                                label="Submit"/>
-                        </section>
-                    </form>
+                            </section>
+                            <label>Status</label>
+                            <section>
+                                <ButtonDropdown
+                                    value={status}
+                                    changeEvent={(e) => setStatus(e.target.value)}
+                                />
+                            </section>
+                            <section>
+                                <Button
+                                    type="submit"
+                                    value="submit"
+                                    variant={variants.SECONDARY}
+                                    size={sizes.LARGE}
+                                    isRequired={true}
+                                    label="Submit"/>
+                            </section>
+                        </form>
+                )}
+                {authState.user?.role === "USER" && (
+                    <div className="feedback-display">
+                        <StatusBlock
+                            variant={status[submission.feedbackStatus] || status.NO_FEEDBACK}
+                            size={sizes.MEDIUM}
+                            label={submission.feedbackStatus}
+                        />
+                        <h2>Feedback</h2>
+                        <PageDivider/>
+                        {!submission.feedbackText && (
+                            <p>No feedback yet...</p>
+                        )}
+                        {submission.feedbackText && (
+                            <p>{submission.feedbackText}</p>
+                        )}
+                        <p></p>
+                    </div>
+                )}
                 </div>
             </div>
             )}

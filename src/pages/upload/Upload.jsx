@@ -3,11 +3,12 @@ import Button from "../../components/button/Button.jsx";
 import InputField from "../../components/input-field/InputField.jsx";
 import {sizes} from "../../assets/constant/sizes.js";
 import {variants} from "../../assets/constant/variants.js";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 
 import {removeTags} from "../../assets/helpers/removeTags.js";
 import {addTags} from "../../assets/helpers/addTags.js";
 import axios from "axios";
+import {AuthContext} from "../../context/AuthContext.jsx";
 
 
 
@@ -74,11 +75,33 @@ function Upload() {
         )
     }
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
+        const token = localStorage.getItem('token');
 
-        console.log(uploadFormState);
-        console.log("tags: " + selectedTag);
+        const metadata = {
+            title: uploadFormState.title,
+            bpm: uploadFormState.bpm,
+            tags: selectedTag,
+        };
+
+        const formData = new FormData();
+        formData.append("file", uploadFormState.upload);
+        formData.append("metadata", new Blob(
+           [JSON.stringify(metadata)],
+            {type: "application/json"}
+        ));
+
+        try {
+            const result = await axios.post("http://localhost:8080/submissions", formData, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            console.log(result);
+        } catch (e) {
+            console.error(e);
+        }
     }
 
 
@@ -88,7 +111,7 @@ function Upload() {
                 <h1 className="upload-title"><span className="header-color">UPLOAD </span>your file</h1>
                 <div className="upload-container">
                     <form onSubmit={handleSubmit}>
-                        <div className="upload-form-upper">
+                        <div className="upload-form-fields">
                             <dl className="upload-form-container">
                                 <dt>
                                     <div className="form-label-container">
@@ -133,8 +156,6 @@ function Upload() {
                                 </dt>
                                 <dd>
                                     <span>
-                                        <a className="upload-form-file-uploadButton">
-                                        </a>
                                         <input
                                             name="upload"
                                             id="upload-field"
@@ -142,13 +163,13 @@ function Upload() {
                                             onChange={handleUploadChange}
                                             accept="audio/*"
                                             title="Attach file"
-                                            className="form-fileInput"></input>
+                                            className="form-file-input"></input>
                                     </span>
                                 </dd>
                             </dl>
                             <dl className="upload-form-container">
                                 <dt>
-                                    <div className="form-label-container">
+                                    <div className="form-label-wrapper">
                                         <label className="upload-form-label" htmlFor="tags">Tags:</label>
                                     </div>
                                 </dt>

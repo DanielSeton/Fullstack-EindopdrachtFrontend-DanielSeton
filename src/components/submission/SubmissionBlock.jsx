@@ -1,17 +1,20 @@
 import './SubmissionBlock.css'
 import PageDivider from "../pagedivider/PageDivider.jsx";
-import ButtonDropdown from "../button-dropdown/ButtonDropdown.jsx";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import {formatDate} from "../../assets/helpers/formatDate.js";
 import {NavLink} from "react-router-dom";
 import StatusBlock from "../status-block/StatusBlock.jsx";
 import {status} from "../../assets/constant/status.js";
 import {sizes} from "../../assets/constant/sizes.js";
+import {AuthContext} from "../../context/AuthContext.jsx";
+import {formatStatus} from "../../assets/helpers/formatStatus.js";
 
 function SubmissionBlock({id}){
 
     const [submission, setSubmission] = useState({});
+    const [audio, setAudio] = useState({});
+    const [isPlaying, toggleIsPlaying] = useState(false);
     const [error, toggleError] = useState();
 
     useEffect(() => {
@@ -30,7 +33,6 @@ function SubmissionBlock({id}){
                         Authorization: `Bearer ${token}`
                     }
                 });
-                console.log("Dit is de data voor de blokken: ", response.data);
                 setSubmission(response.data);
             } catch (e) {
                 console.error(e);
@@ -45,35 +47,64 @@ function SubmissionBlock({id}){
         }
     }, [])
 
-    //todo label van status aanpassen aan status die gegeven is
+    useEffect(() => {
+        if (!isPlaying) return;
+
+        const controller = new AbortController();
+
+        async function loadAudio() {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await axios.get(`http://localhost:8080/submissions/${id}/audio`, {
+                    responseType: "blob",
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    },
+                    signal: controller.signal
+                });
+                const audioUrl = URL.createObjectURL(response.data);
+                setAudio(audioUrl);
+            } catch (e) {
+                console.error('Audio load error: ', e);
+            }
+        }
+
+        loadAudio();
+
+        return () => {
+            controller.abort();
+            if (audio) URL.revokeObjectURL(audio);
+        }
+
+    }, [isPlaying])
 
     return (
-        <article className="submission">
-            <div className="submission-content">
+        <article className="submission-block">
+            <div className="submission-block-content">
                 <NavLink to={`/feedback/${id}`}>
                     <div>
-                        <div className="submission-header">
+                        <div className="submission-block-header">
                             <h2>{submission.title}</h2>
                             <StatusBlock
                                 variant={status[submission.feedbackStatus] || status.NO_FEEDBACK}
                                 size={sizes.MEDIUM}
-                                label="No feedback"
+                                label={submission.feedbackStatus}
                             />
                         </div>
                         <PageDivider/>
-                        <p><span className="submission-info-title">Name: </span>{submission.artistName}</p>
-                        <p><span className="submission-info-title">Uploaded: </span>{formatDate(submission.uploadDate)}</p>
-                        <p><span className="submission-info-title">BPM: </span>{submission.bpm}</p>
+                        <p><span className="submission-label">Name: </span>{submission.artistName}</p>
+                        <p><span className="submission-label">Uploaded: </span>{formatDate(submission.uploadDate)}</p>
+                        <p><span className="submission-label">BPM: </span>{submission.bpm}</p>
                     </div>
                 </NavLink>
-                <audio preload="none" className="submission-audio" controls src={`http://localhost:8080/${submission.audioDownloadUrl}`}></audio>
+                <audio preload="none" className="submission-audio" controls src={audio} onPlay={() => toggleIsPlaying(true)}></audio>
             </div>
-            <div className="submission-bottom">
+            <div className="submission-block-footer">
                 <p>Tags: </p>
-                <ul className="submission-tags-list">
+                <ul className="submission-tags">
                     {submission.tags?.map((tag, index) => {
                         return(
-                            <li key={`${submission.id}-${index}`} className="submission-tags-list-item">{tag}</li>
+                            <li key={`${submission.id}-${index}`} className="submission-tag">{tag}</li>
                         )
                     })}
                 </ul>

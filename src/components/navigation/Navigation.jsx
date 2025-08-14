@@ -20,7 +20,8 @@ function Navigation() {
                     <span id="header-color-section">DJ</span>Corner</button>
             </div>
             {console.log(authState.isAuth)}
-            {console.log(authState.user?.role)}
+            {console.log(authState.user?.username)}
+            <div className="navbar-item-container">
             {authState.isAuth ?
                 <ul>
                     <li>
@@ -99,6 +100,7 @@ function Navigation() {
                     </li>
                 </ul>
             }
+            </div>
         </nav>
     )
 }

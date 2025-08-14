@@ -40,7 +40,7 @@ function Home(){
             <section className="banner-container">
                 <div className="banner-text">
                     <h1>DJ CORNER</h1>
-                    <h2>The BEST party this year</h2>
+                    <h2>The BEST party only needs the BEST music</h2>
                 </div>
             </section>
             <section>

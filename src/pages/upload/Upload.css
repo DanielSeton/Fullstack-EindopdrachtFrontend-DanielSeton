@@ -1,11 +1,3 @@
-.content-wrapper{
-    display: flex;
-    flex-direction: column;
-    margin-top: 30px;
-    align-items: stretch;
-    max-width: 100vw;
-}
-
 .upload-title{
     padding-left: 15%;
     margin-top: 3%;
@@ -73,7 +65,7 @@
     font-size: 1.2em;
 }
 
-.form-fileInput{
+.form-file-input{
     color: var(--page-text-color);
     padding: 6px;
     display: block;
@@ -81,15 +73,6 @@
     text-align: left;
     appearance: none;
     transition: all .2s ease;
-}
-
-.upload-form-file-uploadButton{
-    visibility: hidden;
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    left: -10000px;
 }
 
 /*-----------------///Tags///---------------------*/
