@@ -1,6 +1,6 @@
 import './Button.css'
 
-function Button({type = "button", variant, clickEvent, size, label}) {
+function Button({type = "button", variant, clickEvent, size, label, disabled = false }) {
     let cssVariantClass = '';
     let cssSizeClass = '';
 
@@ -36,7 +36,7 @@ function Button({type = "button", variant, clickEvent, size, label}) {
 
 
     return (
-        <button type={type} onClick={clickEvent} className={`button-styling ${cssSizeClass} ${cssVariantClass}`}>
+        <button type={type} onClick={clickEvent} disabled={disabled} className={`button-styling ${cssSizeClass} ${cssVariantClass} ${disabled ? 'disabled' : ''}`}>
             {label}
         </button>
     )

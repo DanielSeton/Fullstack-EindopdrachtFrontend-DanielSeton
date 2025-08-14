@@ -13,6 +13,8 @@ import {AuthContext} from "../../context/AuthContext.jsx";
 function Dashboard() {
 
     const [submissions, setSubmissions] = useState([]);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [totalPages, setTotalPages] = useState(0);
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
 
@@ -39,6 +41,7 @@ function Dashboard() {
                 });
                 console.log("Dit is wat we binnen krijgen: ", response.data.content);
                 setSubmissions(response.data.content);
+                setTotalPages(response.data.totalPages);
             } catch (e) {
                 if (axios.isCancel(e)) {
                     console.error('Request is canceled...', e.message);
@@ -57,9 +60,9 @@ function Dashboard() {
             controller.abort();
         }
 
-    }, [])
+    }, [currentPage])
 
-    return (
+    return ["USER", "ADMIN"].includes(authState.user?.role) ? (
             <div className="content-container">
                 <aside className="dashboard-profile">
                     <div className="sidebar-header">
@@ -83,7 +86,27 @@ function Dashboard() {
                     </div>
                 </aside>
                 <div className="submission-content">
-                    <PageDivider/>
+                    <PageDivider
+                        size={sizes.LARGE}
+                    />
+                    {totalPages > 0 && (
+                        <div className="submission-button-container">
+                            <Button
+                                variant={variants.SECONDARY}
+                                size={sizes.SMALL}
+                                clickEvent={() => setCurrentPage(prev => prev - 1)}
+                                label="< Previous"
+                                disabled={currentPage === 0}
+                            />
+                            <Button
+                                variant={variants.SECONDARY}
+                                size={sizes.SMALL}
+                                clickEvent={() => setCurrentPage(prev => prev + 1)}
+                                label="Next >"
+                                disabled={currentPage === totalPages - 1}
+                            />
+                        </div>
+                    )}
                     <div className="submission-container">
                         {loading && <p className="state-message">Loading submissions...</p>}
                         {error && <p className="state-message">Something went wrong loading your submissions</p>}
@@ -102,7 +125,22 @@ function Dashboard() {
                     </div>
                 </div>
             </div>
-    )
+        ) : (
+            <section className="error-section">
+                <div>
+                    <h1>OOPS</h1>
+                    <h2>The page you are looking for is off-limits to you</h2>
+                    <span>
+                        <Button
+                            label="Back to home"
+                            variant={variants.SECONDARY}
+                            size={sizes.LARGE}
+                            clickEvent={() => navigate("/")}
+                        />
+                    </span>
+                </div>
+            </section>
+        )
 }
 
 export default Dashboard

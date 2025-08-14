@@ -33,7 +33,6 @@ function SubmissionBlock({id}){
                         Authorization: `Bearer ${token}`
                     }
                 });
-                console.log("Dit is de data voor de blokken: ", response.data);
                 setSubmission(response.data);
             } catch (e) {
                 console.error(e);

@@ -180,6 +180,17 @@ a:hover {
   scrollbar-color: var(--background);
 }
 
+.submission-button-container{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+
 .state-message{
   align-self: center;
 }
