@@ -9,17 +9,22 @@ import headshot from "../../assets/img/dj_headshot.jpg"
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {formatDate} from "../../assets/helpers/formatDate.js";
+import SubmissionBlock from "../../components/submission/SubmissionBlock.jsx";
 
 function Home(){
 
     const [shows, setShows] = useState([]);
+    const [playlists, setPlaylists] = useState([]);
+
     const [error, toggleError] = useState(false);
+    const [loading, toggleLoading] = useState(false);
 
     useEffect(()=>{
         const controller = new AbortController();
 
         async function fetchShows(){
             toggleError(false);
+            toggleLoading(true);
 
             try {
                 const response = await axios.get("http://localhost:8080/shows",
@@ -32,6 +37,35 @@ function Home(){
             }
         }
 
+        async function fetchPlaylists() {
+            toggleError(false);
+            toggleLoading(true);
+
+            const token = localStorage.getItem('token');
+
+            try {
+                const response = await axios.get("http://localhost:8080/playlists", {
+                    signal: controller.signal,
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                setPlaylists(response.data);
+                console.log("Playlist data: ", response.data);
+            } catch (e) {
+                if (axios.isCancel(e)) {
+                    console.error('Request is canceled...', e.message);
+                } else {
+                    console.error(e);
+                    toggleError(true);
+                }
+            } finally {
+                toggleLoading(false);
+            }
+        }
+
+        fetchPlaylists();
         fetchShows();
     }, []);
 
@@ -64,7 +98,15 @@ function Home(){
                         <h1 id="playlist">OUR <span className="header-color">PLAYLIST</span></h1>
                         <PageDivider size={sizes.SMALL}/>
                     </div>
-                    <Playlist/>
+                    {!loading && !error && Object.keys(playlists).length > 0 && playlists.map((playlist) => {
+                        return (
+                            <Playlist
+                                key={playlist.id}
+                                id={playlist.id}
+                            />
+                        );
+                    })}
+
                 </div>
             </section>
             <section>
