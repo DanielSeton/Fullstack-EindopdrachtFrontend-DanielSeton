@@ -9,7 +9,6 @@ import axios from "axios";
 import {Navigate, useNavigate, useParams} from "react-router-dom";
 import {formatDate} from "../../assets/helpers/formatDate.js";
 import {AuthContext} from "../../context/AuthContext.jsx";
-import {status} from "../../assets/constant/status.js";
 import StatusBlock from "../../components/status-block/StatusBlock.jsx";
 
 function Feedback(){
@@ -304,6 +303,7 @@ function Feedback(){
                 </div>
             </div>
             )}
+            {(["STAFF", "ADMIN"].includes(authState.user?.role)) && (
             <section>
                 {!trackAdded && (
                     <Button
@@ -317,6 +317,7 @@ function Feedback(){
                     <p className="success-message">{successMessage}</p>
                 )}
             </section>
+                )}
         </div>
     )
 }

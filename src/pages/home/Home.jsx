@@ -9,7 +9,6 @@ import headshot from "../../assets/img/dj_headshot.jpg"
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {formatDate} from "../../assets/helpers/formatDate.js";
-import SubmissionBlock from "../../components/submission/SubmissionBlock.jsx";
 
 function Home(){
 

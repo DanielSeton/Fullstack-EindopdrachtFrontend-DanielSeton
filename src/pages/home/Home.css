@@ -103,4 +103,12 @@ section{
     .home-content-title h1{
         width: 90%;
     }
+
+    .banner-text{
+        width: 90%;
+    }
+
+    .banner-text>h1{
+        font-size: 4rem;
+    }
 }

@@ -61,7 +61,7 @@ function Playlist({id}) {
                     <PageDivider/>
                     <h2 className="playlist-title">{artist || "Naam artiest"}</h2>
                 </div>
-                <audio className="submission-audio" controls src={audioSrc || null}></audio>
+                <audio className="playlist-audio" controls src={audioSrc || null}></audio>
             </div>
             <div className="playlist-list-body">
                 <div className="playlist-list-header">
@@ -70,8 +70,8 @@ function Playlist({id}) {
                 <ul>
                     {!loading && !error && Object.keys(tracks).length > 0 && tracks.map((track) => {
                         return (
-                            <li key={track.id}>
                                 <PlaylistItem
+                                    key={track.id}
                                     artist={track.uploadedBy}
                                     title={track.title}
                                     onPlayClick={() => {
@@ -80,7 +80,6 @@ function Playlist({id}) {
                                         setArtist(track.uploadedBy);
                                     }}
                                 />
-                            </li>
                         );
                     })}
                 </ul>

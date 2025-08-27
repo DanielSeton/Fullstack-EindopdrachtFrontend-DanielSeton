@@ -3,12 +3,12 @@ import Button from "../../components/button/Button.jsx";
 import InputField from "../../components/input-field/InputField.jsx";
 import {sizes} from "../../assets/constant/sizes.js";
 import {variants} from "../../assets/constant/variants.js";
-import {useContext, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 
 import {removeTags} from "../../assets/helpers/removeTags.js";
 import {addTags} from "../../assets/helpers/addTags.js";
 import axios from "axios";
-import {AuthContext} from "../../context/AuthContext.jsx";
+import {useNavigate} from "react-router-dom";
 
 
 
@@ -23,6 +23,8 @@ function Upload() {
         title: '',
         bpm: '',
     });
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const controller = new AbortController();
@@ -99,6 +101,7 @@ function Upload() {
                 }
             });
             console.log(result);
+            navigate('/dashboard');
         } catch (e) {
             console.error(e);
         }

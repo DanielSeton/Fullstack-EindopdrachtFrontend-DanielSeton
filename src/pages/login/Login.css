@@ -1,33 +1,8 @@
 /*-----------------///Image section///---------------------*/
 
-.login-image {
-    display: flex;
-    flex-shrink: 2;
-    flex-basis: 50%;
-    align-items: center;
-    justify-content: center;
-    background-image: url(../../assets/img/dj-background-login-image.jpg);
-    background-size: cover;
-    background-position: center;
-}
-
 .login-quote{
     font-family: var(--banner-text), sans-serif;
     font-size: 4rem;
     color: var(--banner-text-color);
     -webkit-text-stroke: 1px white;
-}
-
-/*-----------------///Media Queries///---------------------*/
-
-@media screen and (max-width: 576px) {
-    .input-container {
-        flex-basis: 100%;
-    }
-    .image-container {
-        flex-basis: 0;
-    }
-    .login-quote{
-        visibility: hidden;
-    }
 }

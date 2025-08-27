@@ -85,7 +85,7 @@ function Login() {
                             clickEvent={() => navigate("/signup")}/>
                     </div>
                 </div>
-                <div className="login-image">
+                <div className="image-container">
                     <h1 className="login-quote">Inspiring quote</h1>
                 </div>
             </div>

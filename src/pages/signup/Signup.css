@@ -13,29 +13,3 @@
     color: #1372EF;
 }
 
-/*-----------------///Image section///---------------------*/
-
-.image-container {
-    display: flex;
-    flex-shrink: 2;
-    flex-basis: 50%;
-    align-items: center;
-    justify-content: center;
-    background-image: url(../../assets/img/dj-background-login-image.jpg);
-    background-size: cover;
-    background-position: center;
-}
-
-/*-----------------///Media Queries///---------------------*/
-
-@media screen and (max-width: 576px) {
-    .input-container {
-        flex-basis: 100%;
-    }
-    .image-container {
-        flex-basis: 0;
-    }
-    .quote-text{
-        visibility: hidden;
-    }
-}
