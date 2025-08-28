@@ -1,11 +1,11 @@
 import './StatusBlock.css'
 import {formatStatus} from "../../assets/helpers/formatStatus.js";
 
-function StatusBlock({variant, size, label}) {
+function StatusBlock({status, size, label}) {
     let cssStatusClass = '';
     let cssSizeClass = '';
 
-    switch (variant) {
+    switch (status) {
         case 'approved':
             cssStatusClass = 'approved';
             break;

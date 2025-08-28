@@ -38,6 +38,10 @@
         width: 95%;
     }
 
+    .dashboard-profile{
+        width: 90%;
+    }
+
     .dashboard-profile-container{
         gap: 15px;
         margin-bottom: 10px;

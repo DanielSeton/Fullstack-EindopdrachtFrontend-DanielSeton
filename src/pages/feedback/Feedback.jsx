@@ -1,7 +1,8 @@
 import './Feedback.css'
 import {sizes} from "../../assets/constant/sizes.js";
-import Button from "../../components/button/Button.jsx";
 import {variants} from "../../assets/constant/variants.js";
+import {status} from "../../assets/constant/status.js";
+import Button from "../../components/button/Button.jsx";
 import ButtonDropdown from "../../components/button-dropdown/ButtonDropdown.jsx";
 import PageDivider from "../../components/pagedivider/PageDivider.jsx";
 import {useContext, useEffect, useState} from "react";
@@ -9,7 +10,6 @@ import axios from "axios";
 import {Navigate, useNavigate, useParams} from "react-router-dom";
 import {formatDate} from "../../assets/helpers/formatDate.js";
 import {AuthContext} from "../../context/AuthContext.jsx";
-import {status} from "../../assets/constant/status.js";
 import StatusBlock from "../../components/status-block/StatusBlock.jsx";
 
 function Feedback(){
@@ -20,7 +20,11 @@ function Feedback(){
     const [audio, setAudio] = useState({})
 
     const [feedback, setFeedback] = useState("");
-    const [status, setStatus] = useState("noFeedback");
+    const [selectedStatus, setSelectedStatus] = useState("noFeedback");
+
+    const [audioBlob, setAudioBlob] = useState({});
+    const [trackAdded, setTrackAdded] = useState(false);
+    const [successMessage, setSuccessMessage] = useState("");
 
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
@@ -29,6 +33,8 @@ function Feedback(){
 
 
     const { id } = useParams();
+
+    console.log(submission)
 
     useEffect(() => {
         const controller = new AbortController();
@@ -47,7 +53,7 @@ function Feedback(){
                         Authorization: `Bearer ${token}`
                     }
                 });
-                console.log(response.data);
+                console.log("Submission: ", response.data);
                 setSubmission(response.data);
             } catch (e) {
                 if (axios.isCancel(e)) {
@@ -73,8 +79,12 @@ function Feedback(){
         const controller = new AbortController();
 
         async function loadAudio() {
+            toggleError(false);
+            toggleLoading(true);
+
+            const token = localStorage.getItem('token');
+
             try {
-                const token = localStorage.getItem('token');
                 const response = await axios.get(`http://localhost:8080/submissions/${id}/audio`, {
                     responseType: "blob",
                     headers: {
@@ -85,8 +95,16 @@ function Feedback(){
                 const audioUrl = URL.createObjectURL(response.data);
                 console.log("Audio link: ", audioUrl);
                 setAudio(audioUrl);
+                setAudioBlob(response.data);
             } catch (e) {
-                console.error('Audio load error: ', e);
+                if (axios.isCancel(e)) {
+                    console.error('Request is canceled...', e.message);
+                } else {
+                    console.error(e);
+                    toggleError(true);
+                }
+            } finally {
+                toggleLoading(false);
             }
         }
 
@@ -104,11 +122,14 @@ function Feedback(){
     async function handleSubmit(e) {
         e.preventDefault();
 
+        toggleError(false);
+        toggleLoading(true);
+
         const token = localStorage.getItem('token');
 
         try{
             const response = await axios.patch(`http://localhost:8080/submissions/${id}/feedback`, {
-                status: status,
+                status: selectedStatus,
                 feedback: feedback,
             }, {
                 headers: {
@@ -120,10 +141,16 @@ function Feedback(){
             navigate('/overview');
         } catch (e) {
             console.error(e);
+            toggleError(true);
+        } finally {
+            toggleLoading(false);
         }
     }
 
     async function handleDelete() {
+        toggleError(false);
+        toggleLoading(true);
+
         const token = localStorage.getItem('token');
 
         try {
@@ -139,9 +166,44 @@ function Feedback(){
             } else if (["STAFF", "ADMIN"].includes(authState.user?.role)) {
                 navigate("/overview")
             }
-
         } catch (e) {
             console.error(e);
+            toggleError(true);
+        } finally {
+            toggleLoading(false);
+        }
+    }
+
+    async function handleAddToPlaylist() {
+        toggleError(false);
+        toggleLoading(true);
+
+        const token = localStorage.getItem('token');
+
+
+        try {
+            const metadata = {
+                uploadedBy: submission.artistName,
+                title: submission.title,
+                userId: submission.userId
+            }
+
+            const formData = new FormData();
+            formData.append("file", audioBlob);
+            formData.append("metadata", new Blob([JSON.stringify(metadata)], { type: "application/json" }));
+
+            const result = await axios.post("http://localhost:8080/playlists/1", formData, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            setTrackAdded(true);
+            setSuccessMessage("Track successfully added to playlist!");
+        } catch (e) {
+            console.error(e);
+            toggleError(true);
+        } finally {
+            toggleLoading(false);
         }
     }
 
@@ -206,8 +268,8 @@ function Feedback(){
                             <label>Status</label>
                             <section>
                                 <ButtonDropdown
-                                    value={status}
-                                    changeEvent={(e) => setStatus(e.target.value)}
+                                    value={selectedStatus}
+                                    changeEvent={(e) => setSelectedStatus(e.target.value)}
                                 />
                             </section>
                             <section>
@@ -224,7 +286,7 @@ function Feedback(){
                 {authState.user?.role === "USER" && (
                     <div className="feedback-display">
                         <StatusBlock
-                            variant={status[submission.feedbackStatus] || status.NO_FEEDBACK}
+                            status={status[submission.feedbackStatus] || status.NO_FEEDBACK}
                             size={sizes.MEDIUM}
                             label={submission.feedbackStatus}
                         />
@@ -242,6 +304,21 @@ function Feedback(){
                 </div>
             </div>
             )}
+            {(["STAFF", "ADMIN"].includes(authState.user?.role)) && (
+            <section>
+                {!trackAdded && (
+                    <Button
+                        variant={variants.PRIMARY}
+                        size={sizes.SMALL}
+                        clickEvent={handleAddToPlaylist}
+                        label="Add to playlist"
+                    />
+                )}
+                {trackAdded && (
+                    <p className="success-message">{successMessage}</p>
+                )}
+            </section>
+                )}
         </div>
     )
 }

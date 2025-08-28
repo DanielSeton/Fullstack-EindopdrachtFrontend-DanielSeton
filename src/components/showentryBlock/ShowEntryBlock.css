@@ -58,8 +58,7 @@
 
 @media screen and (max-width: 576px) {
     .show-entry-ticket-button button{
-        width: 100px;
-        font-size: 13px;
+        display: none;
     }
 
     .show-entry-title{

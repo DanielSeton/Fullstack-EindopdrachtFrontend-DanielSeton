@@ -77,6 +77,12 @@
     resize: none;
 }
 
+.success-message {
+    color: var(--status-approved);
+    margin-top: 10px;
+    font-weight: bold;
+}
+
 /*-----------------///Media Queries///---------------------*/
 
 @media screen and (max-width: 576px) {

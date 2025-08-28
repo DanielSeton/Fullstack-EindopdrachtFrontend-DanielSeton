@@ -73,6 +73,7 @@ header{
     .navbar ul{
         flex: 1;
         align-self: center;
+        gap: 5px;
     }
 
     .image-container {
