@@ -1,7 +1,8 @@
 import './Feedback.css'
 import {sizes} from "../../assets/constant/sizes.js";
-import Button from "../../components/button/Button.jsx";
 import {variants} from "../../assets/constant/variants.js";
+import {status} from "../../assets/constant/status.js";
+import Button from "../../components/button/Button.jsx";
 import ButtonDropdown from "../../components/button-dropdown/ButtonDropdown.jsx";
 import PageDivider from "../../components/pagedivider/PageDivider.jsx";
 import {useContext, useEffect, useState} from "react";
@@ -19,7 +20,7 @@ function Feedback(){
     const [audio, setAudio] = useState({})
 
     const [feedback, setFeedback] = useState("");
-    const [status, setStatus] = useState("noFeedback");
+    const [selectedStatus, setSelectedStatus] = useState("noFeedback");
 
     const [audioBlob, setAudioBlob] = useState({});
     const [trackAdded, setTrackAdded] = useState(false);
@@ -52,7 +53,7 @@ function Feedback(){
                         Authorization: `Bearer ${token}`
                     }
                 });
-                console.log(response.data);
+                console.log("Submission: ", response.data);
                 setSubmission(response.data);
             } catch (e) {
                 if (axios.isCancel(e)) {
@@ -128,7 +129,7 @@ function Feedback(){
 
         try{
             const response = await axios.patch(`http://localhost:8080/submissions/${id}/feedback`, {
-                status: status,
+                status: selectedStatus,
                 feedback: feedback,
             }, {
                 headers: {
@@ -267,8 +268,8 @@ function Feedback(){
                             <label>Status</label>
                             <section>
                                 <ButtonDropdown
-                                    value={status}
-                                    changeEvent={(e) => setStatus(e.target.value)}
+                                    value={selectedStatus}
+                                    changeEvent={(e) => setSelectedStatus(e.target.value)}
                                 />
                             </section>
                             <section>
@@ -285,7 +286,7 @@ function Feedback(){
                 {authState.user?.role === "USER" && (
                     <div className="feedback-display">
                         <StatusBlock
-                            variant={status[submission.feedbackStatus] || status.NO_FEEDBACK}
+                            status={status[submission.feedbackStatus] || status.NO_FEEDBACK}
                             size={sizes.MEDIUM}
                             label={submission.feedbackStatus}
                         />

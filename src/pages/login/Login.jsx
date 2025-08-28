@@ -4,6 +4,7 @@ import PageDivider from "../../components/pagedivider/PageDivider.jsx";
 import InputField from "../../components/input-field/InputField.jsx";
 import {useContext, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import loginImage from '../../assets/img/dj-background-login-image.jpg';
 
 import {variants} from "../../assets/constant/variants.js";
 import {sizes} from "../../assets/constant/sizes.js";
@@ -85,7 +86,7 @@ function Login() {
                             clickEvent={() => navigate("/signup")}/>
                     </div>
                 </div>
-                <div className="image-container">
+                <div className="image-container" style={{ backgroundImage: `url(${loginImage})` }}>
                     <h1 className="login-quote">Inspiring quote</h1>
                 </div>
             </div>

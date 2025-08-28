@@ -6,6 +6,7 @@ import {sizes} from "../../assets/constant/sizes.js";
 import InputField from "../../components/input-field/InputField.jsx";
 import {NavLink, useNavigate} from "react-router-dom";
 import {useState} from "react";
+import loginImage from '../../assets/img/dj-background-login-image.jpg';
 import axios from "axios";
 
 function Signup() {
@@ -83,7 +84,7 @@ function Signup() {
                         <NavLink to="/login">Already have an account?</NavLink>
                     </div>
                 </div>
-                <div className="image-container">
+                <div className="image-container" style={{ backgroundImage: `url(${loginImage})` }}>
                     <h1 className="quote-text">Inspiring quote</h1>
                 </div>
             </div>

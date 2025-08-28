@@ -1,14 +1,12 @@
 import './SubmissionBlock.css'
 import PageDivider from "../pagedivider/PageDivider.jsx";
-import {useContext, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 import {formatDate} from "../../assets/helpers/formatDate.js";
 import {NavLink} from "react-router-dom";
 import StatusBlock from "../status-block/StatusBlock.jsx";
 import {status} from "../../assets/constant/status.js";
 import {sizes} from "../../assets/constant/sizes.js";
-import {AuthContext} from "../../context/AuthContext.jsx";
-import {formatStatus} from "../../assets/helpers/formatStatus.js";
 
 function SubmissionBlock({id}){
 
@@ -86,7 +84,7 @@ function SubmissionBlock({id}){
                         <div className="submission-block-header">
                             <h2>{submission.title}</h2>
                             <StatusBlock
-                                variant={status[submission.feedbackStatus] || status.NO_FEEDBACK}
+                                status={status[submission.feedbackStatus] || status.NO_FEEDBACK}
                                 size={sizes.MEDIUM}
                                 label={submission.feedbackStatus}
                             />

@@ -83,6 +83,8 @@ function FeedbackOverview() {
                     status : selectedStatus,
                 };
 
+                console.log("Status: ", selectedStatus);
+
                 const response = await axios.get(
                     hasFilters
                         ? `http://localhost:8080/submissions/filter?page=${currentPage}&size=15`
@@ -159,8 +161,8 @@ function FeedbackOverview() {
                             <h3>Status</h3>
                             <FilterOption
                                 label="No feedback"
-                                isChecked={selectedStatus === ""}
-                                changeEvent={() => handleStatusChange("")}
+                                isChecked={selectedStatus === "NO_FEEDBACK"}
+                                changeEvent={() => handleStatusChange("NO_FEEDBACK")}
                             />
                             <FilterOption
                                 label="Accepted"
