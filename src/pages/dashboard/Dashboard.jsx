@@ -129,7 +129,7 @@ function Dashboard() {
             <section className="error-section">
                 <div>
                     <h1>OOPS</h1>
-                    <h2>The page you are looking for is off-limits to you</h2>
+                    <h2>You look a bit lost. Don't worry, it happens.</h2>
                     <span>
                         <Button
                             label="Back to home"
