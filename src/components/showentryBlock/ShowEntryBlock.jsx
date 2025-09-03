@@ -12,14 +12,6 @@ function ShowEntryBlock({date, location, title, website, tickets}) {
                 <div className="show-entry-title">
                     <p>{title}</p>
                 </div>
-                <div className="show-entry-ticket-button">
-                    <Button
-                        type="submit"
-                        variant="secondary"
-                        clickEvent={tickets}
-                        size="small"
-                        label="Tickets"/>
-                </div>
             </div>
         </a>);
 }
