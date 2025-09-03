@@ -1,5 +1,5 @@
 import './Navigation.css'
-import {NavLink, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import logo from "../../assets/img/djcorner_logo.png"
 import {useContext} from "react";
 import {AuthContext} from "../../context/AuthContext.jsx";
@@ -19,8 +19,6 @@ function Navigation() {
                 <button type="button" className="navbar-logo-button" onClick={() => navigate("/")}><img src={logo} alt="Company logo"/>
                     <span id="header-color-section">DJ</span>Corner</button>
             </div>
-            {console.log(authState.isAuth)}
-            {console.log(authState.user?.username)}
             <div className="navbar-item-container">
             {authState.isAuth ?
                 <ul>

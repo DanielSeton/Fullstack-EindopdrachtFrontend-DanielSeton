@@ -34,8 +34,6 @@ function Feedback(){
 
     const { id } = useParams();
 
-    console.log(submission)
-
     useEffect(() => {
         const controller = new AbortController();
 
@@ -53,7 +51,6 @@ function Feedback(){
                         Authorization: `Bearer ${token}`
                     }
                 });
-                console.log("Submission: ", response.data);
                 setSubmission(response.data);
             } catch (e) {
                 if (axios.isCancel(e)) {
@@ -93,7 +90,6 @@ function Feedback(){
                     signal: controller.signal
                 });
                 const audioUrl = URL.createObjectURL(response.data);
-                console.log("Audio link: ", audioUrl);
                 setAudio(audioUrl);
                 setAudioBlob(response.data);
             } catch (e) {
@@ -216,7 +212,6 @@ function Feedback(){
             <div className="feedback-container">
                 <div className="feedback-info">
                     <h2 className="submission-title">{submission.title}</h2>
-                    {console.log(submission)}
                     <PageDivider size={sizes.MEDIUM}/>
                     <p><span className="submission-label">Uploaded: </span>{formatDate(submission.uploadDate)}</p>
                     <p><span className="submission-label">Artist: </span>{submission.artistName}</p>

@@ -49,7 +49,6 @@ function AuthContextProvider({ children }) {
             user: null,
             status: 'done',
         });
-        console.log("We logging out");
         navigate('/');
     }
 

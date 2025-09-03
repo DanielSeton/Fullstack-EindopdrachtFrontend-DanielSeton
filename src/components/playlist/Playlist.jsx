@@ -32,7 +32,6 @@ function Playlist({id}) {
                     }
                 });
                 setTracks(response.data);
-                console.log("tracks data: ", response.data);
             } catch (e) {
                 if (axios.isCancel(e)) {
                     console.error('Request is canceled...', e.message);

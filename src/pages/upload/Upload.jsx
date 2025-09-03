@@ -42,7 +42,6 @@ function Upload() {
                         Authorization: `Bearer ${token}`
                     }
                 });
-                console.log(response.data);
                 setTags(response.data)
             } catch (e) {
                 console.error(e);
