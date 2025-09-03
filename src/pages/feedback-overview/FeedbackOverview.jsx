@@ -97,9 +97,6 @@ function FeedbackOverview() {
                     params,
                     paramsSerializer: p => qs.stringify(p, {arrayFormat: 'repeat'})
                 });
-                console.log("Alle response data: ", response.data);
-                console.log("Page number: ", response.data.pageable.pageNumber);
-                console.log("Page total: ", response.data.totalPages);
                 setSubmissions(response.data.content);
                 setTotalPages(response.data.totalPages);
             } catch (e) {

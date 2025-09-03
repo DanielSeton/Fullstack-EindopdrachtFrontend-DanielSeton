@@ -10,7 +10,7 @@ De kernfunctie voor deze applicatie zijn:
 
 ## Lijst van benodigdheden
 Om deze applicatie goed te laten werken heb je het volgende nodig:
--	Een versie van WebStorm v2024.3.4 of hoger
+-	WebStorm v2024.3.4 of hoger
 -	Node.js v18 of hoger
 
 ### Dependancies
@@ -65,7 +65,7 @@ Om gebruik te kunnen maken van de applicatie worden er inloggegevens gebruikt va
 | teststaff      | 	staffpassword  | 	ROLE_STAFF  |
 | testadmin      | 	adminpassword  | 	ROLE_ADMIN  |
 
-## Rollen en authorisatie
+## Rollen en autorisatie
 
 | Rol         | Toelichting                                                                                                                                                                                                                     |
 |-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

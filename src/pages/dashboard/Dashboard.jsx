@@ -1,7 +1,6 @@
 import './Dashboard.css'
 import SubmissionBlock from "../../components/submission/SubmissionBlock.jsx";
 import PageDivider from "../../components/pagedivider/PageDivider.jsx";
-import FilterOption from "../../components/filter-option/FilterOption.jsx";
 import {useNavigate} from "react-router-dom";
 import Button from "../../components/button/Button.jsx";
 import {variants} from "../../assets/constant/variants.js";
@@ -39,7 +38,6 @@ function Dashboard() {
                         Authorization: `Bearer ${token}`
                     }
                 });
-                console.log("Dit is wat we binnen krijgen: ", response.data.content);
                 setSubmissions(response.data.content);
                 setTotalPages(response.data.totalPages);
             } catch (e) {
@@ -71,7 +69,6 @@ function Dashboard() {
                     <PageDivider />
                     <div className="dashboard-profile-container">
                         <div className="dashboard-profile-info">
-                            {console.log(authState)}
                             <p>User: {authState.user.username}</p>
                             <br/>
                             <p>Total submit(s): {submissions.length}</p>
@@ -114,7 +111,6 @@ function Dashboard() {
                             <p className="state-message">No submissions found</p>
                         )}
                         {!loading && !error && Object.keys(submissions).length > 0 && submissions.map((submission) => {
-                            {console.log("Dit is wat er in de submissions staat ", submissions)}
                             return (
                                 <SubmissionBlock
                                     key={submission.id}

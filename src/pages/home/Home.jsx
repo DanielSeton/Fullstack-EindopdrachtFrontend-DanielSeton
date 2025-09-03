@@ -51,7 +51,6 @@ function Home(){
                     }
                 });
                 setPlaylists(response.data);
-                console.log("Playlist data: ", response.data);
             } catch (e) {
                 if (axios.isCancel(e)) {
                     console.error('Request is canceled...', e.message);
